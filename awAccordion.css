@@ -1,0 +1,97 @@
+/* awAccordion.css -- stylesheet for awAccordion, an accordion microwidget */
+
+.accordion {
+    border-color: #aaa;
+    border-style: solid;
+    border-width: 1px 1px 0;
+
+  -webkit-box-shadow: 2px 2px 4px 0px #aaa; 
+     -moz-box-shadow: 2px 2px 4px 0px #aaa; 
+          box-shadow: 2px 2px 4px 0px #aaa; 
+}
+
+.accordion .title,
+.accordion .pane {
+    border-bottom: 1px solid #555;
+
+  -webkit-transition: all 0.3s ease-out;
+     -moz-transition: all 0.3s ease-out;
+      -ms-transition: all 0.3s ease-out;
+       -o-transition: all 0.3s ease-out;
+          transition: all 0.3s ease-out;
+}
+
+.accordion .title {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    padding: 5px 10px 3px;
+    cursor: pointer;
+    color: white;
+
+    background-color: #B3B3C1;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#B3B3C1), to(#505062)); 
+    background-image: -webkit-linear-gradient(top, #B3B3C1, #505062); 
+    background-image:    -moz-linear-gradient(top, #B3B3C1, #505062); 
+    background-image:     -ms-linear-gradient(top, #B3B3C1, #505062); 
+    background-image:      -o-linear-gradient(top, #B3B3C1, #505062); 
+    background-image:         linear-gradient(to bottom, #B3B3C1, #505062);
+}
+
+.accordion .title.active {
+    background-color: #4D5D80;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#9FB5DF), to(#4D5D80));
+    background-image: -webkit-linear-gradient(top, #9FB5DF, #4D5D80); 
+    background-image:    -moz-linear-gradient(top, #9FB5DF, #4D5D80); 
+    background-image:     -ms-linear-gradient(top, #9FB5DF, #4D5D80); 
+    background-image:      -o-linear-gradient(top, #9FB5DF, #4D5D80); 
+    background-image:         linear-gradient(to bottom, #9FB5DF, #4D5D80);
+}
+
+.accordion .title:before {
+    content: "\25b6";
+    float: left;
+    margin-right: 5px;
+}
+
+.accordion .title.active:before {
+    content: "\25bc";
+}
+
+.accordion .pane {
+    padding: 0 1em;
+    height: 0;
+    overflow: hidden;
+}
+.accordion .pane.active {
+    height: auto;
+    padding: 1em;
+}
+
+
+/* custom styles for left-to-right (i.e. horizontal) mode */
+
+.accordion.ltr .title {
+    padding: 1em 0 0;
+    float: left;
+
+  -webkit-transform: rotate(-90deg);
+     -moz-transform: rotate(-90deg);
+      -ms-transform: rotate(-90deg);
+       -o-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+             filter: progid:DXImageTransform.Microsoft.Matrix(
+                     M11=6.123031769111886e-17, M12=1, M21=-1, M22=6.123031769111886e-17, sizingMethod='auto expand');
+               zoom: 1;
+}
+
+.accordion.ltr .pane {
+    float: left;
+    height: 0;
+    width: 0;
+    padding: 1em 0;
+}
+.accordion.ltr .pane.active {
+    height: auto;
+    width: auto;
+    padding: 1em;
+}

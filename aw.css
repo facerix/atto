@@ -1,0 +1,342 @@
+/* apply a natural box layout model to all elements */
+/*
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+*/
+html,body {
+    margin: 0; padding: 0;
+    width: 100%; height: 100%;
+    background: #FFFFF7;
+}
+a { color: #0DC4F2; }
+a:visited,a:active { color: #054F61; }
+
+header, .main {
+    width: 800px;
+    margin: 0 auto;
+}
+
+header {
+    padding: 5em 1em 0; margin: 12px auto 92px;
+    /*text-align: center;*/
+}
+
+header h1, header h2 {
+    display: inline;
+    letter-spacing: 0;
+    margin: 0;
+}
+
+header h1 {
+    z-index: 1;
+}
+
+header h2.speech-bubble {
+    margin-left: -30px;
+}
+
+article {
+    display: block;
+    margin: 1em 0 0;
+}
+
+p {
+    font-family: Cambria, Georgia, "New Century Schoolbook", "Century Schoolbook L", "Times New Roman", serif;
+    font-size: 12pt;
+}
+
+.main {
+    /*
+    background-color: #C0C0C0;
+    border: 1px solid #808080;
+    */
+}
+
+.main .intro,
+#gallery li {
+    border: 1px solid #0DC4F2;
+}
+
+.intro {
+    padding: 1rem;   padding: 0 1em; /* fallback for IE8 */
+    margin-bottom: 1em;
+}
+
+
+abbr {
+    border-bottom: 1px dotted #808080;
+}
+
+#gallery {
+    width: 100%;
+    padding: 0; margin: 0;
+}
+
+#gallery li {
+    /*
+    height: 120px; width: 385px; margin: 0 5px 10px;
+    */
+    height: 120px; width: 32%; margin: 0 0.5% 1%;
+    background-color: rgba(250, 254, 255, 0.15);
+    list-style-type: none;
+    float: left;
+    text-align: left;
+}
+#gallery li:hover {
+    background-color: rgba(13,196,242,0.25);
+
+  -webkit-transition: all 0.5s ease-in-out;
+     -moz-transition: all 0.5s ease-in-out;
+      -ms-transition: all 0.5s ease-in-out;
+       -o-transition: all 0.5s ease-in-out;
+          transition: all 0.5s ease-in-out;
+}
+
+#gallery a {
+    background: url(icon_blank2.png) no-repeat 5px 10px;
+    color: #333333;
+    display: block;
+    font: small-caps 36px/120px 'GoodDogRegular', cursive;
+    font-size-adjust: 0.43;
+    padding: 0 0 0 120px; margin: 0;
+    text-align: left;
+    text-decoration: none;
+}
+#gallery a[disabled] { background-color: rgba(64,64,64,0.5); }
+
+#gallery a[href*='hpanel'] { background-image: url(icon_hpanel.png); }
+#gallery a[href*='vpanel'] { background-image: url(icon_vpanel.png); }
+#gallery a[href*='panels'] { background-image: url(icon_panels.png); }
+
+#gallery a[href*='button'] { background-image: url(icon_button.png); }
+#gallery a[href*='text']   { background-image: url(icon_textbox.png); }
+#gallery a[href*='combo']  { background-image: url(icon_combo.png); }
+#gallery a[href*='accor']  { background-image: url(icon_accordion.png); }
+#gallery a[href*='list']   { background-image: url(icon_list.png); }
+#gallery a[href*='prog']   { background-image: url(icon_prog.png); }
+#gallery a[href*='slide']  { background-image: url(icon_slides.png); }
+#gallery a[href*='tab']    { background-image: url(icon_tabs.png); }
+#gallery a[href*='tree']   { background-image: url(icon_tree.png); }
+#gallery a[href*='outline']   { background-image: url(icon_outline.png); }
+
+.caps { font-variant: small-caps; }
+
+
+/*  Header Speech Bubble Styles
+   I used Nicolas Gallagher's Pure-CSS Speech Bubbles as the starting point for these:
+   http://nicolasgallagher.com/pure-css-speech-bubbles/demo/
+*/
+.speech-bubble {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 10px solid #0DC4F2;
+    color: #333333;
+    margin: 0 auto;
+    padding: 35px 20px;
+    position: relative;
+    text-align: center;
+
+    border-radius: 260px / 120px;
+  -moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;
+}
+.speech-bubble.primary {
+    font: small-caps 60px/24px 'GoodDogRegular', cursive;
+    font-size-adjust: 0.3;
+}
+.speech-bubble.secondary {
+    font: 24px/24px 'GoodDogRegular', cursive;
+    font-size-adjust: 0.3;
+}
+
+/* bottom edge of the tail */
+.speech-bubble:before {
+    background: none repeat scroll 0 0 transparent;
+    border-color: #0DC4F2;
+    border-style: solid;
+    bottom: -40px;
+    content: "";
+    display: block;
+    height: 30px;
+    margin-right: -10px;
+    position: absolute;
+    width: 50px;
+    z-index: 2;
+}
+.speech-bubble.primary:before {
+    right: 50%;
+    border-width: 0 10px 10px 0;
+    border-bottom-right-radius: 80px 50px;
+}
+.speech-bubble.secondary:before {
+    left: 50%;
+    border-width: 0 0 10px 10px;
+    border-bottom-left-radius: 80px 50px;
+}
+
+/* top edge of the tail */
+.speech-bubble:after {
+    background: none repeat scroll 0 0 transparent;
+    border-color: #0DC4F2;
+    border-style: solid;
+    bottom: -40px;
+    content: "";
+    display: block;
+    height: 31px;
+    position: absolute;
+    width: 20px;
+    z-index: 2;
+}
+.speech-bubble.primary:after {
+    right: 50%;
+    margin-right: 20px;
+    border-width: 0 10px 10px 0;
+    border-bottom-right-radius: 40px 50px;
+}
+.speech-bubble.secondary:after {
+    left: 50%;
+    margin-left: 30px;
+    border-width: 0 0 10px 10px;
+    border-bottom-left-radius: 40px 50px;
+}
+
+/* round off the tip of the tail */
+.speech-bubble > *:first-child:before {
+    background: none repeat scroll 0 0 #0DC4F2;
+    border-radius: 10px 10px 10px 10px;
+    content: "";
+    height: 10px;
+    bottom: -40px;
+    position: absolute;
+    width: 10px;
+    z-index: 1;
+}
+.speech-bubble.primary > *:first-child:before {
+    right: 50%;
+    margin-right: 45px;
+}
+.speech-bubble.secondary > *:first-child:before {
+    left: 50%;
+    margin-left: 55px;
+}
+
+/* hide the border segment where the tail overlaps the bubble */
+.speech-bubble > *:first-child:after {
+    background: none repeat scroll 0 0 #FFFFFF;
+    bottom: -10px;
+    content: "";
+    height: 15px;
+    position: absolute;
+    width: 30px;
+    z-index: 1;
+}
+.speech-bubble.primary > *:first-child:after {
+    right: 50%;
+}
+.speech-bubble.secondary > *:first-child:after {
+    left: 50%;
+}
+/*  End of Header Speech Bubble Styles  */
+
+
+h1,h2 {
+  -webkit-transition: opacity 0.5s ease-in-out;
+     -moz-transition: opacity 0.5s ease-in-out;
+      -ms-transition: opacity 0.5s ease-in-out;
+       -o-transition: opacity 0.5s ease-in-out;
+          transition: opacity 0.5s ease-in-out;
+
+    -webkit-transform: translateZ(0);   /* trigger hardware accel */
+    -webkit-backface-visibility: hidden;
+}
+
+#downLink {
+    line-height: 50px;
+    padding: 15px;
+    font: small-caps 32px/64px 'GoodDogRegular', cursive;
+    background-color: #0DC4F2;
+    text-decoration: none;
+    color: white;
+    border-radius: 8px;
+
+    background-color: #3DD0F5;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#3DD0F5), to(#0DC4F2)); 
+    background-image: -webkit-linear-gradient(top, #3DD0F5, #0DC4F2);
+    background-image:    -moz-linear-gradient(top, #3DD0F5, #0DC4F2);
+    background-image:     -ms-linear-gradient(top, #3DD0F5, #0DC4F2);
+    background-image:      -o-linear-gradient(top, #3DD0F5, #0DC4F2);
+    background-image:         linear-gradient(to bottom, #3DD0F5, #0DC4F2);
+  -webkit-box-shadow: 0 0 8px 0px #054F61; 
+     -moz-box-shadow: 0 0 8px 0px #054F61; 
+          box-shadow: 0 0 8px 0px #054F61; 
+
+  -webkit-transition: all 0.4s ease-in-out;
+     -moz-transition: all 0.4s ease-in-out;
+      -ms-transition: all 0.4s ease-in-out;
+       -o-transition: all 0.4s ease-in-out;
+          transition: all 0.4s ease-in-out;
+          
+    opacity: 0.7;
+}
+#downLink:hover {
+    opacity: 1.0;
+}
+
+footer {
+    font: small-caps 1.25em 'GoodDogRegular', cursive;
+    font-size-adjust: 0.43;
+    text-align: right;
+    color: #600;
+    font-weight: bold;
+    padding: 0 10px 5px;
+    margin: 0;
+
+    display: block;
+    left: 0; right: 0; bottom: 0;
+    height: 48px;
+}
+
+
+/* utility classes */
+.invisible  { opacity: 0; }
+.expando {
+    height: auto;
+    opacity: 1;
+    overflow: hidden;
+    padding: 0; margin: 0;
+
+  -webkit-transition: all 0.5s ease-in-out;
+     -moz-transition: all 0.5s ease-in-out;
+      -ms-transition: all 0.5s ease-in-out;
+       -o-transition: all 0.5s ease-in-out;
+          transition: all 0.5s ease-in-out;
+
+    -webkit-transform: translateZ(0);   /* trigger hardware accel */
+    -webkit-backface-visibility: hidden;
+}
+.expando.collapsed {
+    height: 0;
+    opacity: 0;
+}
+.centered {
+    text-align: center;
+}
+
+/* clearfix, per css-tricks (http://css-tricks.com/snippets/css/clear-fix/) */
+.group:before,
+.group:after {
+    content:"";
+    display:table;
+}
+.group:after {
+    clear:both;
+}
+.group {
+    zoom:1; /* For IE 6/7 (trigger hasLayout) */
+}
+/* end clearfix */
+
+
+/* hacks for IE font fallback */
+.lt-ie9 .speech-bubble.primary   { font-family: 'Comic Sans MS', 'Comic Sans', cursive; font-size: 36px; }
+.lt-ie9 .speech-bubble.secondary { font-family: 'Comic Sans MS', 'Comic Sans', cursive; font-size: 18px; }
+.lt-ie9 #gallery a { font-family: 'Comic Sans MS', 'Comic Sans', cursive; font-size: 18px; }
+.lt-ie9 #gallery a[disabled] { background-color: rgb(148,148,148); opacity: 0.5; }
+.lt-ie9 footer { font-family: 'Comic Sans MS', 'Comic Sans', cursive; font-size: 12px; }

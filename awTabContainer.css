@@ -1,0 +1,132 @@
+/* awTabContainer.css -- stylesheet for awTabContainer, a tab set microwidget */
+
+.tabcontainer {
+    position: relative;
+}
+
+/* CSS-tricks */
+
+.tab-row {
+    list-style: none;
+    margin: 0; padding: 0 5px;
+    line-height: 24px;
+    height: 26px;
+    overflow: hidden;
+    font-size: 12px;
+    font-family: verdana;
+    position: relative;
+}
+.tab-row .tab {
+    border: 1px solid #AAA;
+    background: #D1D1D1;
+    background: -o-linear-gradient(top, #ECECEC 50%, #D1D1D1 100%);
+    background: -ms-linear-gradient(top, #ECECEC 50%, #D1D1D1 100%);
+    background: -moz-linear-gradient(top, #ECECEC 50%, #D1D1D1 100%);
+    background: -webkit-linear-gradient(top, #ECECEC 50%, #D1D1D1 100%);
+    background: linear-gradient(top, #ECECEC 50%, #D1D1D1 100%);
+    display: inline-block;
+    position: relative;
+    z-index: 0;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4), inset 0 1px 0 #FFF;
+    text-shadow: 0 1px #FFF;
+    margin: 0 8px 0 -5px;
+    padding: 0 30px 0 20px; /*0 20px;*/
+    text-align: center;
+    
+    cursor: pointer;
+}
+.tab a {
+    /*color: #555;*/
+    text-decoration: none;
+}
+.tab-row .tab.selected {
+    background: #FFF;
+    color: #333;
+    z-index: 2;
+    border-bottom-color: #FFF;
+}
+.tab-row:before {
+    position: absolute;
+    content: " ";
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    border-bottom: 1px solid #AAA;
+    z-index: 1;
+}
+.tab-row .tab:before,
+.tab-row .tab:after {
+    border: 1px solid #AAA;
+    position: absolute;
+    bottom: -1px;
+    width: 5px;
+    height: 5px;
+    content: " ";
+}
+.tab-row .tab:before {
+    left: -6px;
+    border-bottom-right-radius: 6px;
+    border-width: 0 1px 1px 0;
+    box-shadow: 2px 2px 0 #D1D1D1;
+}
+.tab-row .tab:first-child:before {
+    border-bottom-right-radius: 0;
+}
+.tab-row .tab:after {
+    right: -6px;
+    border-bottom-left-radius: 6px;
+    border-width: 0 0 1px 1px;
+    box-shadow: -2px 2px 0 #D1D1D1;
+}
+.tab-row .tab.selected:before {
+    box-shadow: 2px 2px 0 #FFF;
+}
+.tab-row .tab.selected:after {
+    box-shadow: -2px 2px 0 #FFF;
+}
+
+/* end CSS-tricks */
+
+.tab-body {
+    border: 1px solid #aaa;
+    margin: 0;
+    padding: 0.5em;
+    height: auto;
+    position: absolute;
+    top: 25px; left: 0; right: 0; bottom: 0;
+
+  -webkit-box-shadow: 2px 2px 4px 0px #aaa; 
+     -moz-box-shadow: 2px 2px 4px 0px #aaa; 
+          box-shadow: 2px 2px 4px 0px #aaa; 
+}
+
+.tab-panel {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    opacity: 0;
+    visibility: hidden;
+    padding: 0.5em;
+
+  -webkit-transition: all 0.2s ease-in;
+     -moz-transition: all 0.2s ease-in;
+      -ms-transition: all 0.2s ease-in;
+       -o-transition: all 0.2s ease-in;
+          transition: all 0.2s ease-in;
+}
+
+.tab-panel.selected {
+    opacity: 1;
+    visibility: inherit;
+}
+
+.tab-close-button {
+    color: #999;
+    position: absolute;
+    right: 6px;
+}
+
+.tab-close-button:hover {
+    color: inherit;
+}

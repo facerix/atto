@@ -1,0 +1,19 @@
+/* awVPanel.css -- stylesheet for aw.VPanel, a vertical-layout microwidget */
+
+/*
+.aw-vPanel * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+*/
+.aw-vPanel {
+    position: relative;
+    padding: 0, margin: 0;
+}
+.aw-vPanel > .header, 
+.aw-vPanel > .center, 
+.aw-vPanel > .footer {
+    position: absolute; 
+    left: 0; right: 0;
+    overflow: auto;
+}
+.aw-vPanel > .header { top: 0; height: 15%; }
+.aw-vPanel > .center { top: 15%; bottom: 10%; }
+.aw-vPanel > .footer { bottom: 0; height: 10%; }

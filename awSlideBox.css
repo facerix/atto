@@ -1,0 +1,63 @@
+/* awSlideBox.css -- stylesheet for Slideshow attowidget */
+
+/* apply a natural box layout model to all elements */
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+.slidebox {
+    border: 2px inset #aaa;
+    margin: 0;
+    padding: 0.5em;
+    position: relative;
+    overflow: hidden;
+    
+  -webkit-box-shadow: 2px 2px 4px 0px #aaa; 
+     -moz-box-shadow: 2px 2px 4px 0px #aaa; 
+          box-shadow: 2px 2px 4px 0px #aaa; 
+}
+
+.slidebox .slide {
+    position: absolute;
+    top: 0; 
+    height: 100%; width: 100%;
+    padding: 0.5em;
+    
+    visibility: hidden;
+
+  -webkit-transition: all 0.3s ease-in-out;
+     -moz-transition: all 0.3s ease-in-out;
+      -ms-transition: all 0.3s ease-in-out;
+       -o-transition: all 0.3s ease-in-out;
+          transition: all 0.3s ease-in-out;
+}
+
+.slidebox .slide.prev {
+    left: -100%;
+}
+
+.slidebox .slide.current {
+    left: 0;
+    opacity: 1;
+    visibility: inherit;
+}
+
+.slidebox .slide.next {
+    left: 100%;
+}
+
+.slidebox .prev-button,
+.slidebox .next-button {
+    position: absolute;
+    cursor: pointer;
+    top: 50%; margin-top: -40px;
+    font-size: 64px;
+    color: white;
+    text-decoration: none;
+    opacity: 0.25;
+}
+.slidebox .prev-button { left: 10px; }
+.slidebox .next-button { right: 10px; }
+
+.slidebox:hover .prev-button,
+.slidebox:hover .next-button {
+    opacity: 1;
+}

@@ -1,0 +1,19 @@
+/* awHPanel.css -- stylesheet for awHPanel, a horizontal-layout microwidget */
+
+/*
+.aw-hPanel * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+*/
+.aw-hPanel {
+    position: relative;
+    padding: 0, margin: 0;
+}
+.aw-hPanel > .left, 
+.aw-hPanel > .center, 
+.aw-hPanel > .right {
+    position: absolute; 
+    top: 0; bottom: 0;
+    overflow: auto;
+}
+.aw-hPanel > .left { left: 0; width: 15%; }
+.aw-hPanel > .center { left: 15%; right: 20%; }
+.aw-hPanel > .right { width: 20%; right: 0; }
