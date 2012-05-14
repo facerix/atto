@@ -6,3 +6,5 @@ AttoWidgets are a collection of several basic UI components that I've built for 
 In spirit they're probably more similar to [Wijmo](http://wijmo.com/widgets/) than anything else, but my goal is to make them even smaller and more self-contained than those (awesome though they are). Mostly, though, I just wrote them because I like to tinker. ;)
 
 They're built using as much HTML5 and CSS3 as I could cram in, and lean on CSS3 Transitions to do the heavy lifting of state transformations and animations. As such, the user experience in IE8 is pretty barebones compared to that of more modern browsers. Of course you can replicate these behaviors using jQuery or Mootools or Dojo.FX, but then they wouldn't be quite so ultralight anymore, so I'd rather not.
+
+More information can be found on Atto's official home [here](http://www.buyog.com/aw/).
