@@ -45,16 +45,15 @@ aw.TabContainer = function(rootNode, optArgs) {
     }
 
     function _delTab(id) {
-        var lbl = null,
-            pnl = null;
+        var lbl, pnl, newLbl, newPnl;
         if (id in _registry) {
             lbl = document.getElementById(id+'-label');
             if (lbl.classList.contains('selected')) {
                 lbl.classList.remove('selected');
                 if (lbl.nextSibling) {
-                    lbl.nextSibling.classList.add('selected');
+                    newLbl = lbl.nextSibling;
                 } else if (lbl.previousSibling) {
-                    lbl.previousSibling.classList.add('selected');
+                    newLbl = lbl.previousSibling;
                 }
             }
             _tabRow.removeChild(lbl);
@@ -62,13 +61,25 @@ aw.TabContainer = function(rootNode, optArgs) {
             if (pnl.classList.contains('selected')) {
                 pnl.classList.remove('selected');
                 if (pnl.nextSibling) {
-                    pnl.nextSibling.classList.add('selected');
+                    newPnl = pnl.nextSibling;
                 } else if (pnl.previousSibling) {
-                    pnl.previousSibling.classList.add('selected');
+                    newPnl = pnl.previousSibling;
                 }
             }
             _tabBody.removeChild(pnl);
+            if (newLbl && newPnl) { _selectTab(newLbl, newPnl); }
         }
+    }
+
+    function _selectTab(label, panel) {
+        if (currPanel && currPanel != panel) {
+            currTitle.classList.remove('selected');
+            currPanel.classList.remove('selected');
+        }
+        currTitle = label;
+        currPanel = panel;
+        label.classList.add('selected');
+        panel.classList.add('selected');
     }
 
     function _addTab(label, content) {
@@ -87,12 +98,12 @@ aw.TabContainer = function(rootNode, optArgs) {
 
         if (options.useHashLinks) {
             ndTabChild = document.createElement('a');
-            ndTabChild.className = 'tab-label';
             ndTabChild.href = '#'+sID+'-panel';
-            ndTabChild.innerHTML = label;               // 4/18/2012 TODO - doesn't this blow away the previous two lines?
         } else {
-            ndTabChild = document.createTextNode(label);
+            ndTabChild = document.createElement('span');
         }
+        ndTabChild.className = 'tab-label';
+        ndTabChild.innerHTML = label;
         ndTab.appendChild(ndTabChild);
 
         // tab-close link
@@ -121,23 +132,13 @@ aw.TabContainer = function(rootNode, optArgs) {
         ndPane.innerHTML = nd.innerHTML;
         ndTab.onclick = function(ndTarget) {
             return function() {
-                if (currPanel != ndTarget) {
-                    currPanel.classList.remove('selected');
-                    currPanel = ndTarget;
-                    currTitle.classList.remove('selected');
-                    currTitle = this;
-                }
-                ndTarget.classList.add('selected');
-                this.classList.add('selected');
+                _selectTab(this, ndTarget);
             }
         }(ndPane);
 
         _tabBody.appendChild(ndPane);
         if (tabCount==1) {
-            currTitle = ndTab;
-            currPanel = ndPane;
-            ndTab.classList.add('selected');
-            ndPane.classList.add('selected');
+            _selectTab(ndTab, ndPane);
         }
     }
 
