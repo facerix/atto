@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>aw.SlideBox Demo</title>
+    <link rel="stylesheet" href="demopage.css"/>
+    <style>
+        .controls {
+            width: 320px;
+            font-size: 32px;
+            text-align: center;
+        }
+        .controls a {
+            color: #aaa;
+            text-decoration: none;
+        }
+    </style>
+  </head>
+  <body>
+    <h1>aw.SlideBox Demo</h1>
+
+    <div id="mySlides" style="width: 320px; height: 240px;">
+      <img src="../MUGEN/images/stardragon.png"/> <!-- http://placekitten.com/320/240 -->
+      <img src="../MUGEN/images/flash_whirlwind.png"/>  <!-- http://placekitten.com/240/240 -->
+      <img src="../MUGEN/images/parasite_snack.png"/>  <!-- http://placekitten.com/300/180 -->
+    </div>
+
+    <section class="controls">
+      <a href="javascript:slidebox.goto(0);">&bull;</a>
+      <a href="javascript:slidebox.goto(1);">&bull;</a>
+      <a href="javascript:slidebox.goto(2);">&bull;</a>
+    </section>
+
+  </body>
+<script src="aw-core.js"></script>
+<script src="awSlideBox.js"></script>
+<script>
+    window.slidebox = null;
+    addLoadEvent(function() {
+        // find and operate on any accordion nodes in the current page
+        var node = document.getElementById("mySlides");
+        window.slidebox = new aw.SlideBox(node, {});
+    });
+</script>
+</html>

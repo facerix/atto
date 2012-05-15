@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HPanel/VPanel Layout Demo</title>
+    <link rel="stylesheet" href="demopage.css"/>
+    <style>
+        #main-outer, #main-inner { margin: 0; padding: 0; }
+        #main-outer {
+            top:0; bottom: 0; left: 0; right: 0;
+            position: absolute;
+        }
+        .aw-vPanel .header { background-color:#345; }
+        .aw-vPanel .center { background-color:#eec; }
+        .aw-vPanel .footer { background-color:#aaa; }
+        .aw-vPanel .header, .aw-vPanel .footer { text-align: center; }
+        .aw-vPanel .header h1   { margin: 25px 0; }
+        .aw-vPanel .footer span { line-height: 50px; }
+
+        .aw-hPanel .left   { background-color:#435; }
+        .aw-hPanel .right  { background-color:#aaf; }
+
+        .aw-hPanel .left,
+        .aw-hPanel .center,
+        .aw-hPanel .right { padding: 5px; border: 1px solid black; }
+    </style>
+  </head>
+  <body>
+    <div id="main-outer">
+      <div>
+        <h1>HPanel/VPanel Combo Layout</h1>
+      </div>
+
+      <div id="main-inner">
+        <div>
+          <h4>Phony nav</h4>
+          <ul>
+            <li><a href="#">Link 1</a></li>
+            <li><a href="#">Link 2</a></li>
+            <li><a href="#">Link 3</a></li>
+            <li><a href="#">Link 4</a></li>
+          </ul>
+        </div>
+        <div>
+          <p>Sausage pig rump ball tip, boudin drumstick strip steak t-bone pastrami capicola corned beef shank venison swine flank. Beef speck meatball biltong, prosciutto turkey cow turducken short ribs bresaola sirloin kielbasa ribeye drumstick. Brisket tri-tip boudin ham hock, strip steak pastrami venison biltong short ribs pork chicken ham. Andouille ham hock swine flank shankle, short loin sirloin pork bacon kielbasa beef ribs shoulder capicola biltong pork loin. Fatback prosciutto pastrami, pork loin pork chop capicola ball tip turkey short ribs tongue bacon ribeye pancetta bresaola flank. Meatball ham hock prosciutto shoulder, venison turducken pork. Salami sirloin cow turkey, ground round jerky turducken ham hock fatback.</p>
+          <p>Jowl andouille strip steak hamburger biltong ball tip pancetta, t-bone speck venison tenderloin rump. Chuck shank beef, ground round pork chop prosciutto pork loin chicken. Strip steak pastrami meatball shoulder. Tongue ham tail jerky flank, tri-tip pork ball tip frankfurter drumstick kielbasa spare ribs. Ham hock pig biltong shoulder kielbasa, pancetta andouille ball tip fatback spare ribs chicken.</p>
+        </div>
+        <div>
+          <p>Vice authentic fanny pack, portland scenester aesthetic pinterest vinyl blog dreamcatcher kale chips umami +1 quinoa. Blog umami sriracha single-origin coffee photo booth. Cardigan cray photo booth, letterpress pitchfork street art VHS high life salvia trust fund. Semiotics ennui umami, messenger bag skateboard pitchfork put a bird on it pork belly blog small batch tofu american apparel terry richardson godard freegan. Chambray gentrify thundercats authentic lo-fi, typewriter fanny pack umami master cleanse helvetica cray. Pork belly flexitarian terry richardson yr, chillwave godard farm-to-table pop-up marfa chambray. Terry richardson gluten-free pork belly, +1 locavore butcher seitan polaroid food truck.</p>
+        </div>
+      </div>
+
+      <div>
+        <span>(Text from <a href="http://baconipsum.com/">BaconIpsum.com</a> and
+            <a href="http://hipsteripsum.me/">HipsterIpsum.me</a>)</span>
+      </div>
+    </div>
+  </body>
+
+  <script src="../js/XMLHttpRequest.js"></script>
+  <script src="aw-core.js"></script>
+  <script src="awVPanel.js"></script>
+  <script src="awHPanel.js"></script>
+  <script>
+      var mainInner = document.querySelector("#main-inner");
+      window.spanel = new aw.HPanel(mainInner, {left:'120px', right:'200px'});
+
+      var mainOuter = document.querySelector("#main-outer");
+      window.hpanel = new aw.VPanel(mainOuter, {header:'80px',footer:'50px'});
+  </script>
+</html>

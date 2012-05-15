@@ -103,20 +103,20 @@ abbr {
 }
 #gallery a[disabled] { background-color: rgba(64,64,64,0.5); }
 
-#gallery a[href*='hpanel'] { background-image: url(icon_hpanel.png); }
-#gallery a[href*='vpanel'] { background-image: url(icon_vpanel.png); }
-#gallery a[href*='panels'] { background-image: url(icon_panels.png); }
+#gallery a[href*='hpanel'] { background-image: url(images/icon_hpanel.png); }
+#gallery a[href*='vpanel'] { background-image: url(images/icon_vpanel.png); }
+#gallery a[href*='panels'] { background-image: url(images/icon_panels.png); }
 
-#gallery a[href*='button'] { background-image: url(icon_button.png); }
-#gallery a[href*='text']   { background-image: url(icon_textbox.png); }
-#gallery a[href*='combo']  { background-image: url(icon_combo.png); }
-#gallery a[href*='accor']  { background-image: url(icon_accordion.png); }
-#gallery a[href*='list']   { background-image: url(icon_list.png); }
-#gallery a[href*='prog']   { background-image: url(icon_prog.png); }
-#gallery a[href*='slide']  { background-image: url(icon_slides.png); }
-#gallery a[href*='tab']    { background-image: url(icon_tabs.png); }
-#gallery a[href*='tree']   { background-image: url(icon_tree.png); }
-#gallery a[href*='outline']   { background-image: url(icon_outline.png); }
+#gallery a[href*='button'] { background-image: url(images/icon_button.png); }
+#gallery a[href*='text']   { background-image: url(images/icon_textbox.png); }
+#gallery a[href*='combo']  { background-image: url(images/icon_combo.png); }
+#gallery a[href*='accor']  { background-image: url(images/icon_accordion.png); }
+#gallery a[href*='list']   { background-image: url(images/icon_list.png); }
+#gallery a[href*='prog']   { background-image: url(images/icon_prog.png); }
+#gallery a[href*='slide']  { background-image: url(images/icon_slides.png); }
+#gallery a[href*='tab']    { background-image: url(images/icon_tabs.png); }
+#gallery a[href*='tree']   { background-image: url(images/icon_tree.png); }
+#gallery a[href*='outline']   { background-image: url(images/icon_outline.png); }
 
 .caps { font-variant: small-caps; }
 

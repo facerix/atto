@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>    <html class="lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>    <html class="lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html> <!--<![endif]-->
+  <head>
+    <title>Atto | Ultra-Lightweight, Pure-JavaScript UI Components</title>
+
+    <script src="../js/html5shiv.js"></script>
+    <link rel="stylesheet" href="../fonts/gooddog/stylesheet.css" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="aw.css" type="text/css" charset="utf-8">
+    <style>
+      /* overrides until I can refresh the CloudFlare cache */
+      .aside { font-size: smaller; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1 class="speech-bubble primary invisible"><span>Aw Yeah Atto!</span></h1>
+      <h2 class="speech-bubble secondary invisible"><span>Ultralight, Pure-JavaScript Widgets</span></h2>
+    </header>
+
+    <article class="main">
+      <ul id="gallery" class="group">
+          <!--
+          <li><a href="button.html"  title="(coming soon)">Button</a>
+          <li><a href="textbox.html" title="(coming soon)">TextBox</a>
+          <li><a href="combo.html"   title="(coming soon)">ComboBox</a>
+          -->
+          <li><a href="demo/accordion.html">Accordion</a>
+          <li><a href="demo/slides.html" title="(or carousel, if you prefer)">SlideBox</a>
+          <li><a href="demo/tabs.html">TabContainer</a>
+          <!--
+          <li><a href="list.html" title="(coming soon)">ListBox</a>
+          <li><a href="prog.html" title="(coming soon)">ProgressBar</a>
+          <li><a href="tree.html" title="(coming soon)">Tree</a>
+          -->
+          <li><a href="demo/hpanel.html">HPanel</a></li>
+          <li><a href="demo/vpanel.html">VPanel</a></li>
+          <li><a href="demo/panels.html">2 Panels</a></li>
+          <!--li><a href="outliner.html">Outliner</a-->
+      </ul>
+
+      <section class='intro'>
+        <p><span class="caps">Atto</span> is a collection of several basic UI components
+           (i.e. widgets) that I've built for my own personal use, but figured I'd share
+           in case anyone else wants a <em>super</em> light widget for something where the
+           overhead of a full-blown library like <a href="http://dojotoolkit.com">Dojo</a>,
+           <a href="http://developer.yahoo.com/yui/">YUI</a>, or
+           <a href="http://jqueryui.com/">jQuery UI</a> is undesirable. They have <strong>zero</strong>
+           external dependencies, work on all modern web browsers, and
+           <a href="http://en.wikipedia.org/wiki/Progressive_enhancement">degrade gracefully</a> on IE8
+           (IE6 and 7 are another matter, sadly, but I'm making the conscious decision not to support those at the moment).</p>
+
+        <p class="aside">(You could call this progressive enhancement or graceful degradation if you want, and I certainly strive for that.
+              For my part, though, I call it "I don't want my site to be broken if I access it from work")</p>
+
+        <p>In spirit they're probably more similar to <a href="http://wijmo.com/widgets/">Wijmo</a>
+           than anything else, but my goal is to make them even smaller and more self-contained than those
+           (awesome though they are). Mostly, though, I just wrote them because I like to tinker. ;)</p>
+
+        <p>They're built using as much HTML5 and CSS3 as I could cram in, and lean on CSS3 Transitions to do the
+           heavy lifting of state transformations and animations. As such, the user experience in IE8
+           is pretty barebones compared to that of more modern browsers. Of course you can replicate these behaviors
+           using jQuery or Mootools or Dojo.FX or (pick your favorite framework), but then they wouldn't be quite
+           so ultralight anymore, so I'd rather not.</p>
+
+        <p class="centered"><a href="https://github.com/buyog/atto" id="downLink">Download Atto v1.0</a></p>
+
+        <!--div class="expando collapsed">
+           <p>Originally I called these things "AttoWidgets" to emphasize how tiny they are
+               (get it, <a href="http://en.wikipedia.org/wiki/Atto-">atto</a>?) but the namespace prefix
+               they use, <code>aw-</code>, led me in
+               <a href="http://knowyourmeme.com/memes/aww-yea-guy">another</a>
+               <a href="http://www.youtube.com/watch?v=5FiFMKR3LGc">direction</a>
+               <a href="http://www.artbaltazar.com/tinytitans">entirely</a>. But "Aw Yeah Widgets" sounds more like a
+               slogan than an actual product, so I went back to Atto, but kept the Tiny Titans-inspired site.
+               Funny how that sometimes happens.</p>
+        </div>
+
+        <p><a href="javascript:toggleIntro()" id="btnToggle">More...</a></p-->
+      </section>
+
+      <footer><span class="caps">Atto</span> is released under the <a href="http://www.opensource.org/licenses/MIT">MIT license</a>.<br/>
+        If you use these widgets in something interesting, <a href="https://twitter.com/intent/tweet/?text=Hey%20@buyog..." title="Tweet at me, bro!">I'd love to hear about it</a>.
+      </footer>
+    </article>
+
+  </body>
+  <script src="aw-core.js"></script> <!-- needed for the addLoadEvent -->
+  <script>
+      addLoadEvent(function() {
+          // show the header (which is hidden until the custom font-face can get hoisted)
+          window.setTimeout(function() {
+              var h = document.querySelectorAll("h1")[0];
+              if (h) { h.classList.toggle('invisible'); }
+
+              window.setTimeout(function() {
+                  var h = document.querySelectorAll("h2")[0];
+                  if (h) { h.classList.toggle('invisible'); }
+              }, 500);
+          }, 500);
+      });
+
+      function toggleIntro() {
+          var btn = document.querySelector('#btnToggle'),
+              div = document.querySelector('.expando');
+
+          div.classList.toggle('collapsed');
+          btn.innerHTML = btn.innerHTML == "More..." ? "(Less)" : "More...";
+      }
+  </script>
+</html>

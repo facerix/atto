@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>aw.Accordion Demo</title>
+    <link rel="stylesheet" href="demopage.css"/>
+  </head>
+  <body>
+    <h1>aw.Accordion Demo</h1>
+
+    <div id="acc1" style="width:320px;">
+        <div title="Panel 1 Title">
+          This is the first panel.<br>It includes raw text plus some basic <abbr title="Hypertext Markup Language">HTML</abbr>.
+        </div>
+        <div>
+            This is the second panel, with an automatic title
+        </div>
+        <div title="Custom-titled, <em>rich text</em> pane">
+            <p>This is the <strong>third</strong> and <em>final</em> panel</p>
+        </div>
+    </div>
+  </body>
+
+<script src="aw-core.js"></script>
+<script src="awAccordion.js"></script>
+<script>
+    var node = document.getElementById("acc1");
+    window.accordion = new aw.Accordion(node, {});
+</script>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>aw.HPanel Demo</title>
+    <link rel="stylesheet" href="demopage.css"/>
+    <style>
+        #main {
+            /*margin: 50px auto;*/
+            height: 400px;
+            width: 800px;
+            border: 3px double #735;
+        }
+        .aw-hPanel .left   { background-color:#345; }
+        .aw-hPanel .center { background-color:#eec; }
+        .aw-hPanel .right  { background-color:#aaa; }
+        .aw-hPanel h2 { text-align: center; border-bottom: 1px inset #333; }
+    </style>
+  </head>
+  <body>
+    <h1>aw.HPanel Demo</h1>
+    <div id="main">
+      <div>
+        <h2>Left Column (150px fixed)</h2>
+        <h4>Phony nav</h4>
+        <ul>
+            <li><a href="#">Link 1</a></li>
+            <li><a href="#">Link 2</a></li>
+            <li><a href="#">Link 3</a></li>
+            <li><a href="#">Link 4</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Center Column (expands to fill remaining space)</h2>
+        <h4>Have some <a href="http://baconipsum.com">Bacon Ipsum</a>:</h4>
+        <p>Sausage pig rump ball tip, boudin drumstick strip steak t-bone pastrami capicola corned beef shank venison swine flank. Beef speck meatball biltong, prosciutto turkey cow turducken short ribs bresaola sirloin kielbasa ribeye drumstick. Brisket tri-tip boudin ham hock, strip steak pastrami venison biltong short ribs pork chicken ham. Andouille ham hock swine flank shankle, short loin sirloin pork bacon kielbasa beef ribs shoulder capicola biltong pork loin. Fatback prosciutto pastrami, pork loin pork chop capicola ball tip turkey short ribs tongue bacon ribeye pancetta bresaola flank. Meatball ham hock prosciutto shoulder, venison turducken pork. Salami sirloin cow turkey, ground round jerky turducken ham hock fatback.</p>
+
+        <p>Jowl andouille strip steak hamburger biltong ball tip pancetta, t-bone speck venison tenderloin rump. Chuck shank beef, ground round pork chop prosciutto pork loin chicken. Strip steak pastrami meatball shoulder. Tongue ham tail jerky flank, tri-tip pork ball tip frankfurter drumstick kielbasa spare ribs. Ham hock pig biltong shoulder kielbasa, pancetta andouille ball tip fatback spare ribs chicken.</p>
+      </div>
+      <div>
+        <h2>Right Column (200px fixed)</h2>
+        <h4>O, you prefer <a href="http://hipsteripsum.me/">Hipster Ipsum</a>? Whatever:</h4>
+        <p>Vice authentic fanny pack, portland scenester aesthetic pinterest vinyl blog dreamcatcher kale chips umami +1 quinoa. Blog umami sriracha single-origin coffee photo booth. Cardigan cray photo booth, letterpress pitchfork street art VHS high life salvia trust fund. Semiotics ennui umami, messenger bag skateboard pitchfork put a bird on it pork belly blog small batch tofu american apparel terry richardson godard freegan. Chambray gentrify thundercats authentic lo-fi, typewriter fanny pack umami master cleanse helvetica cray. Pork belly flexitarian terry richardson yr, chillwave godard farm-to-table pop-up marfa chambray. Terry richardson gluten-free pork belly, +1 locavore butcher seitan polaroid food truck.</p>
+      </div>
+    </div>
+  </body>
+
+  <script src="aw-core.js"></script>
+  <script src="awHPanel.js"></script>
+  <script>
+      var mainNode = document.querySelector("#main");
+      window.spanel = new aw.HPanel(mainNode, {left:'150px', right:'200px'});
+  </script>
+</html>

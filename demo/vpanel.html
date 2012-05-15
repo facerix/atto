@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>aw.VPanel Demo</title>
+    <link rel="stylesheet" href="demopage.css"/>
+    <style>
+        #main {
+            /*margin: 50px auto;*/
+            height: 400px;
+            width: 800px;
+            border: 3px double #735;
+        }
+        .aw-vPanel .header { background-color:#345; }
+        .aw-vPanel .center { background-color:#eec; }
+        .aw-vPanel .footer { background-color:#aaa; }
+        .aw-vPanel .header, .aw-vPanel .footer { text-align: center; }
+        .aw-vPanel .header h1   { margin: 25px 0; }
+        .aw-vPanel .footer span { line-height: 50px; }
+        .r-pinned { position: absolute; top: 5px; right: 5px; }
+    </style>
+  </head>
+  <body>
+    <h1>aw.VPanel Demo</h1>
+    <div id="main">
+      <div>
+        <h1>O HAI U GUYS</h1>
+        <h2 class="r-pinned">(80px fixed header)</h2>
+      </div>
+      <div>
+        <h4>Vegan? Have a helping of <a href="http://veggieipsum.com/">Veggie Ipsum</a>:</h4>
+        <p>Veggies sunt bona vobis, proinde vos postulo esse magis sea lettuce arugula sorrel silver beet kohlrabi gram.</p>
+        <p>Kohlrabi celtuce turnip collard greens bitterleaf nori fennel water chestnut winter purslane courgette peanut earthnut pea scallion okra burdock corn carrot. Mustard arugula soko chicory eggplant seakale leek kohlrabi komatsuna cabbage radish endive. Celery brussels sprout cauliflower grape soko zucchini horseradish leek lotus root jícama chicory kale turnip greens garlic gumbo black-eyed pea.</p>
+        <p>Pea sprouts desert raisin sea lettuce broccoli rabe spring onion bok choy catsear. Brussels sprout earthnut pea chard pumpkin lotus root beet greens rutabaga prairie turnip kohlrabi garbanzo catsear collard greens. Kohlrabi zucchini jícama eggplant komatsuna dulse onion brussels sprout tatsoi plantain celery kakadu plum sweet pepper beetroot sorrel radish.</p>
+        <h2 class="r-pinned">(center panel expands to fill vertical space)</h2>
+      </div>
+      <div>
+        <span><a href="hpanel.html">Don't like veggies?</a></span>
+        <h2 class="r-pinned">(footer is fixed at 50px)</h2>
+      </div>
+    </div>
+  </body>
+
+  <script src="aw-core.js"></script>
+  <script src="awVPanel.js"></script>
+  <script>
+      var mainNode = document.querySelector("#main");
+      window.hpanel = new aw.VPanel(mainNode, {header:'80px',footer:'50px'});
+  </script>
+</html>

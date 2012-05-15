@@ -1,0 +1,58 @@
+@import url("../fonts/gooddog/stylesheet.css");
+
+h1 {
+    font: small-caps 48px/24px 'GoodDogRegular', cursive;
+}
+h2 {
+    font: normal 14px/16px helvetica,arial,verdana,tahoma,"sans serif";
+}
+abbr {
+    border-bottom: 1px dotted #aab;
+    cursor: help;
+}
+.to-convert {
+    border: 1px solid #aaa;
+}
+
+.controls * {
+  -webkit-transition: all 0.4s ease-in-out;
+     -moz-transition: all 0.4s ease-in-out;
+      -ms-transition: all 0.4s ease-in-out;
+       -o-transition: all 0.4s ease-in-out;
+          transition: all 0.4s ease-in-out;
+}
+
+.controls .hidden { opacity: 0; visibility: hidden; }
+
+#status {
+    font-style: italic;
+    border: 1px dashed #ccc;
+    background-color: #333;
+    color: #eee;
+    padding: 20px;
+}
+
+
+/* slides page */
+.to-convert {
+    overflow: hidden;
+}
+.imageWrapper {
+    display: block;
+    padding: 0; margin: 0;
+    background-color: #e7e7e7;
+}
+.imageWrapper img {
+    display: block;
+    margin: auto;
+}
+
+
+      .controls .hidden { opacity: 0; visibility: hidden; }
+        #status {
+            font-style: italic;
+            border: 1px dashed #ccc;
+            background-color: #333;
+            color: #eee;
+            padding: 20px;
+        }
