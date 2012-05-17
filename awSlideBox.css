@@ -50,14 +50,15 @@
     cursor: pointer;
     top: 50%; margin-top: -40px;
     font-size: 64px;
-    color: white;
+    color: #777;
     text-decoration: none;
     opacity: 0.25;
 }
 .slidebox .prev-button { left: 10px; }
 .slidebox .next-button { right: 10px; }
 
-.slidebox:hover .prev-button,
-.slidebox:hover .next-button {
+.slidebox .prev-button:hover,
+.slidebox .next-button:hover {
     opacity: 1;
+    color: #222;
 }

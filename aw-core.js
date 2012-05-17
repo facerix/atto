@@ -84,39 +84,63 @@ function addLoadEvent(func) {
 
 
 // ensure AttoWidgets (aw) namespace exists
-window.aw = window.aw || {};
+window.aw = window.aw || function() {
 
-window.aw._loadResource = function(type, url, id) {
-    var fileRef = null;
+    function _lastScriptPath() {
+        var path = null,
+            script_sources = document.querySelectorAll('script[src]');
+        if (script_sources) {
+            path = script_sources[script_sources.length-1].src;
+        }
 
-    if (type === 'css') {
-        fileRef = document.createElement('link');
-        fileRef.setAttribute("rel", "stylesheet");
-        fileRef.setAttribute("type", "text/css");
-        fileRef.setAttribute("href", url);
+        return path ? path.substr(0,path.lastIndexOf('/')+1) : null;
+    }
 
-    } else if (type === 'js') {
-        fileRef = document.createElement('script');
-        fileRef.setAttribute("type", "text/javascript");
+    function _loadResource(type, url, id) {
+        var fileRef = null;
+
+        // if url doesn't include an explicit path, assume the most recently loaded script file's path
+        //  (which for Attowidgets that load their own stylesheets is a pretty safe assumption!)
+        if (url.indexOf('/') == -1) {
+            url = _lastScriptPath() + url;
+        }
+
+        if (type === 'css') {
+            fileRef = document.createElement('link');
+            fileRef.setAttribute("rel", "stylesheet");
+            fileRef.setAttribute("type", "text/css");
+            fileRef.setAttribute("href", url);
+
+        } else if (type === 'js') {
+            fileRef = document.createElement('script');
+            fileRef.setAttribute("type", "text/javascript");
+            fileRef.setAttribute("src", url);
+
+        } else {
+            // handle error state
+        }
+
+        if (fileRef) {
+            if (id) { fileRef.setAttribute("id", id); }
+            fileRef.onload = function(m) {
+                //console.log('loaded:', m);
+            };
+            document.querySelector('head').appendChild(fileRef);
+        }
+    }
+
+    function _loadTemplate(url, id) {
+        var fileRef = document.createElement('iframe');
+        fileRef.setAttribute("style", "display:none");
+        fileRef.setAttribute("id", id);
         fileRef.setAttribute("src", url);
-
-    } else {
-        // handle error state
+        document.querySelector('body').appendChild(fileRef);
     }
 
-    if (fileRef) {
-        if (id) { fileRef.setAttribute("id", id); }
-        fileRef.onload = function(m) {
-            //console.log('loaded:', m);
-        };
-        document.querySelector('head').appendChild(fileRef);
-    }
-}
+    return {
+        _lastScriptPath: _lastScriptPath,
+        _loadResource  : _loadResource,
+        _loadTemplate  : _loadTemplate
+    };
 
-window.aw._loadTemplate = function(url, id) {
-    var fileRef = document.createElement('iframe');
-    fileRef.setAttribute("style", "display:none");
-    fileRef.setAttribute("id", id);
-    fileRef.setAttribute("src", url);
-    document.querySelector('body').appendChild(fileRef);
-}
+}();

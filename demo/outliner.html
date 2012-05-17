@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>aw.Outliner Demo</title>
+    <link rel="stylesheet" href="demopage.css"/>
+  </head>
+  <body>
+    <h1>aw.Outliner Demo</h1>
+
+    <h2>List 1 (ordered):</h2>
+    <pre class="easy-list ordered">
+    - Some task
+    - Another task
+      - here's a subtask
+      - and another
+        - and this one has a sub-sub task
+      - this one doesn't
+      - last subtask
+        - sub-subtask A
+        - sub-subtask B
+    - Top-level task III (no subtasks)
+    </pre>
+
+    <h2>List 2 (unordered):</h2>
+    <pre class="easy-list">
+    * bullet 1
+    * bullet 2
+      * bullet 2.1
+    </pre>
+
+    <section class="controls">
+      <button id="btnConvert">Convert all .easy-list nodes</button>
+      <p id="status" class="hidden"></p>
+    </section>
+  </body>
+  <script src="../awOutliner.js"></script>
+  <script>
+    var btnConvert = document.getElementById('btnConvert');
+    if (btnConvert) {
+       btnConvert.onclick = function convert() {
+          // find and operate on any nodes in the current page with a class of easy-list (just an arbitrary name; could be anything)
+          var lists = document.querySelectorAll(".easy-list");
+          for (var i=0,listCount=lists.length; i<listCount; i++) {
+              window.outliner(lists[i]);
+          }
+          var msg = "Converted " + listCount + " easy-list node" + (listCount>1 ? 's.' : '.');
+          var p = document.getElementById('status');
+          if (p) {
+              p.innerHTML = msg;
+              p.classList.toggle('hidden');
+          } else {
+              console.log(msg);
+          }
+          this.classList.add('hidden');
+       }
+    }
+  </script>
+</html>
