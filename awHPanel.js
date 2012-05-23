@@ -2,8 +2,8 @@
 // awHPanel.js (AttoWidget HPanel : simple horizontal-layout widget)
 //
 // author: Ryan Corradini
-// version: 1.0
-// date: 9 May 2012
+// version: 1.1
+// date: 23 May 2012
 // license: MIT
 //
 
@@ -19,15 +19,42 @@ aw.HPanel = function(rootNode, optArgs) {
         _right = null,
         i      = 0,
         nd     = null,
-        nCount = _root.childNodes.length,
-        opts   = optArgs;
+        nCount = _root.childElementCount || childElementCount(_root),
+        opts   = optArgs || {};
 
     //_root.innerHTML = '';
     _root.classList.add('aw-hPanel');
 
     // massage the child nodes
-    if (_root.childElementCount < 3) {
-        // if less than 3 child elements, we'll need to divine which is which, or create them from scratch
+    if (nCount !== 3) {
+        // if more or less than 3 child elements, we'll need to divine which is which (or create them from scratch...?)
+        if (opts.leftId) {
+            nd = document.getElementById(opts.leftId);
+            if (nd) {
+                _left = nd;
+                if (nd.parentNode !== _root) {
+                    _root.appendChild(nd);
+                }
+            }
+        }
+        if (opts.centerId) {
+            nd = document.getElementById(opts.centerId);
+            if (nd) {
+                _main = nd;
+                if (nd.parentNode !== _root) {
+                    _root.appendChild(nd);
+                }
+            }
+        }
+        if (opts.rightId) {
+            nd = document.getElementById(opts.rightId);
+            if (nd) {
+                _right = nd;
+                if (nd.parentNode !== _root) {
+                    _root.appendChild(nd);
+                }
+            }
+        }
     } else {
         // grab the first three child elements for left/main/right
         _left  = _root.firstElementChild  ||  firstElementChild(_root);
@@ -39,17 +66,17 @@ aw.HPanel = function(rootNode, optArgs) {
     if (_left) {
         _left.classList.add('left');
         _left.style.width = opts.left || '15%';
-        if (_main) {
-            _main.style.left = _left.style.width;
-        }
+        if (_main) _main.style.left = _left.style.width;
+    } else {
+        if (_main) _main.style.left = '0';
     }
     _main && _main.classList.add('center');
     if (_right) {
         _right.classList.add('right');
         _right.style.width = opts.right || '10%';
-        if (_main) {
-            _main.style.right = _right.style.width;
-        }
+        if (_main) _main.style.right = _right.style.width;
+    } else {
+        if (_main) _main.style.right = '0';
     }
 
     return {

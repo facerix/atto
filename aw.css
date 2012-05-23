@@ -15,9 +15,13 @@ header, .main {
     margin: 0 auto;
 }
 
+header, section, article, nav, footer {
+    display: block;
+}
+
 header {
     padding: 5em 1em 0; margin: 12px auto 92px;
-    /*text-align: center;*/
+    text-align: center;
 }
 
 header h1, header h2 {
@@ -34,10 +38,7 @@ header h2.speech-bubble {
     margin-left: -30px;
 }
 
-article {
-    display: block;
-    margin: 1em 0 0;
-}
+article { margin: 1em 0 0; }
 
 p {
     font-family: Cambria, Georgia, "New Century Schoolbook", "Century Schoolbook L", "Times New Roman", serif;
@@ -57,7 +58,7 @@ p {
 }
 
 .intro {
-    padding: 1rem;   padding: 0 1em; /* fallback for IE8 */
+    padding: 0 1em;
     margin-bottom: 1em;
 }
 
@@ -288,7 +289,6 @@ footer {
     padding: 0 10px 5px;
     margin: 0;
 
-    display: block;
     left: 0; right: 0; bottom: 0;
     height: 48px;
 }

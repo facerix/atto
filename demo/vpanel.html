@@ -4,10 +4,10 @@
     <title>aw.VPanel Demo</title>
     <link rel="stylesheet" href="demopage.css"/>
     <style>
-        #main {
-            /*margin: 50px auto;*/
+        .demoFrame {
+            margin: 20px;
             height: 400px;
-            width: 800px;
+            width: 600px;
             border: 3px double #735;
         }
         .aw-vPanel .header { background-color:#345; }
@@ -21,7 +21,9 @@
   </head>
   <body>
     <h1>aw.VPanel Demo</h1>
-    <div id="main">
+
+    <h3>Full 3-pane layout:</h3>
+    <div id="main1" class="demoFrame">
       <div>
         <h1>O HAI U GUYS</h1>
         <h2 class="r-pinned">(80px fixed header)</h2>
@@ -38,12 +40,43 @@
         <h2 class="r-pinned">(footer is fixed at 50px)</h2>
       </div>
     </div>
+
+    <h3>Header+center 2-pane layout:</h3>
+    <div id="main2" class="demoFrame">
+      <div id="headerPane">
+        <h1>O HAI U GUYS</h1>
+        <h2 class="r-pinned">(80px fixed header)</h2>
+      </div>
+      <div id="centerPane">
+        <h4>Vegan? Have a helping of <a href="http://veggieipsum.com/">Veggie Ipsum</a>:</h4>
+        <p>Veggies sunt bona vobis, proinde vos postulo esse magis sea lettuce arugula sorrel silver beet kohlrabi gram.</p>
+        <p>Kohlrabi celtuce turnip collard greens bitterleaf nori fennel water chestnut winter purslane courgette peanut earthnut pea scallion okra burdock corn carrot. Mustard arugula soko chicory eggplant seakale leek kohlrabi komatsuna cabbage radish endive. Celery brussels sprout cauliflower grape soko zucchini horseradish leek lotus root jícama chicory kale turnip greens garlic gumbo black-eyed pea.</p>
+        <p>Pea sprouts desert raisin sea lettuce broccoli rabe spring onion bok choy catsear. Brussels sprout earthnut pea chard pumpkin lotus root beet greens rutabaga prairie turnip kohlrabi garbanzo catsear collard greens. Kohlrabi zucchini jícama eggplant komatsuna dulse onion brussels sprout tatsoi plantain celery kakadu plum sweet pepper beetroot sorrel radish.</p>
+        <h2 class="r-pinned">(center panel expands to fill vertical space)</h2>
+      </div>
+    </div>
+
+    <h3>Center+footer 2-pane layout:</h3>
+    <div id="main3" class="demoFrame">
+      <div id="centerPane2">
+        <h4>Vegan? Have a helping of <a href="http://veggieipsum.com/">Veggie Ipsum</a>:</h4>
+        <p>Veggies sunt bona vobis, proinde vos postulo esse magis sea lettuce arugula sorrel silver beet kohlrabi gram.</p>
+        <p>Kohlrabi celtuce turnip collard greens bitterleaf nori fennel water chestnut winter purslane courgette peanut earthnut pea scallion okra burdock corn carrot. Mustard arugula soko chicory eggplant seakale leek kohlrabi komatsuna cabbage radish endive. Celery brussels sprout cauliflower grape soko zucchini horseradish leek lotus root jícama chicory kale turnip greens garlic gumbo black-eyed pea.</p>
+        <p>Pea sprouts desert raisin sea lettuce broccoli rabe spring onion bok choy catsear. Brussels sprout earthnut pea chard pumpkin lotus root beet greens rutabaga prairie turnip kohlrabi garbanzo catsear collard greens. Kohlrabi zucchini jícama eggplant komatsuna dulse onion brussels sprout tatsoi plantain celery kakadu plum sweet pepper beetroot sorrel radish.</p>
+        <h2 class="r-pinned">(center panel expands to fill vertical space)</h2>
+      </div>
+      <div id="footerPane">
+        <span><a href="hpanel.html">Don't like veggies?</a></span>
+        <h2 class="r-pinned">(footer is fixed at 50px)</h2>
+      </div>
+    </div>
   </body>
 
   <script src="../aw-core.js"></script>
   <script src="../awVPanel.js"></script>
   <script>
-      var mainNode = document.querySelector("#main");
-      window.hpanel = new aw.VPanel(mainNode, {header:'80px',footer:'50px'});
+      window.vpanel1 = new aw.VPanel(document.getElementById("main1"), {header:'80px',footer:'50px'});
+      window.vpanel2 = new aw.VPanel(document.getElementById("main2"), {header:'80px',headerId:'headerPane',centerId:'centerPane'});
+      window.vpanel3 = new aw.VPanel(document.getElementById("main3"), {footer:'50px',centerId:'centerPane2',footerId:'footerPane'});
   </script>
 </html>

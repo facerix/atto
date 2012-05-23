@@ -2,8 +2,8 @@
 // awVPanel.js (AttoWidget VPanel : simple vertical-layout widget)
 //
 // author: Ryan Corradini
-// version: 1.0
-// date: 9 May 2012
+// version: 1.1
+// date: 23 May 2012
 // license: MIT
 //
 
@@ -19,15 +19,42 @@ aw.VPanel = function(rootNode, optArgs) {
         _foot  = null,
         i      = 0,
         nd     = null,
-        nCount = _root.childNodes.length,
-        opts   = optArgs;
+        nCount = _root.childElementCount || childElementCount(_root),
+        opts   = optArgs || {};
 
     //_root.innerHTML = '';
     _root.classList.add('aw-vPanel');
 
     // massage the child nodes
-    if (_root.childElementCount < 3) {
-        // if less than 3 child elements, we'll need to divine which is which, or create them from scratch
+    if (nCount !== 3) {
+        // if more or less than 3 child elements, we'll need to divine which is which (or create them from scratch...?)
+        if (opts.headerId) {
+            nd = document.getElementById(opts.headerId);
+            if (nd) {
+                _head = nd;
+                if (nd.parentNode !== _root) {
+                    _root.appendChild(nd);
+                }
+            }
+        }
+        if (opts.centerId) {
+            nd = document.getElementById(opts.centerId);
+            if (nd) {
+                _main = nd;
+                if (nd.parentNode !== _root) {
+                    _root.appendChild(nd);
+                }
+            }
+        }
+        if (opts.footerId) {
+            nd = document.getElementById(opts.footerId);
+            if (nd) {
+                _foot = nd;
+                if (nd.parentNode !== _root) {
+                    _root.appendChild(nd);
+                }
+            }
+        }
     } else {
         // grab the first three child elements for head/main/foot
         _head = _root.firstElementChild  ||  firstElementChild(_root);
@@ -39,17 +66,17 @@ aw.VPanel = function(rootNode, optArgs) {
     if (_head) {
         _head.classList.add('header');
         _head.style.height = opts.header || '15%';
-        if (_main) {
-            _main.style.top = _head.style.height;
-        }
+        if (_main) _main.style.top = _head.style.height;
+    } else {
+        if (_main) _main.style.top = '0';
     }
     _main && _main.classList.add('center');
     if (_foot) {
         _foot.classList.add('footer');
         _foot.style.height = opts.footer || '10%';
-        if (_main) {
-            _main.style.bottom = _foot.style.height;
-        }
+        if (_main) _main.style.bottom = _foot.style.height;
+    } else {
+        if (_main) _main.style.bottom = '0';
     }
 
     return {
