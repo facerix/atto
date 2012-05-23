@@ -129,7 +129,7 @@ aw.TabContainer = function(rootNode, optArgs) {
         ndPane = document.createElement('div');
         ndPane.className = 'tab-panel';
         ndPane.id = sID+'-panel';
-        ndPane.innerHTML = nd.innerHTML;
+        ndPane.innerHTML = content;
         ndTab.onclick = function(ndTarget) {
             return function() {
                 _selectTab(this, ndTarget);
