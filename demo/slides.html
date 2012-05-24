@@ -35,7 +35,7 @@
 <script src="../awSlideBox.js"></script>
 <script>
     window.slidebox = null;
-    addLoadEvent(function() {
+    aw.core.addLoadEvent(function() {
         // find and operate on any accordion nodes in the current page
         var node = document.getElementById("mySlides");
         window.slidebox = new aw.SlideBox(node, {});

@@ -2,8 +2,8 @@
 // aw-core : helper functions and such
 //
 // author: Ryan Corradini
-// version: 1.0
-// date: 22 Apr 2012
+// version: 1.1
+// date: 23 May 2012
 // license: MIT
 //
 
@@ -17,70 +17,78 @@ if(typeof document!=="undefined"&&!("classList" in document.createElement("a")))
 // some browsers don't define this constant, which most of the widget bootstraps rely on
 window.ELEMENT_NODE = document.ELEMENT_NODE || 1;
 
-// polyfill firstElementChild / nextElementSibling in older browsers
-//tr = tr.nextElementSibling || nextElementSibling(tr);
-function nextElementSibling( el ) {
-    do { el = el.nextSibling } while ( el && el.nodeType !== ELEMENT_NODE );
-    return el;
-}
-function firstElementChild( el ) {
-    el = el ? el.firstChild : null;
-    if ( el && el.nodeType == ELEMENT_NODE ) {
+// polyfill ElementTraversal interfaces in older browsers
+//
+// LMNT version 1.1
+// author: Ryan Corradini
+window.lmnt = function() {
+    function _nextElementSibling( el ) {
+        if ( el && el.nextElementSibling ) { return el.nextElementSibling; }
+        if ( !el ) { return null; }
+        do { el = el.nextSibling } while ( el && el.nodeType !== ELEMENT_NODE );
         return el;
-    } else {
-        return el.nextElementSibling || nextElementSibling(el);
     }
-}
-function childElementCount( el ) {
-    if ( el && el.children ) { return el.children.length || 0; }
-    var count = 0;
-    el = el.firstChild;
-    do {
-        if ( el && el.nodeType == ELEMENT_NODE ) { count++; }
-        el = el.nextSibling;
-    } while ( el );
-    return count;
-}
+
+    function _previousElementSibling( el ) {
+        if ( el && el.previousElementSibling ) { return el.previousElementSibling; }
+        if ( !el ) { return null; }
+        do { el = el.previousSibling } while ( el && el.nodeType !== ELEMENT_NODE );
+        return el;
+    }
+
+    function _firstElementChild( el ) {
+        if ( el && el.firstElementChild ) { return el.firstElementChild; }
+        el = el ? el.firstChild : null;
+        if ( el && el.nodeType == ELEMENT_NODE ) {
+            return el;
+        } else {
+            return el.nextElementSibling || _nextElementSibling(el);
+        }
+    }
+
+    function _lastElementChild( el ) {
+        if ( el && el.lastElementChild ) { return el.lastElementChild; }
+        el = el ? el.lastChild : null;
+        if ( el && el.nodeType == ELEMENT_NODE ) {
+            return el;
+        } else {
+            return el.previousElementSibling || _previousElementSibling(el);
+        }
+    }
+
+    function _childElementCount( el ) {
+        // note that we can't use el.children because IE<9 lies, including comment nodes.
+        if ( el && el.childElementCount ) { return el.childElementCount; }
+        var count = 0;
+        el = el ? el.firstChild : null;
+        do {
+            if ( el && el.nodeType == ELEMENT_NODE ) { count++; }
+            el = el.nextSibling;
+        } while ( el );
+        return count;
+    }
+
+    function _childElements( el ) {
+        // see above; can't trust el.children, so we have to do it manually no matter what.
+        var stash = [];
+        el = el ? el.firstChild : null;
+        while ( el ) {
+            if ( el && el.nodeType == ELEMENT_NODE ) { stash.push( el ); }
+            el = el.nextSibling;
+        };
+        return stash;
+    }
+
+    return {
+        nextElementSibling     : _nextElementSibling,
+        previousElementSibling : _previousElementSibling,
+        firstElementChild      : _firstElementChild,
+        lastElementChild       : _lastElementChild,
+        childElementCount      : _childElementCount,
+        children               : _childElements
+    }
+}();
 // end of ElementTraversal polyfills
-
-
-function stopEventCascade(e) {
-    if (!e) var e = window.event;
-    if (e.preventDefault) {
-        e.preventDefault();
-    } else if (e.stop) {
-        e.stop();
-    } else {
-        e.cancelBubble = true;
-    }
-
-    e.returnValue = false;
-    if (e.stopPropagation) e.stopPropagation();
-}
-
-/*
-  Simon Willison's unobtrusive onLoad event handler
-  (http://simonwillison.net/2004/May/26/addLoadEvent/)
-
-  Example usage:
-    addLoadEvent(nameOfSomeFunctionToRunOnPageLoad);
-    addLoadEvent(function() {
-      // more code to run on page load
-    });
-*/
-function addLoadEvent(func) {
-  var oldonload = window.onload;
-  if (typeof window.onload != 'function') {
-    window.onload = func;
-  } else {
-    window.onload = function() {
-      if (oldonload) {
-        oldonload();
-      }
-      func();
-    }
-  }
-}
 
 
 // ensure AttoWidgets (aw) namespace exists
@@ -144,3 +152,43 @@ window.aw = window.aw || function() {
     };
 
 }();
+
+aw.core = aw.core || {
+    stopEventCascade: function(e) {
+        if (!e) var e = window.event;
+        if (e.preventDefault) {
+            e.preventDefault();
+        } else if (e.stop) {
+            e.stop();
+        } else {
+            e.cancelBubble = true;
+        }
+
+        e.returnValue = false;
+        if (e.stopPropagation) e.stopPropagation();
+    },
+
+    addLoadEvent: function(func) {
+    /*
+      Simon Willison's unobtrusive onLoad event handler
+      (http://simonwillison.net/2004/May/26/addLoadEvent/)
+
+      Example usage:
+        addLoadEvent(nameOfSomeFunctionToRunOnPageLoad);
+        addLoadEvent(function() {
+          // more code to run on page load
+        });
+    */
+        var oldonload = window.onload;
+        if (typeof window.onload != 'function') {
+            window.onload = func;
+        } else {
+            window.onload = function() {
+                if (oldonload) {
+                    oldonload();
+                }
+                func();
+            }
+        }
+    }
+};

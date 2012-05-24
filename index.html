@@ -89,7 +89,7 @@
   </body>
   <script src="aw-core.js"></script> <!-- needed for the addLoadEvent -->
   <script>
-      addLoadEvent(function() {
+      aw.core.addLoadEvent(function() {
           // show the header (which is hidden until the custom font-face can get hoisted)
           window.setTimeout(function() {
               var h = document.querySelectorAll("h1")[0];

@@ -18,7 +18,7 @@ aw.Accordion = function(rootNode, optArgs) {
         _currentPanel = null,
         i      = 0,
         nd     = null,
-        nCount = _root.childElementCount || childElementCount(_root),
+        nCount = _root.childElementCount || lmnt.childElementCount(_root),
         lastId = 0,
         _registry = {},
         options = optArgs || {},
@@ -78,8 +78,9 @@ aw.Accordion = function(rootNode, optArgs) {
 
 
     // grab any child elements (not raw text nodes) to form my initial tabs
+    var elems = lmnt.children(_root);
     for (i=0; i<nCount; i++) {
-        nd = _root.children[i];
+        nd = elems[i];
 
         _addPanel(nd.title ? nd.title : "Panel " + (tabCount+1), nd.innerHTML, __frag);
     }

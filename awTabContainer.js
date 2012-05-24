@@ -2,8 +2,8 @@
 // awTabContainer.js (AttoWidget TabContainer : convert a raw list of DOM nodes into a simple, self-contained tab widget)
 //
 // author: Ryan Corradini
-// version: 1.0
-// date: 18 Apr 2012
+// version: 1.1
+// date: 23 May 2012
 // license: MIT
 //
 
@@ -18,7 +18,7 @@ aw.TabContainer = function(rootNode, optArgs) {
         _curr  = 0,
         i      = 0,
         nd     = null,
-        nCount = _root.childNodes.length,
+        nCount = _root.childElementCount || lmnt.childElementCount(_root),
         lastId = 0,
         _registry = {},
         options = optArgs,
@@ -112,7 +112,7 @@ aw.TabContainer = function(rootNode, optArgs) {
         ndTabChild.innerHTML = '&times;';
         ndTabChild.onclick = function(ndTarget) {
             return function(e) {
-                stopEventCascade(e);
+                aw.core.stopEventCascade(e);
 
                 // strip off the '-label' portion of the id
                 if (ndTarget.id) { _delTab(ndTarget.id.substr(0, ndTarget.id.length-6)); }
@@ -144,12 +144,10 @@ aw.TabContainer = function(rootNode, optArgs) {
 
 
     // grab any child elements (not raw text nodes) to form my initial tabs
+    var elems = lmnt.children(_root);
     for (i=0; i<nCount; i++) {
-        if (_root.childNodes[i].nodeType == ELEMENT_NODE) {
-            nd = _root.childNodes[i];
-
-            _addTab(nd.title ? nd.title : "Tab " + (tabCount+1), nd.innerHTML);
-        }
+        nd = elems[i];
+        _addTab(nd.title ? nd.title : "Tab " + (tabCount+1), nd.innerHTML);
     }
     _root.innerHTML = '';
     _root.classList.add('tabcontainer');

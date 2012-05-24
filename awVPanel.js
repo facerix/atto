@@ -19,7 +19,7 @@ aw.VPanel = function(rootNode, optArgs) {
         _foot  = null,
         i      = 0,
         nd     = null,
-        nCount = _root.childElementCount || childElementCount(_root),
+        nCount = _root.childElementCount || lmnt.childElementCount(_root),
         opts   = optArgs || {};
 
     //_root.innerHTML = '';
@@ -57,9 +57,9 @@ aw.VPanel = function(rootNode, optArgs) {
         }
     } else {
         // grab the first three child elements for head/main/foot
-        _head = _root.firstElementChild  ||  firstElementChild(_root);
-        _main = _head.nextElementSibling || nextElementSibling(_head);
-        _foot = _main.nextElementSibling || nextElementSibling(_main);
+        _head = _root.firstElementChild  || lmnt.firstElementChild(_root);
+        _main = _head.nextElementSibling || lmnt.nextElementSibling(_head);
+        _foot = _main.nextElementSibling || lmnt.nextElementSibling(_main);
     }
 
     // set classes & inline sizing accordingly

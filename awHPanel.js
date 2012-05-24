@@ -19,7 +19,7 @@ aw.HPanel = function(rootNode, optArgs) {
         _right = null,
         i      = 0,
         nd     = null,
-        nCount = _root.childElementCount || childElementCount(_root),
+        nCount = _root.childElementCount || lmnt.childElementCount(_root),
         opts   = optArgs || {};
 
     //_root.innerHTML = '';
@@ -57,9 +57,9 @@ aw.HPanel = function(rootNode, optArgs) {
         }
     } else {
         // grab the first three child elements for left/main/right
-        _left  = _root.firstElementChild  ||  firstElementChild(_root);
-        _main  = _left.nextElementSibling || nextElementSibling(_left);
-        _right = _main.nextElementSibling || nextElementSibling(_main);
+        _left  = _root.firstElementChild  || lmnt.firstElementChild(_root);
+        _main  = _left.nextElementSibling || lmnt.nextElementSibling(_left);
+        _right = _main.nextElementSibling || lmnt.nextElementSibling(_main);
     }
 
     // set classes & inline sizing accordingly
