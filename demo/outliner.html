@@ -35,7 +35,7 @@
   </body>
   <script src="../awOutliner.js"></script>
   <script>
-    var btnConvert = document.getElementById('btnConvert');
+    var btnConvert = aw.core.byId('btnConvert');
     if (btnConvert) {
        btnConvert.onclick = function convert() {
           // find and operate on any nodes in the current page with a class of easy-list (just an arbitrary name; could be anything)
@@ -44,7 +44,7 @@
               window.outliner(lists[i]);
           }
           var msg = "Converted " + listCount + " easy-list node" + (listCount>1 ? 's.' : '.');
-          var p = document.getElementById('status');
+          var p = aw.core.byId('status');
           if (p) {
               p.innerHTML = msg;
               p.classList.toggle('hidden');

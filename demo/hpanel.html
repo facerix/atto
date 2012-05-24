@@ -86,8 +86,8 @@
   <script src="../aw-core.js"></script>
   <script src="../awHPanel.js"></script>
   <script>
-      window.hpanel1 = new aw.HPanel(document.getElementById("main1"), {left:'150px', right:'200px'});
-      window.hpanel2 = new aw.HPanel(document.getElementById("main2"), {left:'200px', leftId:'leftPane', centerId:'centerPane', right:'0px'});
-      window.hpanel3 = new aw.HPanel(document.getElementById("main3"), {left:'0px', centerId:'centerPane2', rightId:'rightPane2', right:'250px'});
+      window.hpanel1 = new aw.HPanel(aw.core.byId("main1"), {left:'150px', right:'200px'});
+      window.hpanel2 = new aw.HPanel(aw.core.byId("main2"), {left:'200px', leftId:'leftPane', centerId:'centerPane'});
+      window.hpanel3 = new aw.HPanel(aw.core.byId("main3"), {centerId:'centerPane2', rightId:'rightPane2', right:'250px'});
   </script>
 </html>

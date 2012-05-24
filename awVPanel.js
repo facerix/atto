@@ -29,7 +29,7 @@ aw.VPanel = function(rootNode, optArgs) {
     if (nCount !== 3) {
         // if more or less than 3 child elements, we'll need to divine which is which (or create them from scratch...?)
         if (opts.headerId) {
-            nd = document.getElementById(opts.headerId);
+            nd = aw.core.byId(opts.headerId);
             if (nd) {
                 _head = nd;
                 if (nd.parentNode !== _root) {
@@ -38,7 +38,7 @@ aw.VPanel = function(rootNode, optArgs) {
             }
         }
         if (opts.centerId) {
-            nd = document.getElementById(opts.centerId);
+            nd = aw.core.byId(opts.centerId);
             if (nd) {
                 _main = nd;
                 if (nd.parentNode !== _root) {
@@ -47,7 +47,7 @@ aw.VPanel = function(rootNode, optArgs) {
             }
         }
         if (opts.footerId) {
-            nd = document.getElementById(opts.footerId);
+            nd = aw.core.byId(opts.footerId);
             if (nd) {
                 _foot = nd;
                 if (nd.parentNode !== _root) {

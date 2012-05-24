@@ -190,5 +190,10 @@ aw.core = aw.core || {
                 func();
             }
         }
+    },
+
+    byId: function(id) {
+    // convenience shortcut; no real improvement other than code shorthand
+        return document.getElementById(id);
     }
 };

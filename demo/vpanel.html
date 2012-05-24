@@ -75,8 +75,8 @@
   <script src="../aw-core.js"></script>
   <script src="../awVPanel.js"></script>
   <script>
-      window.vpanel1 = new aw.VPanel(document.getElementById("main1"), {header:'80px',footer:'50px'});
-      window.vpanel2 = new aw.VPanel(document.getElementById("main2"), {header:'80px',headerId:'headerPane',centerId:'centerPane'});
-      window.vpanel3 = new aw.VPanel(document.getElementById("main3"), {footer:'50px',centerId:'centerPane2',footerId:'footerPane'});
+      window.vpanel1 = new aw.VPanel(aw.core.byId("main1"), {header:'80px',footer:'50px'});
+      window.vpanel2 = new aw.VPanel(aw.core.byId("main2"), {header:'80px',headerId:'headerPane',centerId:'centerPane'});
+      window.vpanel3 = new aw.VPanel(aw.core.byId("main3"), {footer:'50px',centerId:'centerPane2',footerId:'footerPane'});
   </script>
 </html>

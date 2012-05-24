@@ -34,11 +34,7 @@
 <script src="../aw-core.js"></script>
 <script src="../awSlideBox.js"></script>
 <script>
-    window.slidebox = null;
-    aw.core.addLoadEvent(function() {
-        // find and operate on any accordion nodes in the current page
-        var node = document.getElementById("mySlides");
-        window.slidebox = new aw.SlideBox(node, {});
-    });
+    // find and operate on any accordion nodes in the current page
+    window.slidebox = new aw.SlideBox(aw.core.byId("mySlides"), {});
 </script>
 </html>

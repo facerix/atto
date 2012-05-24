@@ -23,11 +23,7 @@
 <script src="../aw-core.js"></script>
 <script src="../awTabContainer.js"></script>
 <script>
-    window.tabs = null;
-    aw.core.addLoadEvent(function() {
-        // find and operate on any accordion nodes in the current page
-        var node = document.getElementById("myTabs");
-        window.tabs = new aw.TabContainer(node, {});
-    });
+    // find and operate on any accordion nodes in the current page
+    window.tabs = new aw.TabContainer(aw.core.byId("myTabs"), {});
 </script>
 </html>

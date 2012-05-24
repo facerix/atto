@@ -47,7 +47,7 @@ aw.TabContainer = function(rootNode, optArgs) {
     function _delTab(id) {
         var lbl, pnl, newLbl, newPnl;
         if (id in _registry) {
-            lbl = document.getElementById(id+'-label');
+            lbl = aw.core.byId(id+'-label');
             if (lbl.classList.contains('selected')) {
                 lbl.classList.remove('selected');
                 if (lbl.nextSibling) {
@@ -57,7 +57,7 @@ aw.TabContainer = function(rootNode, optArgs) {
                 }
             }
             _tabRow.removeChild(lbl);
-            pnl = document.getElementById(id+'-panel');
+            pnl = aw.core.byId(id+'-panel');
             if (pnl.classList.contains('selected')) {
                 pnl.classList.remove('selected');
                 if (pnl.nextSibling) {
