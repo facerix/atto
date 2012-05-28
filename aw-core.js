@@ -153,8 +153,50 @@ window.aw = window.aw || function() {
 
 }();
 
-aw.core = aw.core || {
-    stopEventCascade: function(e) {
+aw.core = aw.core || function() {
+    function _sendRequest(url,callback,postData) {
+        var req = _createXMLHTTPObject();
+        if (!req) return;
+        var method = (postData) ? "POST" : "GET";
+        req.open(method,url,true);
+        //req.setRequestHeader('User-Agent','XMLHTTP/1.0');
+        if (postData)
+            req.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+        req.onreadystatechange = function () {
+            if (req.readyState != 4) return;
+            if (req.status != 200 && req.status != 304) {
+    //          alert('HTTP error ' + req.status);
+                return;
+            }
+            callback(req);
+        }
+        if (req.readyState == 4) return;
+        req.send(postData);
+    }
+
+    var _XMLHttpFactories = [
+        function () {return new XMLHttpRequest()},
+        function () {return new ActiveXObject("Msxml2.XMLHTTP")},
+        function () {return new ActiveXObject("Msxml3.XMLHTTP")},
+        function () {return new ActiveXObject("Microsoft.XMLHTTP")}
+    ];
+
+    function _createXMLHTTPObject() {
+        var xmlhttp = false;
+        for (var i=0; i < _XMLHttpFactories.length; i++) {
+            try {
+                xmlhttp = _XMLHttpFactories[i]();
+            }
+            catch (e) {
+                continue;
+            }
+            break;
+        }
+        return xmlhttp;
+    }
+
+
+    function _stopEventCascade(e) {
         if (!e) var e = window.event;
         if (e.preventDefault) {
             e.preventDefault();
@@ -166,9 +208,9 @@ aw.core = aw.core || {
 
         e.returnValue = false;
         if (e.stopPropagation) e.stopPropagation();
-    },
+    }
 
-    addLoadEvent: function(func) {
+    function _addLoadEvent(func) {
     /*
       Simon Willison's unobtrusive onLoad event handler
       (http://simonwillison.net/2004/May/26/addLoadEvent/)
@@ -190,10 +232,17 @@ aw.core = aw.core || {
                 func();
             }
         }
-    },
+    }
 
-    byId: function(id) {
+    function _byId(id) {
     // convenience shortcut; no real improvement other than code shorthand
         return document.getElementById(id);
     }
-};
+
+    return {
+        addLoadEvent     : _addLoadEvent,
+        byId             : _byId,
+        stopEventCascade : _stopEventCascade,
+        xhrRequest       : _sendRequest
+    }
+}();
