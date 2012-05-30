@@ -27,13 +27,15 @@
     display: inline-block;
     position: relative;
     z-index: 0;
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4), inset 0 1px 0 #FFF;
     text-shadow: 0 1px #FFF;
     margin: 0 8px 0 -5px;
     padding: 0 30px 0 20px; /*0 20px;*/
     text-align: center;
+
+       -moz-border-radius: 6px 6px 0 0;
+    -webkit-border-radius: 6px 6px 0 0;
+            border-radius: 6px 6px 0 0;
     
     cursor: pointer;
 }
@@ -46,45 +48,6 @@
     color: #333;
     z-index: 2;
     border-bottom-color: #FFF;
-}
-.tab-row:before {
-    position: absolute;
-    content: " ";
-    width: 100%;
-    bottom: 0;
-    left: 0;
-    border-bottom: 1px solid #AAA;
-    z-index: 1;
-}
-.tab-row .tab:before,
-.tab-row .tab:after {
-    border: 1px solid #AAA;
-    position: absolute;
-    bottom: -1px;
-    width: 5px;
-    height: 5px;
-    content: " ";
-}
-.tab-row .tab:before {
-    left: -6px;
-    border-bottom-right-radius: 6px;
-    border-width: 0 1px 1px 0;
-    box-shadow: 2px 2px 0 #D1D1D1;
-}
-.tab-row .tab:first-child:before {
-    border-bottom-right-radius: 0;
-}
-.tab-row .tab:after {
-    right: -6px;
-    border-bottom-left-radius: 6px;
-    border-width: 0 0 1px 1px;
-    box-shadow: -2px 2px 0 #D1D1D1;
-}
-.tab-row .tab.selected:before {
-    box-shadow: 2px 2px 0 #FFF;
-}
-.tab-row .tab.selected:after {
-    box-shadow: -2px 2px 0 #FFF;
 }
 
 /* end CSS-tricks */
@@ -129,4 +92,9 @@
 
 .tab-close-button:hover {
     color: inherit;
+}
+
+.tab.home {
+   padding: 0 20px;
+   /* background-image: something; background-position: center -100px; */
 }

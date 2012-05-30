@@ -12,12 +12,13 @@
 aw._loadResource('css', 'awSlideBox.css', 'css-slides');
 
 // declare the awSlideBox widget
-aw.SlideBox = function(rootNode, optionArray) {
+aw.SlideBox = function(rootNode, optArgs) {
     var _root   = rootNode || document.createElement('div'),
         _slides = [],
         _curr   = 0,
         i       = 0,
         nd      = 0,
+        opts    = optArgs || {},
         nCount  = _root.childElementCount || lmnt.childElementCount(_root);
 
     // grab any child elements (not raw text nodes) to form the initial slides for our deck

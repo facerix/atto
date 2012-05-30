@@ -135,7 +135,9 @@ abbr {
     position: relative;
     text-align: center;
 
-    border-radius: 260px / 120px;
+       -moz-border-radius: 260px / 120px;
+    -webkit-border-radius: 260px / 120px;
+            border-radius: 260px / 120px;
   -moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;
 }
 .speech-bubble.primary {
@@ -164,12 +166,18 @@ abbr {
 .speech-bubble.primary:before {
     right: 50%;
     border-width: 0 10px 10px 0;
-    border-bottom-right-radius: 80px 50px;
+    
+        -moz-border-radius-bottomright: 80px 50px;
+    -webkit-border-bottom-right-radius: 80px 50px;
+            border-bottom-right-radius: 80px 50px;
 }
 .speech-bubble.secondary:before {
     left: 50%;
     border-width: 0 0 10px 10px;
-    border-bottom-left-radius: 80px 50px;
+
+        -moz-border-radius-bottomleft: 80px 50px;
+    -webkit-border-bottom-left-radius: 80px 50px;
+            border-bottom-left-radius: 80px 50px;
 }
 
 /* top edge of the tail */
@@ -189,25 +197,34 @@ abbr {
     right: 50%;
     margin-right: 20px;
     border-width: 0 10px 10px 0;
-    border-bottom-right-radius: 40px 50px;
+
+        -moz-border-radius-bottomright: 40px 50px;
+    -webkit-border-bottom-right-radius: 40px 50px;
+            border-bottom-right-radius: 40px 50px;
 }
 .speech-bubble.secondary:after {
     left: 50%;
     margin-left: 30px;
     border-width: 0 0 10px 10px;
-    border-bottom-left-radius: 40px 50px;
+
+        -moz-border-radius-bottomleft: 40px 50px;
+    -webkit-border-bottom-left-radius: 40px 50px;
+            border-bottom-left-radius: 40px 50px;
 }
 
 /* round off the tip of the tail */
 .speech-bubble > *:first-child:before {
     background: none repeat scroll 0 0 #0DC4F2;
-    border-radius: 10px 10px 10px 10px;
     content: "";
     height: 10px;
     bottom: -40px;
     position: absolute;
     width: 10px;
     z-index: 1;
+
+       -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+            border-radius: 10px 10px 10px 10px;
 }
 .speech-bubble.primary > *:first-child:before {
     right: 50%;
@@ -255,7 +272,9 @@ h1,h2 {
     background-color: #0DC4F2;
     text-decoration: none;
     color: white;
-    border-radius: 8px;
+       -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+            border-radius: 8px;
 
     background-color: #3DD0F5;
     background-image: -webkit-gradient(linear, left top, left bottom, from(#3DD0F5), to(#0DC4F2)); 

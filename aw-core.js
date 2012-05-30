@@ -195,6 +195,40 @@ aw.core = aw.core || function() {
         return xmlhttp;
     }
 
+    function _isArray(it) {
+        // shamelessly lifted from Dojo Base)
+        return it && (it instanceof Array || typeof it === "array");
+    }
+
+    function _colonSplit(s) {
+        return s ? s.split(':') : null;
+    }
+
+    function _parse_args(arglist) {
+        var args = [];
+        if (arglist) {
+            if (typeof arglist === 'string') {
+                args = arglist.split(',').map(String.trim).map(_colonSplit); // split by comma, trim whitespace, then split by colon
+            } else if (_isArray(arglist)) {
+                args = arglist.map(_colonSplit);
+            } else if (typeof arglist === 'object') {
+                for (var k in arglist) {
+                    args.push([k, arglist[k]]);
+                }
+            }
+        }
+        return args;
+    }
+
+    function _args_mixin(old_args, new_arglist) {
+        var new_args = _parse_args(new_arglist), key, val;
+        for (var i in new_args) {
+            key = new_args[i][0];
+            val = new_args[i][1];
+            old_args[key] = val;
+        }
+        return old_args;
+    }  // --> this is the one that gets exposed
 
     function _stopEventCascade(e) {
         if (!e) var e = window.event;
@@ -243,6 +277,7 @@ aw.core = aw.core || function() {
         addLoadEvent     : _addLoadEvent,
         byId             : _byId,
         stopEventCascade : _stopEventCascade,
-        xhrRequest       : _sendRequest
+        xhrRequest       : _sendRequest,
+        mixinArgs        : _args_mixin
     }
 }();

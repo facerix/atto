@@ -32,7 +32,7 @@ aw.DataView = function(rootNode, optionArray) {
             aw.core.xhrRequest(fetchUrl, function(e) {
                 //console.log('request finished');
                 if (e && e.status && e.status === 200) {
-                    _root.innerHTML = e.response;       // also needs to be more sopisticated, but this is a proof of concept
+                    _root.innerHTML = e.response || e.responseText;    // also needs to be more sopisticated, but this is a proof of concept
                 } else {
                     console.error('Apparently I somehow failed to fetch the data. Sorry about that, mate.');
                     if (e.statusText) { console.debug('Failure details:', e.statusText); }

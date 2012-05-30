@@ -21,7 +21,7 @@ aw.TabContainer = function(rootNode, optArgs) {
         nCount = _root.childElementCount || lmnt.childElementCount(_root),
         lastId = 0,
         _registry = {},
-        options = optArgs,
+        opts = optArgs || {},
         currTitle = null,
         currPanel = null;
 
@@ -82,7 +82,7 @@ aw.TabContainer = function(rootNode, optArgs) {
         panel.classList.add('selected');
     }
 
-    function _addTab(label, content) {
+    function _addTab(label, content, args) {
         var sID        = '',
             ndTab      = null,
             ndTabChild = null,
@@ -96,7 +96,7 @@ aw.TabContainer = function(rootNode, optArgs) {
         ndTab.className = 'tab';
         ndTab.id = sID+'-label';
 
-        if (options.useHashLinks) {
+        if (opts.useHashLinks) {
             ndTabChild = document.createElement('a');
             ndTabChild.href = '#'+sID+'-panel';
         } else {
@@ -107,21 +107,24 @@ aw.TabContainer = function(rootNode, optArgs) {
         ndTab.appendChild(ndTabChild);
 
         // tab-close link
-        ndTabChild = document.createElement('a');
-        ndTabChild.className = 'tab-close-button';
-        ndTabChild.innerHTML = '&times;';
-        ndTabChild.onclick = function(ndTarget) {
-            return function(e) {
-                aw.core.stopEventCascade(e);
+        if (args && args.home) {
+            ndTab.classList.add('home');
+        } else {
+            ndTabChild = document.createElement('a');
+            ndTabChild.className = 'tab-close-button';
+            ndTabChild.innerHTML = '&times;';
+            ndTabChild.onclick = function(ndTarget) {
+                return function(e) {
+                    aw.core.stopEventCascade(e);
 
-                // strip off the '-label' portion of the id
-                if (ndTarget.id) { _delTab(ndTarget.id.substr(0, ndTarget.id.length-6)); }
+                    // strip off the '-label' portion of the id
+                    if (ndTarget.id) { _delTab(ndTarget.id.substr(0, ndTarget.id.length-6)); }
 
-                return false;
-            }
-        }(ndTab);
-        ndTab.appendChild(ndTabChild);
-
+                    return false;
+                }
+            }(ndTab);
+            ndTab.appendChild(ndTabChild);
+        }
         _tabRow.appendChild(ndTab);
 
 
@@ -147,7 +150,11 @@ aw.TabContainer = function(rootNode, optArgs) {
     var elems = lmnt.children(_root);
     for (i=0; i<nCount; i++) {
         nd = elems[i];
-        _addTab(nd.title ? nd.title : "Tab " + (tabCount+1), nd.innerHTML);
+        var args = {
+            'home': (i==0 && opts.persistent_home)
+        }
+
+        _addTab(nd.title ? nd.title : "Tab " + (tabCount+1), nd.innerHTML, args);
     }
     _root.innerHTML = '';
     _root.classList.add('tabcontainer');
