@@ -1,0 +1,13 @@
+/* awDataView.css -- stylesheet for aw.DataView, a basic/reference widget for implementing REST-compliant data view widgets */
+
+.aw-dataView {
+   background-color: #E7E7E0;
+   color: black;
+   overflow: auto;
+}
+.pending {
+   background-color: #444;
+   color: white;
+   padding: 1em;
+   font-16px;
+}

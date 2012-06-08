@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DataView Demo</title>
+    <link rel="stylesheet" href="demopage.css"/>
+    <style>
+        #dataBound { border: 1px solid #666; }
+    </style>
+  </head>
+  <body>
+    <h1>DataView Demo</h1>
+    <h4>Select an option:</h4>
+    <ul>
+        <li><a href="javascript:dview.fetch('1');">=1=</a></li>
+        <li><a href="javascript:dview.fetch('2');">=2=</a></li>
+        <li><a href="javascript:dview.fetch('3');">=3=</a></li>
+        <li><a href="javascript:dview.fetch('4');">=4=</a></li>
+    </ul>
+
+    <h4>Requested data:</h4>
+    <div id="dataBound"></div>
+  </body>
+
+  <script src="../aw-core.js"></script>
+  <script src="../awDataView.js"></script>
+  <script>
+      window.dview = new aw.DataView(aw.core.byId("dataBound"), {dataSrc:'dataPump.php/'});
+  </script>
+</html>

@@ -154,7 +154,7 @@ window.aw = window.aw || function() {
 }();
 
 aw.core = aw.core || function() {
-    function _sendRequest(url,callback,postData) {
+    function _sendRequest(url,callback,postData,errBack) {
         var req = _createXMLHTTPObject();
         if (!req) return;
         var method = (postData) ? "POST" : "GET";
@@ -166,6 +166,7 @@ aw.core = aw.core || function() {
             if (req.readyState != 4) return;
             if (req.status != 200 && req.status != 304) {
     //          alert('HTTP error ' + req.status);
+                if (errBack && typeof errBack === 'function') errBack(req);
                 return;
             }
             callback(req);
@@ -250,8 +251,8 @@ aw.core = aw.core || function() {
       (http://simonwillison.net/2004/May/26/addLoadEvent/)
 
       Example usage:
-        addLoadEvent(nameOfSomeFunctionToRunOnPageLoad);
-        addLoadEvent(function() {
+        aw.core.addLoadEvent(nameOfSomeFunctionToRunOnPageLoad);
+        aw.core.addLoadEvent(function() {
           // more code to run on page load
         });
     */
@@ -273,11 +274,28 @@ aw.core = aw.core || function() {
         return document.getElementById(id);
     }
 
+    function _supplant(str, args) {
+    /*
+      adapted from Douglas Crockford's Remedial JavaScript
+      Example usage:
+        alert(aw.core.supplant("I'm {age} years old!", { age: 29 }));
+        alert(aw.core.supplant("The {a} says {n}, {n}, {n}!", { a: 'cow', n: 'moo' }));
+    */
+        return str.replace(/{([^{}]*)}/g,
+            function (a, b) {
+                var r = args[b];
+                return typeof r === 'string' || typeof r === 'number' ? r : a;
+            }
+        );
+    };
+
+
     return {
         addLoadEvent     : _addLoadEvent,
         byId             : _byId,
         stopEventCascade : _stopEventCascade,
         xhrRequest       : _sendRequest,
-        mixinArgs        : _args_mixin
+        mixinArgs        : _args_mixin,
+        supplant         : _supplant
     }
 }();

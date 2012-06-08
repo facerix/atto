@@ -9,6 +9,8 @@
 
 "use strict";
 
+aw._loadResource('css', 'awDataView.css', 'css-dataview');
+
 // declare the DataView widget
 aw.DataView = function(rootNode, optionArray) {
     var _root  = rootNode || document.createElement('div'),
@@ -24,21 +26,26 @@ aw.DataView = function(rootNode, optionArray) {
 
     // now define the common operations:
     function _fetch(args) {
+       _root.innerHTML = 'Fetching...';
+       _root.classList.add('pending');
+
         // will fetch data from the current AJAX dataSrc URL (if any)
         var fetchUrl;
 
         if (opts.dataSrc) {
-            fetchUrl = opts.dataSrc + args;     // needs to be more sophisticated; argument substitution would be keen
+            fetchUrl = opts.dataSrc + (args || '');     // needs to be more sophisticated; argument substitution would be keen
             aw.core.xhrRequest(fetchUrl, function(e) {
                 //console.log('request finished');
                 if (e && e.status && e.status === 200) {
                     _root.innerHTML = e.response || e.responseText;    // also needs to be more sopisticated, but this is a proof of concept
                 } else {
-                    console.error('Apparently I somehow failed to fetch the data. Sorry about that, mate.');
-                    if (e.statusText) { console.debug('Failure details:', e.statusText); }
+                    _root.innerHTML = 'Unable to fetch the requested data.';
+                    if (window.console && e.statusText) { console.log('Failure details: ', e.statusText); }
                 }
+               _root.classList.remove('pending');
             });
         } else {
+            _root.innerHTML = 'Missing dataSrc parameter; cannot fetch data.';
         }
     }
 
