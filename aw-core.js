@@ -292,13 +292,13 @@ aw.core = aw.core || function() {
         } else if (tgt.attachEvent) {
             // IE < 9
             tgt.attachEvent('on'+type, func);
-        } else if (target['on'+type]) {
+        } else if (tgt['on'+type]) {
             // old school (this condition isn't quite right tho...)
-            var oldfunc = target['on'+type];
+            var oldfunc = tgt['on'+type];
             if (typeof oldfunc === 'function') {
-                target['on'+type] = function() { oldfunc(); func(); };
+                tgt['on'+type] = function() { oldfunc(); func(); };
             } else {
-                target['on'+type] = func;
+                tgt['on'+type] = func;
             }
         } else {
             alert ("Can't add this event type: " + type + " to this element: " + tgt);
