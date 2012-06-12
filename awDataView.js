@@ -15,7 +15,10 @@ aw._loadResource('css', 'awDataView.css', 'css-dataview');
 aw.DataView = function(rootNode, optionArray) {
     var _root  = rootNode || document.createElement('div'),
         _tmpl  = '',
-        opts   = optionArray || {};
+        opts   = aw.core.mixinArgs({
+            dataUrl: '',
+            fetchMessage: 'Fetching...'
+        }, optionArray);
 
     // grab the root node's current contents and store them as a template, then clear it
     _tmpl = _root.innerHTML;
@@ -26,26 +29,40 @@ aw.DataView = function(rootNode, optionArray) {
 
     // now define the common operations:
     function _fetch(args) {
-       _root.innerHTML = 'Fetching...';
+       _root.innerHTML = opts.fetchMessage;
        _root.classList.add('pending');
 
-        // will fetch data from the current AJAX dataSrc URL (if any)
+        // will fetch data from the current AJAX dataUrl (if any)
         var fetchUrl;
 
-        if (opts.dataSrc) {
-            fetchUrl = opts.dataSrc + (args || '');     // needs to be more sophisticated; argument substitution would be keen
-            aw.core.xhrRequest(fetchUrl, function(e) {
-                //console.log('request finished');
-                if (e && e.status && e.status === 200) {
-                    _root.innerHTML = e.response || e.responseText;    // also needs to be more sopisticated, but this is a proof of concept
-                } else {
-                    _root.innerHTML = 'Unable to fetch the requested data.';
-                    if (window.console && e.statusText) { console.log('Failure details: ', e.statusText); }
+        if (opts.dataUrl) {
+            fetchUrl = aw.core.supplant(opts.dataUrl, args);
+            aw.core.xhrRequest({
+                url: fetchUrl,
+                success: function(response) {
+                    _renderResult(response);
+                    _root.classList.remove('pending');
+                },
+                failure: function(e) {
+                    if (opts.errback && typeof opts.errback === 'function') opts.errback.call(this, {code:e.status,reason:e.statusText});
+                    _root.classList.remove('pending');
                 }
-               _root.classList.remove('pending');
             });
         } else {
-            _root.innerHTML = 'Missing dataSrc parameter; cannot fetch data.';
+            _root.innerHTML = 'Missing dataUrl parameter; cannot fetch data.';
+        }
+    }
+
+    function _renderResult(payload) {
+        if (opts.templateRenderer) {
+            //
+        } else if (_tmpl) {
+            if (typeof payload === 'string') {
+                payload = JSON.parse(payload);
+            }
+            _root.innerHTML = aw.core.supplant(_tmpl, payload);
+        } else {
+            _root.innerHTML = payload;
         }
     }
 

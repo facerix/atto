@@ -154,25 +154,39 @@ window.aw = window.aw || function() {
 }();
 
 aw.core = aw.core || function() {
-    function _sendRequest(url,callback,postData,errBack) {
+    function _xhr(args) {
+        var opts = _args_mixin({
+            url: '',
+            postData: '',
+            success: null,
+            failure: null
+        }, args);
+
         var req = _createXMLHTTPObject();
         if (!req) return;
-        var method = (postData) ? "POST" : "GET";
-        req.open(method,url,true);
-        //req.setRequestHeader('User-Agent','XMLHTTP/1.0');
-        if (postData)
+        if (opts.postData) {
+            req.open('POST', opts.url, true);
             req.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+        } else {
+            req.open('GET', opts.url, true);
+        }
         req.onreadystatechange = function () {
             if (req.readyState != 4) return;
             if (req.status != 200 && req.status != 304) {
-    //          alert('HTTP error ' + req.status);
-                if (errBack && typeof errBack === 'function') errBack(req);
+                //alert('HTTP error ' + req.status);
+                if (opts.failure && typeof opts.failure === 'function') {
+                    //console.debug(opts.failure);
+                    opts.failure.call(this,req);
+                }
                 return;
             }
-            callback(req);
+            if (opts.success && typeof opts.success === 'function') {
+
+                opts.success.call(this, req.response || req.responseText);
+            }
         }
         if (req.readyState == 4) return;
-        req.send(postData);
+        req.send(opts.postData);
     }
 
     var _XMLHttpFactories = [
@@ -269,6 +283,28 @@ aw.core = aw.core || function() {
         }
     }
 
+    function _addEvent(tgt, type, func, useCapture) {
+    // follows the API of the standard addEventListener, but abstracts it to work cross-browser
+        var capture = useCapture || false;
+        if (tgt.addEventListener) {
+            // modern standards-based browsers
+            tgt.addEventListener(type, func, capture);
+        } else if (tgt.attachEvent) {
+            // IE < 9
+            tgt.attachEvent('on'+type, func);
+        } else if (target['on'+type]) {
+            // old school (this condition isn't quite right tho...)
+            var oldfunc = target['on'+type];
+            if (typeof oldfunc === 'function') {
+                target['on'+type] = function() { oldfunc(); func(); };
+            } else {
+                target['on'+type] = func;
+            }
+        } else {
+            alert ("Can't add this event type: " + type + " to this element: " + tgt);
+        }
+    }
+
     function _byId(id) {
     // convenience shortcut; no real improvement other than code shorthand
         return document.getElementById(id);
@@ -292,9 +328,10 @@ aw.core = aw.core || function() {
 
     return {
         addLoadEvent     : _addLoadEvent,
+        addEvent         : _addEvent,
         byId             : _byId,
         stopEventCascade : _stopEventCascade,
-        xhrRequest       : _sendRequest,
+        xhrRequest       : _xhr,
         mixinArgs        : _args_mixin,
         supplant         : _supplant
     }
