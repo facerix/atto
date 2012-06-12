@@ -292,8 +292,8 @@ aw.core = aw.core || function() {
         } else if (tgt.attachEvent) {
             // IE < 9
             tgt.attachEvent('on'+type, func);
-        } else if (tgt['on'+type]) {
-            // old school (this condition isn't quite right tho...)
+        } else if (typeof tgt['on'+type] !== 'undefined') {
+            // old school (can assign to the element's event handler this way, provided it's not undefined)
             var oldfunc = tgt['on'+type];
             if (typeof oldfunc === 'function') {
                 tgt['on'+type] = function() { oldfunc(); func(); };
