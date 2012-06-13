@@ -135,6 +135,8 @@ window.aw = window.aw || function() {
             };
             document.querySelector('head').appendChild(fileRef);
         }
+
+        return fileRef;
     }
 
     function _loadTemplate(url, id) {
