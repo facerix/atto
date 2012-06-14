@@ -88,7 +88,7 @@ define(
 
 
             return {
-                get root() { return _root; },
+                root     : _root,
                 addPanel : _addPanel
             } // end of public interface
         } // end of constructor

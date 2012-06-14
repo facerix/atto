@@ -3,6 +3,7 @@
   <head>
     <title>DataView Demo</title>
     <link rel="stylesheet" href="demopage.css"/>
+    <link rel="stylesheet" href="../awDataView.css"/>
     <style>
         #dataBound { border: 1px solid #666; }
     </style>
@@ -22,23 +23,25 @@
         <strong>Name:</strong> {first_name} {surname}<br/>
         <strong>Birthday:</strong> {birthDate}
     </div>
-  </body>
 
-  <script src="../aw-core.js"></script>
-  <script src="../awDataView.js"></script>
-  <script>
-      window.dview = new aw.DataView(aw.core.byId("dataBound"), {
-          dataUrl: 'dataPump.php/{id}',
-          fetchMessage: 'Please wait...',
-          errback: errCallback
-      });
-      function _fetch(n) {
-          dview.fetch({id:n});
-      }
-      function errCallback(args) {
-          aw.core.byId('dataBound').innerHTML = 'Unable to fetch the requested data; Error details: ' + args.reason;
-          //console.error('Unable to fetch the requested data.');
-          //console.log('Failure details: ', args.reason);
-      }
-  </script>
+    <script src="/js/require.js"></script>
+    <script>
+        require.config({
+            baseUrl: '../..'
+        });
+        require(["atto/core","atto/dataView"], function(atto, DataView) {
+            window.dview = new DataView(atto.byId("dataBound"), {
+                dataUrl: 'dataPump.php/{id}',
+                fetchMessage: 'Please wait...',
+                errback: function(args) {
+                    atto.byId('dataBound').innerHTML = 'Unable to fetch the requested data; Error details: ' + args.reason;
+                }
+            });
+        });
+
+        function _fetch(n) {
+            dview.fetch({id:n});
+        }
+    </script>
+  </body>
 </html>

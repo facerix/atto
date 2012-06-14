@@ -1,5 +1,14 @@
 @import url("../../fonts/gooddog/stylesheet.css");
 
+html,body {
+    margin: 0; padding: 0;
+    width: 100%; height: 100%;
+}
+html {
+    background-image: url('../dots.png');
+    background-color: #FFFFF7;
+}
+
 h1 {
     font: small-caps 48px/24px 'GoodDogRegular', cursive;
 }

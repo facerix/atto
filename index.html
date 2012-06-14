@@ -16,8 +16,8 @@
   </head>
   <body>
     <header>
-      <h1 class="speech-bubble primary invisible"><span>Aw Yeah Atto!</span></h1>
-      <h2 class="speech-bubble secondary invisible"><span>Ultralight, Pure-JavaScript Widgets</span></h2>
+      <h1 id="bubble1" class="speech-bubble primary invisible"><span>Aw Yeah Atto!</span></h1>
+      <h2 id="bubble2" class="speech-bubble secondary invisible"><span>Ultralight, Pure-JavaScript Widgets</span></h2>
     </header>
 
     <article class="main">
@@ -68,7 +68,7 @@
 
         <p class="centered"><a href="https://github.com/buyog/atto" id="downLink">Get Atto</a></p>
 
-        <!--div class="expando collapsed">
+        <!--div id="why-atto" class="expando collapsed">
            <p>Originally I called these things "AttoWidgets" to emphasize how tiny they are
                (get it, <a href="http://en.wikipedia.org/wiki/Atto-">atto</a>?) but the namespace prefix
                they use, <code>aw-</code>, led me in
@@ -96,19 +96,19 @@
             atto.addLoadEvent(function() {
                 // show the header (which is hidden until the custom font-face can get hoisted)
                 window.setTimeout(function() {
-                    var h = document.querySelectorAll("h1")[0];
+                    var h = document.getElementById("bubble1");
                     if (h) { h.classList.toggle('invisible'); }
 
                     window.setTimeout(function() {
-                        var h = document.querySelectorAll("h2")[0];
+                        var h = document.getElementById("bubble2");
                         if (h) { h.classList.toggle('invisible'); }
                     }, 500);
                 }, 500);
             });
 
             function toggleIntro() {
-                var btn = document.querySelector('#btnToggle'),
-                    div = document.querySelector('.expando');
+                var btn = document.getElementById("btnToggle"),
+                    div = document.getElementById("why-atto");
 
                 div.classList.toggle('collapsed');
                 btn.innerHTML = btn.innerHTML == "More..." ? "(Less)" : "More...";

@@ -32,27 +32,33 @@
       <button id="btnConvert">Convert all .easy-list nodes</button>
       <p id="status" class="hidden"></p>
     </section>
+
+    <script src="/js/require.js"></script>
+    <script>
+        require.config({
+            baseUrl: '../..'
+        });
+        require(["atto/core","atto/outliner"], function(atto, listify) {
+            var btnConvert = atto.byId('btnConvert');
+            if (btnConvert) {
+               btnConvert.onclick = function convert() {
+                  // find and operate on any nodes in the current page with a class of easy-list (just an arbitrary name; could be anything)
+                  var lists = document.querySelectorAll(".easy-list");
+                  for (var i=0,listCount=lists.length; i<listCount; i++) {
+                      listify(lists[i]);
+                  }
+                  var msg = "Converted " + listCount + " easy-list node" + (listCount>1 ? 's.' : '.');
+                  var p = atto.byId('status');
+                  if (p) {
+                      p.innerHTML = msg;
+                      p.classList.toggle('hidden');
+                  } else {
+                      console.log(msg);
+                  }
+                  this.classList.add('hidden');
+               }
+            }
+        });
+    </script>
   </body>
-  <script src="../awOutliner.js"></script>
-  <script>
-    var btnConvert = aw.core.byId('btnConvert');
-    if (btnConvert) {
-       btnConvert.onclick = function convert() {
-          // find and operate on any nodes in the current page with a class of easy-list (just an arbitrary name; could be anything)
-          var lists = document.querySelectorAll(".easy-list");
-          for (var i=0,listCount=lists.length; i<listCount; i++) {
-              window.outliner(lists[i]);
-          }
-          var msg = "Converted " + listCount + " easy-list node" + (listCount>1 ? 's.' : '.');
-          var p = aw.core.byId('status');
-          if (p) {
-              p.innerHTML = msg;
-              p.classList.toggle('hidden');
-          } else {
-              console.log(msg);
-          }
-          this.classList.add('hidden');
-       }
-    }
-  </script>
 </html>

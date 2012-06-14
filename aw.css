@@ -5,7 +5,10 @@
 html,body {
     margin: 0; padding: 0;
     width: 100%; height: 100%;
-    background: #FFFFF7;
+}
+html {
+    background-image: url(dots.png);
+    background-color: #FFFFF7;
 }
 a { color: #0DC4F2; }
 a:visited,a:active { color: #054F61; }

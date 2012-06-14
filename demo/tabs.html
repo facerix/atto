@@ -3,6 +3,7 @@
   <head>
     <title>aw.TabContainer Demo</title>
     <link rel="stylesheet" href="demopage.css"/>
+    <link rel="stylesheet" href="../awTabContainer.css"/>
   </head>
   <body>
     <h1>aw.TabContainer Demo</h1>
@@ -18,12 +19,15 @@
             <p>This is the <strong>third</strong> and <em>final</em> tab panel</p>
         </div>
     </div>
-  </body>
 
-<script src="../aw-core.js"></script>
-<script src="../awTabContainer.js"></script>
-<script>
-    // find and operate on any accordion nodes in the current page
-    window.tabs = new aw.TabContainer(aw.core.byId("myTabs"), {persistent_home: true});
-</script>
+    <script src="/js/require.js"></script>
+    <script>
+        require.config({
+            baseUrl: '../..'
+        });
+        require(["atto/core","atto/tabContainer"], function(atto, TabContainer) {
+            window.tabs = new TabContainer(atto.byId("myTabs"), {persistent_home: true});
+        });
+    </script>
+  </body>
 </html>

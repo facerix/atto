@@ -3,6 +3,8 @@
   <head>
     <title>HPanel/VPanel Layout Demo</title>
     <link rel="stylesheet" href="demopage.css"/>
+    <link rel="stylesheet" href="../awHPanel.css"/>
+    <link rel="stylesheet" href="../awVPanel.css"/>
     <style>
         #main-outer, #main-inner { margin: 0; padding: 0; }
         #main-outer {
@@ -54,16 +56,15 @@
             <a href="http://hipsteripsum.me/">HipsterIpsum.me</a>)</span>
       </div>
     </div>
+    <script src="/js/require.js"></script>
+    <script>
+        require.config({
+            baseUrl: '../..'
+        });
+        require(["atto/core","atto/HPanel","atto/VPanel"], function(atto, HPanel, VPanel) {
+            var hpanel = new HPanel(atto.byId('main-inner'), {left:'120px', right:'200px'}),
+                vpanel = new VPanel(atto.byId('main-outer'), {header:'80px',footer:'50px'});
+        });
+    </script>
   </body>
-
-  <script src="../aw-core.js"></script>
-  <script src="../awVPanel.js"></script>
-  <script src="../awHPanel.js"></script>
-  <script>
-      var mainInner = document.querySelector("#main-inner");
-      window.spanel = new aw.HPanel(mainInner, {left:'120px', right:'200px'});
-
-      var mainOuter = document.querySelector("#main-outer");
-      window.hpanel = new aw.VPanel(mainOuter, {header:'80px',footer:'50px'});
-  </script>
 </html>

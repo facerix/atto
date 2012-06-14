@@ -3,6 +3,7 @@
   <head>
     <title>aw.VPanel Demo</title>
     <link rel="stylesheet" href="demopage.css"/>
+    <link rel="stylesheet" href="../awVPanel.css"/>
     <style>
         .demoFrame {
             margin: 20px;
@@ -70,13 +71,17 @@
         <h2 class="r-pinned">(footer is fixed at 50px)</h2>
       </div>
     </div>
-  </body>
 
-  <script src="../aw-core.js"></script>
-  <script src="../awVPanel.js"></script>
-  <script>
-      window.vpanel1 = new aw.VPanel(aw.core.byId("main1"), {header:'80px',footer:'50px'});
-      window.vpanel2 = new aw.VPanel(aw.core.byId("main2"), {header:'80px',headerId:'headerPane',centerId:'centerPane'});
-      window.vpanel3 = new aw.VPanel(aw.core.byId("main3"), {footer:'50px',centerId:'centerPane2',footerId:'footerPane'});
-  </script>
+    <script src="/js/require.js"></script>
+    <script>
+        require.config({
+            baseUrl: '../..'
+        });
+        require(["atto/core","atto/VPanel"], function(atto, VPanel) {
+            window.vpanel1 = new VPanel(atto.byId("main1"), {header:'80px',footer:'50px'});
+            window.vpanel2 = new VPanel(atto.byId("main2"), {header:'80px',headerId:'headerPane',centerId:'centerPane'});
+            window.vpanel3 = new VPanel(atto.byId("main3"), {footer:'50px',centerId:'centerPane2',footerId:'footerPane'});
+        });
+    </script>
+  </body>
 </html>

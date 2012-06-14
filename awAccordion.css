@@ -58,6 +58,7 @@
 }
 
 .accordion .pane {
+    background-color: #FFF;
     padding: 0 1em;
     height: 0;
     overflow: hidden;
