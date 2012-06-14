@@ -110,6 +110,7 @@ abbr {
 #gallery a[href*='hpanel'] { background-image: url(demo/images/icon_hpanel.png); }
 #gallery a[href*='vpanel'] { background-image: url(demo/images/icon_vpanel.png); }
 #gallery a[href*='panels'] { background-image: url(demo/images/icon_panels.png); }
+#gallery a[href*='dataview'] { background-image: url(demo/images/icon_dataview.png); }
 
 #gallery a[href*='button'] { background-image: url(demo/images/icon_button.png); }
 #gallery a[href*='text']   { background-image: url(demo/images/icon_textbox.png); }
