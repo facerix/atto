@@ -3,6 +3,7 @@
   <head>
     <title>aw.HPanel Demo</title>
     <link rel="stylesheet" href="demopage.css"/>
+    <link rel="stylesheet" href="../awHPanel.css"/>
     <style>
         .demoFrame {
             margin: 20px;
@@ -81,13 +82,16 @@
       </div>
     </div>
 
+    <script src="/js/require.js"></script>
+    <script>
+        require.config({
+            baseUrl: '../..'
+        });
+        require(["atto/core","atto/hPanel"], function(atto, HPanel) {
+            window.hpanel1 = new HPanel(atto.byId("main1"), {left:'150px', right:'200px'});
+            window.hpanel2 = new HPanel(atto.byId("main2"), {left:'200px', leftId:'leftPane', centerId:'centerPane'});
+            window.hpanel3 = new HPanel(atto.byId("main3"), {centerId:'centerPane2', rightId:'rightPane2', right:'250px'});
+        });
+    </script>
   </body>
-
-  <script src="../aw-core.js"></script>
-  <script src="../awHPanel.js"></script>
-  <script>
-      window.hpanel1 = new aw.HPanel(aw.core.byId("main1"), {left:'150px', right:'200px'});
-      window.hpanel2 = new aw.HPanel(aw.core.byId("main2"), {left:'200px', leftId:'leftPane', centerId:'centerPane'});
-      window.hpanel3 = new aw.HPanel(aw.core.byId("main3"), {centerId:'centerPane2', rightId:'rightPane2', right:'250px'});
-  </script>
 </html>

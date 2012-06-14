@@ -1,12 +1,61 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Testing the AMD version of Atto Core</title>
-        <!-- data-main attribute tells require.js to load
-             scripts/main.js after require.js loads. -->
-        <script data-main="complex" src="/js/require.js"></script>
-    </head>
-    <body>
-        <h1>Atto Core : AMD Test</h1>
-    </body>
+  <head>
+    <title>DataView Demo (AMD)</title>
+    <link rel="stylesheet" href="demopage.css"/>
+    <style>
+        #dataBound { border: 1px solid #666; }
+    </style>
+  </head>
+  <body>
+    <h1>DataView Demo (AMD version)</h1>
+    <h4>Select an option:</h4>
+    <ul>
+        <li><a href="javascript:_fetch('1');">= 1 =</a></li>
+        <li><a href="javascript:_fetch('2');">= 2 =</a></li>
+        <li><a href="javascript:_fetch('3');">= 3 =</a></li>
+        <li><a href="javascript:_fetch('4');">= 4 =</a></li>
+    </ul>
+
+    <h4>Requested data:</h4>
+    <div id="dataBound" style="height:50px">
+        <strong>Name:</strong> {first_name} {surname}<br/>
+        <strong>Birthday:</strong> {birthDate}
+    </div>
+
+    <script src="/js/require.js"></script>
+    <script>
+        require.config({
+            baseUrl: '../..'
+        });
+        require(["atto/core","atto/dataView"], function(atto, dataView) {
+            //console.log('Atto core is loaded and available:', atto);
+            //var s = 'This is the id: {id}';
+            //var o = {id: 123};
+            //console.log(atto.supplant(s, o));
+
+            //console.log('got dataView:', dataView);
+            window.dview = new dataView(atto.byId("dataBound"), {
+                dataUrl: 'dataPump.php/{id}',
+                fetchMessage: 'Please wait...',
+                errback: function(args) {
+                    atto.byId('dataBound').innerHTML = 'Unable to fetch the requested data; Error details: ' + args.reason;
+                    //console.error('Unable to fetch the requested data.');
+                    //console.log('Failure details: ', args.reason);
+                }
+            });
+
+
+            //If util.js calls define(), then this function is not fired until
+            //util's dependencies have loaded, and the util argument will hold
+            //the module value for "helper/util".
+        });
+
+
+        // public functions
+        function _fetch(n) {
+            dview.fetch({id:n});
+        }
+    </script>
+  </body>
 </html>

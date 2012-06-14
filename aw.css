@@ -93,7 +93,7 @@ abbr {
 }
 
 #gallery a {
-    background: url(icon_blank2.png) no-repeat 5px 10px;
+    background: url(demo/images/icon_blank2.png) no-repeat 5px 10px;
     color: #333333;
     display: block;
     font: small-caps 36px/120px 'GoodDogRegular', cursive;

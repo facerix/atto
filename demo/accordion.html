@@ -3,6 +3,7 @@
   <head>
     <title>aw.Accordion Demo</title>
     <link rel="stylesheet" href="demopage.css"/>
+    <link rel="stylesheet" href="../awAccordion.css"/>
   </head>
   <body>
     <h1>aw.Accordion Demo</h1>
@@ -18,11 +19,15 @@
             <p>This is the <strong>third</strong> and <em>final</em> panel</p>
         </div>
     </div>
-  </body>
 
-<script src="../aw-core.js"></script>
-<script src="../awAccordion.js"></script>
-<script>
-    window.accordion = new aw.Accordion(aw.core.byId("acc1"), {});
-</script>
+    <script src="/js/require.js"></script>
+    <script>
+        require.config({
+            baseUrl: '../..'
+        });
+        require(["atto/core","atto/accordion"], function(atto, Accordion) {
+            window.accordion = new Accordion(atto.byId("acc1"), {});
+        });
+    </script>
+  </body>
 </html>

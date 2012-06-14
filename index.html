@@ -8,11 +8,10 @@
 
 <!--[if lt IE 9]> <script src="../js/html5shiv.js"></script> <![endif]-->
 
-    <link rel="stylesheet" href="../fonts/gooddog/stylesheet.css" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="/fonts/gooddog/stylesheet.css" type="text/css" charset="utf-8">
     <link rel="stylesheet" href="aw.css" type="text/css" charset="utf-8">
     <style>
       /* overrides until I can refresh the CloudFlare cache */
-      .aside { font-size: smaller; }
     </style>
   </head>
   <body>
@@ -88,28 +87,33 @@
       </footer>
     </article>
 
+    <script src="/js/require.js"></script>
+    <script>
+        require.config({
+            baseUrl: '../..'
+        });
+        require(["atto/core"], function(atto) {
+            atto.addLoadEvent(function() {
+                // show the header (which is hidden until the custom font-face can get hoisted)
+                window.setTimeout(function() {
+                    var h = document.querySelectorAll("h1")[0];
+                    if (h) { h.classList.toggle('invisible'); }
+
+                    window.setTimeout(function() {
+                        var h = document.querySelectorAll("h2")[0];
+                        if (h) { h.classList.toggle('invisible'); }
+                    }, 500);
+                }, 500);
+            });
+
+            function toggleIntro() {
+                var btn = document.querySelector('#btnToggle'),
+                    div = document.querySelector('.expando');
+
+                div.classList.toggle('collapsed');
+                btn.innerHTML = btn.innerHTML == "More..." ? "(Less)" : "More...";
+            }
+        });
+    </script>
   </body>
-  <script src="aw-core.js"></script> <!-- needed for the addLoadEvent -->
-  <script>
-      aw.core.addLoadEvent(function() {
-          // show the header (which is hidden until the custom font-face can get hoisted)
-          window.setTimeout(function() {
-              var h = document.querySelectorAll("h1")[0];
-              if (h) { h.classList.toggle('invisible'); }
-
-              window.setTimeout(function() {
-                  var h = document.querySelectorAll("h2")[0];
-                  if (h) { h.classList.toggle('invisible'); }
-              }, 500);
-          }, 500);
-      });
-
-      function toggleIntro() {
-          var btn = document.querySelector('#btnToggle'),
-              div = document.querySelector('.expando');
-
-          div.classList.toggle('collapsed');
-          btn.innerHTML = btn.innerHTML == "More..." ? "(Less)" : "More...";
-      }
-  </script>
 </html>

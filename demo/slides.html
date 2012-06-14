@@ -3,6 +3,7 @@
   <head>
     <title>aw.SlideBox Demo</title>
     <link rel="stylesheet" href="demopage.css"/>
+    <link rel="stylesheet" href="../awSlideBox.css"/>
     <style>
         .controls {
             width: 320px;
@@ -30,11 +31,14 @@
       <a href="javascript:slidebox.goto(2);">&bull;</a>
     </section>
 
+    <script src="/js/require.js"></script>
+    <script>
+        require.config({
+            baseUrl: '../..'
+        });
+        require(["atto/core","atto/slideBox"], function(atto, SlideBox) {
+            window.slidebox = new SlideBox(atto.byId("mySlides"), {});
+        });
+    </script>
   </body>
-<script src="../aw-core.js"></script>
-<script src="../awSlideBox.js"></script>
-<script>
-    // find and operate on any accordion nodes in the current page
-    window.slidebox = new aw.SlideBox(aw.core.byId("mySlides"), {});
-</script>
 </html>
