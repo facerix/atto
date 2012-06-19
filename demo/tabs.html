@@ -26,7 +26,7 @@
             baseUrl: '../..'
         });
         require(["atto/core","atto/tabContainer"], function(atto, TabContainer) {
-            window.tabs = new TabContainer(atto.byId("myTabs"), {persistent_home: true});
+            var tabs = new TabContainer(atto.byId("myTabs"), {persistent_home: true});
         });
     </script>
   </body>

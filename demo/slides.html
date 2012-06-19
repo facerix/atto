@@ -37,7 +37,7 @@
             baseUrl: '../..'
         });
         require(["atto/core","atto/slideBox"], function(atto, SlideBox) {
-            window.slidebox = new SlideBox(atto.byId("mySlides"), {});
+            var slidebox = new SlideBox(atto.byId("mySlides"), {});
         });
     </script>
   </body>

@@ -5,43 +5,29 @@
     <link rel="stylesheet" href="demopage.css"/>
     <link rel="stylesheet" href="../awDataView.css"/>
     <style>
-        #dataBound { border: 1px solid #666; }
+        #dataBound {
+            border: 1px solid #666;
+            height: 75px;
+        }
     </style>
   </head>
   <body>
     <h1>DataView Demo</h1>
     <h4>Select an option:</h4>
     <ul>
-        <li><a href="javascript:_fetch('1');">= 1 =</a></li>
-        <li><a href="javascript:_fetch('2');">= 2 =</a></li>
-        <li><a href="javascript:_fetch('3');">= 3 =</a></li>
-        <li><a href="javascript:_fetch('4');">= 4 =</a></li>
+        <li><a href="#" data-target='1'>= 1 =</a></li>
+        <li><a href="#" data-target='2'>= 2 =</a></li>
+        <li><a href="#" data-target='3'>= 3 =</a></li>
+        <li><a href="#" data-target='4'>= 4 =</a></li>
     </ul>
 
     <h4>Requested data:</h4>
-    <div id="dataBound" style="height:50px">
+    <div id="dataBound">
         <strong>Name:</strong> {first_name} {surname}<br/>
-        <strong>Birthday:</strong> {birthDate}
+        <strong>Birthday:</strong> {birthDate}<br/>
+        <strong>Personal identifier:</strong> {randomString}
     </div>
 
-    <script src="/js/require.js"></script>
-    <script>
-        require.config({
-            baseUrl: '../..'
-        });
-        require(["atto/core","atto/dataView"], function(atto, DataView) {
-            window.dview = new DataView(atto.byId("dataBound"), {
-                dataUrl: 'dataPump.php/{id}',
-                fetchMessage: 'Please wait...',
-                errback: function(args) {
-                    atto.byId('dataBound').innerHTML = 'Unable to fetch the requested data; Error details: ' + args.reason;
-                }
-            });
-        });
-
-        function _fetch(n) {
-            dview.fetch({id:n});
-        }
-    </script>
+    <script src="/js/require.js" data-main="dataview-demo"></script>
   </body>
 </html>

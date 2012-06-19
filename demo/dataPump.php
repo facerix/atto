@@ -38,27 +38,29 @@ date_default_timezone_set("America/New_York");
 
 // ---------- end of column data type values -----------
 
-
-// get query (if any)
-$q = "";
-if (array_key_exists("q", $_REQUEST)) {
-    $q = $_REQUEST['q'];
-}else if (array_key_exists("name", $_REQUEST)) {
-    $q = $_REQUEST['name'];
-}
-if (strlen($q) && $q[strlen($q)-1]=="*") {
-    $q = substr($q, 0, strlen($q)-1);
+if (array_key_exists("count", $_REQUEST)) {
+    $return = array();
+    $count = $_REQUEST['count'];
+    for ($i = 0; $i < $count; $i++) {
+        $return[] = getPerson();
+    }
+} else {
+    $return = getPerson();
 }
 
 // build the return payload
-$rnd = mt_rand(0,1000);
-$payload = array(
-    'first_name'=>$givenNames[$rnd%20],
-    'surname'=>$surnames[$rnd%20],
-    'gender'=>$gender[$rnd%2],
-    'randomString'=>genRandomString(5,15),
-    'link'=>$urls[mt_rand(0,5)],
-    'birthDate'=>date("Y/m/d")
-);
+function getPerson() {
+    global $givenNames, $surnames, $gender, $urls;
+    $rnd = mt_rand(0,30000);
+    $birthDay = strtotime("- $rnd days");
+    return array(
+        'first_name'=>$givenNames[$rnd%20],
+        'surname'=>$surnames[$rnd%20],
+        'gender'=>$gender[$rnd%2],
+        'randomString'=>genRandomString(5,15),
+        'link'=>$urls[mt_rand(0,5)],
+        'birthDate'=>date("Y/m/d", $birthDay)
+    );
+}
 
-print json_encode($payload);
+print json_encode($return);
