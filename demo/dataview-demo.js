@@ -1,7 +1,7 @@
 require.config({
     baseUrl: '../..'
 });
-require(["atto/core","atto/dataView", "atto/TemplateMixin"], function(atto, DataView, tm) {
+require(["atto/core","atto/dataView", "atto/mixin_templatize"], function(atto, DataView, templatize) {
     var dview = new DataView(atto.byId("dataBound"), {
         dataUrl: 'dataPump.php?seed={id}',
         fetchMessage: 'Please wait...',
@@ -17,9 +17,4 @@ require(["atto/core","atto/dataView", "atto/TemplateMixin"], function(atto, Data
             atto.stopEventCascade();
         }
     }
-
-    window.atto = atto;
-    window.DataView = DataView;
-    window.dv = dview;
-    window.tm = tm;
 });
