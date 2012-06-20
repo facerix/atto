@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Templated DataView Demo</title>
+    <link rel="stylesheet" href="demopage.css"/>
+    <link rel="stylesheet" href="../awDataView.css"/>
+    <style>
+        #dataBound {
+            border: 1px solid #666;
+            min-height: 75px;
+        }
+    </style>
+  </head>
+  <body>
+    <h1>Templated DataView Demo</h1>
+    <p>This page serves as an example of how to apply the Templatize mixin to the standard DataView widget.
+        Instead of relying on simple parameter-substitution, it uses Mustache as a custom templating engine.</p>
+    <h4>How many records to retrieve?</h4>
+    <ul>
+        <li><a href="#" data-target='2'>= 2 =</a></li>
+        <li><a href="#" data-target='3'>= 3 =</a></li>
+        <li><a href="#" data-target='4'>= 4 =</a></li>
+        <li><a href="#" data-target='5'>= 5 =</a></li>
+    </ul>
+
+    <h4>Requested data:</h4>
+    <div id="dataBound">
+        {{#people}}
+        <li>
+            <strong>Name:</strong> {{first_name}} {{surname}}<br/>
+            <strong>Birthday:</strong> {{birthDate}}<br/>
+            <strong>Personal identifier:</strong> {{randomString}}
+        </li>
+        {{/people}}
+    </div>
+
+    <script src="/js/require.js" data-main="templated-demo"></script>
+  </body>
+</html>

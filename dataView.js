@@ -12,13 +12,12 @@ define(
     function(atto) {
         function constructor(rootNode, optionArray) {
             var _root  = rootNode || document.createElement('div'),
-                _tmpl  = '',
                 opts   = atto.mixinArgs({
                     dataUrl: '',
                     fetchMessage: 'Fetching...'
                 }, optionArray);
 
-            // grab the root node's current contents and store them as a template, then clear it
+            // empty out root node's current contents
             _tmpl = _root.innerHTML;
             _root.innerHTML = '';
 
@@ -31,14 +30,14 @@ define(
                _root.classList.add('pending');
 
                 // will fetch data from the current AJAX dataUrl (if any)
-                var fetchUrl;
+                var fetchUrl, self = this;
 
                 if (opts.dataUrl) {
                     fetchUrl = atto.supplant(opts.dataUrl, args);
                     atto.xhrRequest({
                         url: fetchUrl,
                         success: function(response) {
-                            _renderResult(response);
+                            self.update(response);
                             _root.classList.remove('pending');
                         },
                         failure: function(e) {
@@ -52,21 +51,14 @@ define(
             }
 
             function _renderResult(payload) {
-                if (opts.templateRenderer) {
-                    //
-                } else if (_tmpl) {
-                    if (typeof payload === 'string') {
-                        payload = JSON.parse(payload);
-                    }
-                    _root.innerHTML = atto.supplant(_tmpl, payload);
-                } else {
-                    _root.innerHTML = payload;
-                }
+                _root.innerHTML = payload.toString();
             }
 
             return {
-                root : _root,
-                fetch: _fetch
+                root     : _root,
+                fetch    : _fetch,
+                template : _tmpl,
+                update   : _renderResult
             } // end of public interface
         } // end of constructor
 

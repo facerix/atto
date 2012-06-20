@@ -1,7 +1,7 @@
 require.config({
     baseUrl: '../..'
 });
-require(["atto/core","atto/dataView", "atto/mixin_templatize"], function(atto, DataView, templatize) {
+require(["atto/core","atto/dataView"], function(atto, DataView) {
     var dview = new DataView(atto.byId("dataBound"), {
         dataUrl: 'dataPump.php?seed={id}',
         fetchMessage: 'Please wait...',
