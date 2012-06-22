@@ -107,7 +107,7 @@ define(
         }  // --> this is the one that gets exposed
 
         function _stopEventCascade(e) {
-            if (!e) var e = window.event;
+            if (!e) var e = window.event || {};
             if (e.preventDefault) {
                 e.preventDefault();
             } else if (e.stop) {
