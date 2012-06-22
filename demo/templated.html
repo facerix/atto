@@ -13,8 +13,8 @@
   </head>
   <body>
     <h1>Templated DataView Demo</h1>
-    <p>This page serves as an example of how to apply the Templatize mixin to the standard DataView widget.
-        Instead of relying on simple parameter-substitution, it uses Mustache as a custom templating engine.</p>
+    <p>This page serves as an example of how to apply the Templatize mixin to the standard DataView widget.</p>
+    <p>Templatize allows you to specify a callback function to be called whenever dataView receives new data, allowing you to define a custom templating solution to the returned data structure. In this demo, I'm using Mustache.js to render an arbitrarily-sized list of person structs, but you could use any client-side templating package you want.</p>
     <h4>How many records to retrieve?</h4>
     <ul>
         <li><a href="#" data-target='2'>= 2 =</a></li>
@@ -29,7 +29,7 @@
         <li>
             <strong>Name:</strong> {{first_name}} {{surname}}<br/>
             <strong>Birthday:</strong> {{birthDate}}<br/>
-            <strong>Personal identifier:</strong> {{randomString}}
+            <strong>Personal identifier:</strong> {{randomString}}<br/>
         </li>
         {{/people}}
     </div>
