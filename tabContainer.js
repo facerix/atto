@@ -30,8 +30,8 @@ define(
                 tabCount = 0;
 
             // initial setup
-            _tabRow.className = 'tab-row';
-            _tabBody.className = 'tab-body';
+            _tabRow.className = 'aw-tab-row';
+            _tabBody.className = 'aw-tab-body';
             __frag.appendChild(_tabRow);
             __frag.appendChild(_tabBody);
 
@@ -91,7 +91,7 @@ define(
 
                 // create tab header
                 ndTab = document.createElement('li');
-                ndTab.className = 'tab';
+                ndTab.className = 'aw-tab';
                 ndTab.id = sID+'-label';
 
                 if (opts.useHashLinks) {
@@ -100,7 +100,7 @@ define(
                 } else {
                     ndTabChild = document.createElement('span');
                 }
-                ndTabChild.className = 'tab-label';
+                ndTabChild.className = 'aw-tab-label';
                 ndTabChild.innerHTML = label;
                 ndTab.appendChild(ndTabChild);
 
@@ -109,7 +109,7 @@ define(
                     ndTab.classList.add('home');
                 } else {
                     ndTabChild = document.createElement('a');
-                    ndTabChild.className = 'tab-close-button';
+                    ndTabChild.className = 'aw-tab-close-button';
                     ndTabChild.innerHTML = '&times;';
                     ndTabChild.onclick = function(ndTarget) {
                         return function(e) {
@@ -128,7 +128,7 @@ define(
 
                 // create tab pane
                 ndPane = document.createElement('div');
-                ndPane.className = 'tab-panel';
+                ndPane.className = 'aw-tab-panel';
                 ndPane.id = sID+'-panel';
                 ndPane.innerHTML = content;
                 ndTab.onclick = function(ndTarget) {
@@ -155,7 +155,7 @@ define(
                 _addTab(nd.title ? nd.title : "Tab " + (tabCount+1), nd.innerHTML, args);
             }
             _root.innerHTML = '';
-            _root.classList.add('tabcontainer');
+            _root.classList.add('aw-tabcontainer');
             _root.appendChild(__frag);
 
 

@@ -8,7 +8,7 @@
 //
 
 define(
-    ["atto/core","atto/lmnt"], //,"text!awAccordion.css"],
+    ["atto/core","atto/lmnt"],
     function(atto, lmnt) {
         function constructor(rootNode, optionArray) {
             var _root  = rootNode || document.createElement('div'),
@@ -43,13 +43,13 @@ define(
                 sID = _getUniqueId();
                 tabCount += 1;
                 ndTitle = document.createElement('div');
-                ndTitle.className = 'title';
+                ndTitle.className = 'aw-acc-title';
                 ndTitle.innerHTML = label;
 
                 appendTo.appendChild(ndTitle);
 
                 ndPane = document.createElement('div');
-                ndPane.className = 'pane';
+                ndPane.className = 'aw-acc-pane';
                 ndPane.id = sID;
                 ndPane.innerHTML = content;
                 ndTitle.onclick = function(ndTarget) {
@@ -83,7 +83,7 @@ define(
                 _addPanel(nd.title ? nd.title : "Panel " + (tabCount+1), nd.innerHTML, __frag);
             }
             _root.innerHTML = '';
-            _root.classList.add('accordion');
+            _root.classList.add('aw-accordion');
             _root.appendChild(__frag);
 
 

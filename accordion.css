@@ -1,18 +1,21 @@
-/* awAccordion.css -- stylesheet for awAccordion, an accordion microwidget */
+/* accordion.css -- stylesheet for Atto Accordion, an accordion microwidget */
 
-.accordion {
+.aw-accordion {
     border-color: #aaa;
     border-style: solid;
     border-width: 1px 1px 0;
 
-  -webkit-box-shadow: 2px 2px 4px 0px #aaa; 
-     -moz-box-shadow: 2px 2px 4px 0px #aaa; 
-          box-shadow: 2px 2px 4px 0px #aaa; 
+       -moz-border-radius: 2px 2px 2px 2px;
+    -webkit-border-radius: 2px 2px 2px 2px;
+            border-radius: 2px 2px 2px 2px;
+
+  -webkit-box-shadow: 1px 1px 2px 0px #aaa; 
+     -moz-box-shadow: 1px 1px 2px 0px #aaa; 
+          box-shadow: 1px 1px 2px 0px #aaa; 
 }
 
-.accordion .title,
-.accordion .pane {
-    border-bottom: 1px solid #555;
+.aw-acc-title, .aw-acc-pane {
+    border-bottom: 1px solid #AAA;
 
   -webkit-transition: all 0.3s ease-out;
      -moz-transition: all 0.3s ease-out;
@@ -21,49 +24,45 @@
           transition: all 0.3s ease-out;
 }
 
-.accordion .title {
+.aw-acc-title {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 14px;
     padding: 5px 10px 3px;
     cursor: pointer;
-    color: white;
+    color: black;
 
-    background-color: #B3B3C1;
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#B3B3C1), to(#505062)); 
-    background-image: -webkit-linear-gradient(top, #B3B3C1, #505062); 
-    background-image:    -moz-linear-gradient(top, #B3B3C1, #505062); 
-    background-image:     -ms-linear-gradient(top, #B3B3C1, #505062); 
-    background-image:      -o-linear-gradient(top, #B3B3C1, #505062); 
-    background-image:         linear-gradient(to bottom, #B3B3C1, #505062);
+    background: #F7F7F7;
+}
+.aw-acc-title.active {
+    background: #E0E0E0;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4), inset 0 1px 0 #FFF;
+}
+.aw-acc-title.hover {
+    background: #D1D1D1;
+    background: -o-linear-gradient(top, #ECECEC 50%, #D1D1D1 100%);
+    background: -ms-linear-gradient(top, #ECECEC 50%, #D1D1D1 100%);
+    background: -moz-linear-gradient(top, #ECECEC 50%, #D1D1D1 100%);
+    background: -webkit-linear-gradient(top, #ECECEC 50%, #D1D1D1 100%);
+    background: linear-gradient(top, #ECECEC 50%, #D1D1D1 100%);
 }
 
-.accordion .title.active {
-    background-color: #4D5D80;
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#9FB5DF), to(#4D5D80));
-    background-image: -webkit-linear-gradient(top, #9FB5DF, #4D5D80); 
-    background-image:    -moz-linear-gradient(top, #9FB5DF, #4D5D80); 
-    background-image:     -ms-linear-gradient(top, #9FB5DF, #4D5D80); 
-    background-image:      -o-linear-gradient(top, #9FB5DF, #4D5D80); 
-    background-image:         linear-gradient(to bottom, #9FB5DF, #4D5D80);
-}
-
-.accordion .title:before {
+.aw-acc-title:before {
     content: "\25b6";
     float: left;
     margin-right: 5px;
 }
 
-.accordion .title.active:before {
+.aw-acc-title.active:before {
     content: "\25bc";
 }
 
-.accordion .pane {
+.aw-acc-pane {
     background-color: #FFF;
     padding: 0 1em;
     height: 0;
     overflow: hidden;
 }
-.accordion .pane.active {
+.aw-acc-pane.active {
     height: auto;
     padding: 1em;
 }
@@ -71,7 +70,7 @@
 
 /* custom styles for left-to-right (i.e. horizontal) mode */
 
-.accordion.ltr .title {
+.ltr .aw-acc-title {
     padding: 1em 0 0;
     float: left;
 
@@ -85,13 +84,13 @@
                zoom: 1;
 }
 
-.accordion.ltr .pane {
+.ltr .aw-acc-pane {
     float: left;
     height: 0;
     width: 0;
     padding: 1em 0;
 }
-.accordion.ltr .pane.active {
+.ltr .aw-acc-pane.active {
     height: auto;
     width: auto;
     padding: 1em;
