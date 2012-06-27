@@ -61,7 +61,7 @@
         require.config({
             baseUrl: '../..'
         });
-        require(["atto/core","atto/HPanel","atto/VPanel"], function(atto, HPanel, VPanel) {
+        require(["atto/core","atto/hPanel","atto/vPanel"], function(atto, HPanel, VPanel) {
             var hpanel = new HPanel(atto.byId('main-inner'), {left:'120px', right:'200px'}),
                 vpanel = new VPanel(atto.byId('main-outer'), {header:'80px',footer:'50px'});
         });
