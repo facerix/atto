@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Layout Example</title>
+    <link rel="stylesheet" href="demopage.css"/>
+    <link rel="stylesheet" href="../hPanel.css"/>
+    <link rel="stylesheet" href="../vPanel.css"/>
+    <style>
+      #main-outer {
+        position: absolute;
+        top:0; left:0; right:0; bottom:0
+      }
+      #main-outer div { border: 1px solid black; }
+    </style>
+  </head>
+  <body>
+    <div id="main-outer">
+      <div>North</div>
+      <div id="main-inner">
+        <div>West</div>
+        <div>Center
+          <p>This is a copy of the <a href="http://layout.jquery-dev.net/demos/example.html">jQuery Layout plugin</a>'s simple demo page.</p>
+          <p><a href="http://buyog.com/atto/demo">Go to the Demos page</a></p>
+          <p>* Pane-resizing is disabled because I haven't implemented it.</p>
+          <p>* Pane-animation is disabled because I don't care. ;)</p>
+        </div>
+        <div>East</div>
+      </div>
+      <div>South</div>
+    </div>
+    <script src="/js/require.js"></script>
+    <script>
+        require.config({baseUrl: '../..'});
+        require(["atto/core","atto/hPanel","atto/vPanel"], function(atto, HPanel, VPanel) {
+            var hpanel = new HPanel(atto.byId('main-inner'), {left:'120px', right:'200px'}),
+                vpanel = new VPanel(atto.byId('main-outer'), {header:'80px',footer:'50px'});
+        });
+    </script>
+  </body>
+</html>
