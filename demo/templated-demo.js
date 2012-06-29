@@ -23,6 +23,7 @@ require(
             links[idx].onclick = function() {
                 dview.fetch({num:this.getAttribute('data-target')});
                 atto.stopEventCascade();
+                return false;
             }
         }
     }
