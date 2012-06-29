@@ -23,17 +23,17 @@ define(
             var elems = lmnt.children(_root);
             for (i=0; i<nCount; i++) {
                 nd = elems[i];
-                nd.setAttribute('data-baseClasses', nd.className + ' slide ');
-                nd.className = nd.className + ' slide next';
+                nd.setAttribute('data-baseClasses', nd.className + ' aw-slide ');
+                nd.className = nd.className + ' aw-slide next';
                 _slides.push(nd);
             }
 
             // add the appropriate class to the root node
-            _root.classList.add('slidebox');
+            _root.classList.add('aw-slidebox');
 
             // prev link
             nd = document.createElement('a');
-            nd.className = 'prev-button';
+            nd.className = 'aw-prev-button';
             nd.innerHTML = '&#x2039;';
             nd.onclick = function(tgt) {
                 return function(e) {
@@ -46,7 +46,7 @@ define(
 
             // next link
             nd = document.createElement('a');
-            nd.className = 'next-button';
+            nd.className = 'aw-next-button';
             nd.innerHTML = '&#x203A;';
             nd.onclick = function(tgt) {
                 return function(e) {

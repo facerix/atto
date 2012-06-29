@@ -26,9 +26,9 @@
     </div>
 
     <div class="controls">
-      <a href="javascript:slidebox.goto(0);">&bull;</a>
-      <a href="javascript:slidebox.goto(1);">&bull;</a>
-      <a href="javascript:slidebox.goto(2);">&bull;</a>
+      <a data-target="0" href="#">&bull;</a>
+      <a data-target="1" href="#">&bull;</a>
+      <a data-target="2" href="#">&bull;</a>
     </div>
 
     <script src="/js/require.js"></script>
@@ -38,6 +38,14 @@
         });
         require(["atto/core","atto/slideBox"], function(atto, SlideBox) {
             var slidebox = new SlideBox(atto.byId("mySlides"), {});
+
+            var links = document.querySelectorAll('.controls a[data-target]');
+            for (var idx in links) {
+                links[idx].onclick = function() {
+                    slidebox.goto(parseInt(this.getAttribute('data-target')));
+                    atto.stopEventCascade();
+                }
+            }
         });
     </script>
   </body>

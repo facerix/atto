@@ -1,9 +1,9 @@
 /* awSlideBox.css -- stylesheet for Slideshow attowidget */
 
-/* apply a natural box layout model to all elements */
-* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+/* apply a natural box layout model to all child elements */
+.aw-slidebox * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
 
-.slidebox {
+.aw-slidebox {
     border: 2px inset #aaa;
     margin: 0;
     padding: 0.5em;
@@ -15,11 +15,12 @@
           box-shadow: 2px 2px 4px 0px #aaa; 
 }
 
-.slidebox .slide {
+.aw-slidebox .aw-slide {
     background-color: #FFF;
     position: absolute;
-    top: 0; 
+    top: 0; left: 0;
     height: 100%; width: 100%;
+    margin: 0;
     padding: 0.5em;
     
     visibility: hidden;
@@ -31,22 +32,22 @@
           transition: all 0.3s ease-in-out;
 }
 
-.slidebox .slide.prev {
+.aw-slidebox .aw-slide.prev {
     left: -100%;
 }
 
-.slidebox .slide.current {
+.aw-slidebox .aw-slide.current {
     left: 0;
     opacity: 1;
     visibility: inherit;
 }
 
-.slidebox .slide.next {
+.aw-slidebox .aw-slide.next {
     left: 100%;
 }
 
-.slidebox .prev-button,
-.slidebox .next-button {
+.aw-slidebox .aw-prev-button,
+.aw-slidebox .aw-next-button {
     position: absolute;
     cursor: pointer;
     top: 50%; margin-top: -40px;
@@ -55,11 +56,11 @@
     text-decoration: none;
     opacity: 0.25;
 }
-.slidebox .prev-button { left: 10px; }
-.slidebox .next-button { right: 10px; }
+.aw-slidebox .aw-prev-button { left: 10px; }
+.aw-slidebox .aw-next-button { right: 10px; }
 
-.slidebox .prev-button:hover,
-.slidebox .next-button:hover {
+.aw-slidebox .aw-prev-button:hover,
+.aw-slidebox .aw-next-button:hover {
     opacity: 1;
     color: #222;
 }
