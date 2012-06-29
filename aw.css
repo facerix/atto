@@ -78,7 +78,10 @@ abbr {
     background-color: rgba(250, 254, 255, 0.15);
     list-style-type: none;
     float: left;
-    text-align: left;
+    text-align: center;
+
+    font: small-caps 36px/120px 'GoodDogRegular', cursive;
+    font-size-adjust: 0.43;
 }
 #gallery li:hover {
     background-color: rgba(13,196,242,0.25);
@@ -94,8 +97,6 @@ abbr {
     background: url(demo/images/icon_blank2.png) no-repeat 5px 10px;
     color: #333333;
     display: block;
-    font: small-caps 36px/120px 'GoodDogRegular', cursive;
-    font-size-adjust: 0.43;
     padding: 0 0 0 120px; margin: 0;
     text-align: left;
     text-decoration: none;
@@ -116,7 +117,8 @@ abbr {
 #gallery a[href*='slide']  { background-image: url(demo/images/icon_slides.png); }
 #gallery a[href*='tab']    { background-image: url(demo/images/icon_tabs.png); }
 #gallery a[href*='tree']   { background-image: url(demo/images/icon_tree.png); }
-#gallery a[href*='outline']   { background-image: url(demo/images/icon_outline.png); }
+#gallery a[href*='outline']  { background-image: url(demo/images/icon_outline.png); }
+#gallery a[href*='template'] { background-image: url(demo/images/icon_tmpl.png); }
 
 .caps { font-variant: small-caps; }
 
