@@ -11,16 +11,9 @@ define(
     ["atto/core","require"],
     function(atto) {
         // make sure the appopriate CSS has been loaded for this widget
-        var cssTitle = "atto-dataView";
-        if (!document.querySelector("style[data-for-widget='"+cssTitle+"']")) {
-            require(["text!atto/dataView.css"], function(rawCss) {
-                var newCss = document.createElement('style');
-                newCss.setAttribute('data-for-widget', cssTitle);
-                newCss.type = "text/css";
-                newCss.textContent = rawCss;
-
-                document.head.appendChild(newCss);
-            });
+        var forWidget = "atto-dataView";
+        if (!document.querySelector("style[data-for-widget='"+forWidget+"']")) {
+            require(["text!atto/dataView.css"], function(rawCss) { atto.addWidgetCss(rawCss, forWidget); });
         }
 
         function constructor(rootNode, optionArray) {

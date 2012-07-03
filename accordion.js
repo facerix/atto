@@ -11,16 +11,9 @@ define(
     ["atto/core","atto/lmnt","require"],
     function(atto, lmnt) {
         // make sure the appopriate CSS has been loaded for this widget
-        var cssTitle = "atto-accordion";
-        if (!document.querySelector("style[data-for-widget='"+cssTitle+"']")) {
-            require(["text!atto/accordion.css"], function(rawCss) {
-                var newCss = document.createElement('style');
-                newCss.setAttribute('data-for-widget', cssTitle);
-                newCss.type = "text/css";
-                newCss.textContent = rawCss;
-
-                document.head.appendChild(newCss);
-            });
+        var forWidget = "atto-accordion";
+        if (!document.querySelector("style[data-for-widget='"+forWidget+"']")) {
+            require(["text!atto/accordion.css"], function(rawCss) { atto.addWidgetCss(rawCss, forWidget); });
         }
 
         function constructor(rootNode, optionArray) {

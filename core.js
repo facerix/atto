@@ -184,11 +184,21 @@ define(
                     return typeof r === 'string' || typeof r === 'number' ? r : a;
                 }
             );
-        };
+        }
+
+        function _addWidgetCss(rawCss, forWidget) {
+            var newCss = document.createElement('style');
+            newCss.setAttribute('data-for-widget', forWidget);
+            newCss.type = "text/css";
+            newCss.textContent = rawCss;
+
+            document.head.appendChild(newCss);
+        }
 
         return {
             addLoadEvent     : _addLoadEvent,
             addEvent         : _addEvent,
+            addWidgetCss     : _addWidgetCss,
             byId             : _byId,
             stopEventCascade : _stopEventCascade,
             xhrRequest       : _xhr,

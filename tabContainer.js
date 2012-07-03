@@ -11,16 +11,9 @@ define(
     ["atto/core","atto/lmnt","require"],
     function(atto, lmnt) {
         // make sure the appopriate CSS has been loaded for this widget
-        var cssTitle = "atto-tabs";
-        if (!document.querySelector("style[data-for-widget='"+cssTitle+"']")) {
-            require(["text!atto/tabContainer.css"], function(rawCss) {
-                var newCss = document.createElement('style');
-                newCss.setAttribute('data-for-widget', cssTitle);
-                newCss.type = "text/css";
-                newCss.textContent = rawCss;
-
-                document.head.appendChild(newCss);
-            });
+        var forWidget = "atto-tabs";
+        if (!document.querySelector("style[data-for-widget='"+forWidget+"']")) {
+            require(["text!atto/tabContainer.css"], function(rawCss) { atto.addWidgetCss(rawCss, forWidget); });
         }
 
         function constructor(rootNode, optionArray) {
