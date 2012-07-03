@@ -3,8 +3,6 @@
   <head>
     <title>Atto HPanel/VPanel Layout Example</title>
     <link rel="stylesheet" href="demopage.css"/>
-    <link rel="stylesheet" href="../hPanel.css"/>
-    <link rel="stylesheet" href="../vPanel.css"/>
     <style>
         #main-outer, #main-inner { margin: 0; padding: 0; }
         #main-outer {
@@ -51,12 +49,12 @@
             <a href="http://hipsteripsum.me/">HipsterIpsum.me</a>)</span>
       </div>
     </div>
-    <script src="/js/require.js"></script>
+    <script src="../../require.js"></script>
     <script>
         require.config({
             baseUrl: '../..'
         });
-        require(["atto/core","atto/hPanel","atto/vPanel"], function(atto, HPanel, VPanel) {
+        require(["atto/core","atto/vPanel","atto/hPanel"], function(atto, VPanel, HPanel) {
             var hpanel = new HPanel(atto.byId('main-inner'), {left:'120px', right:'200px'}),
                 vpanel = new VPanel(atto.byId('main-outer'), {header:'80px',footer:'50px'});
         });

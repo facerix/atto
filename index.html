@@ -92,12 +92,14 @@
       </footer>
     </article>
 
-    <script src="/js/require.js"></script>
+    <script src="../require.js"></script>
     <script>
         require.config({
-            baseUrl: '../..'
+            baseUrl: '..'
         });
         require(["atto/core"], function(atto) {
+            console.log('ready');
+            window.atto = atto;
             atto.addLoadEvent(function() {
                 // show the header (which is hidden until the custom font-face can get hoisted)
                 window.setTimeout(function() {

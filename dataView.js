@@ -8,8 +8,21 @@
 //
 
 define(
-    ["atto/core"], //,"text!awDataView.css"],
+    ["atto/core","require"],
     function(atto) {
+        // make sure the appopriate CSS has been loaded for this widget
+        var cssTitle = "atto-dataView";
+        if (!document.querySelector("style[data-for-widget='"+cssTitle+"']")) {
+            require(["text!atto/dataView.css"], function(rawCss) {
+                var newCss = document.createElement('style');
+                newCss.setAttribute('data-for-widget', cssTitle);
+                newCss.type = "text/css";
+                newCss.textContent = rawCss;
+
+                document.head.appendChild(newCss);
+            });
+        }
+
         function constructor(rootNode, optionArray) {
             var _root  = rootNode || document.createElement('div'),
                 opts   = atto.mixinArgs({

@@ -2,14 +2,27 @@
 // Atto TabContainer : convert a raw list of DOM nodes into a simple, self-contained tab widget
 //
 // author: Ryan Corradini
-// version: 2.0 (AMD)
-// date: 14 Jun 2012
+// version: 2.1
+// date: 3 July 2012
 // license: MIT
 //
 
 define(
-    ["atto/core","atto/lmnt"], //,"text!awTabContainer.css"],
+    ["atto/core","atto/lmnt","require"],
     function(atto, lmnt) {
+        // make sure the appopriate CSS has been loaded for this widget
+        var cssTitle = "atto-tabs";
+        if (!document.querySelector("style[data-for-widget='"+cssTitle+"']")) {
+            require(["text!atto/tabContainer.css"], function(rawCss) {
+                var newCss = document.createElement('style');
+                newCss.setAttribute('data-for-widget', cssTitle);
+                newCss.type = "text/css";
+                newCss.textContent = rawCss;
+
+                document.head.appendChild(newCss);
+            });
+        }
+
         function constructor(rootNode, optionArray) {
             var _root  = rootNode || document.createElement('div'),
                 _tabs  = [],
@@ -23,7 +36,7 @@ define(
                 currTitle = null,
                 currPanel = null;
 
-            // vars from old tabify()
+            // DOM container hooks
             var __frag   = document.createDocumentFragment(),
                 _tabRow  = document.createElement('ul'),
                 _tabBody = document.createElement('div'),

@@ -2,14 +2,27 @@
 // Atto Accordion : convert a raw list of DOM nodes into a simple accordion widget
 //
 // author: Ryan Corradini
-// version: 2.0 (AMD)
-// date: 13 Jun 2012
+// version: 2.1
+// date: 3 July 2012
 // license: MIT
 //
 
 define(
-    ["atto/core","atto/lmnt"],
+    ["atto/core","atto/lmnt","require"],
     function(atto, lmnt) {
+        // make sure the appopriate CSS has been loaded for this widget
+        var cssTitle = "atto-accordion";
+        if (!document.querySelector("style[data-for-widget='"+cssTitle+"']")) {
+            require(["text!atto/accordion.css"], function(rawCss) {
+                var newCss = document.createElement('style');
+                newCss.setAttribute('data-for-widget', cssTitle);
+                newCss.type = "text/css";
+                newCss.textContent = rawCss;
+
+                document.head.appendChild(newCss);
+            });
+        }
+
         function constructor(rootNode, optionArray) {
             var _root  = rootNode || document.createElement('div'),
                 _currentTitle = null,

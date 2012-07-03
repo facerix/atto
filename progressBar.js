@@ -2,13 +2,26 @@
 // Atto ProgressBar (simple progressbar widget)
 //
 // author: Ryan Corradini
-// date: 21 June 2012
+// date: 3 July 2012
 // license: MIT
 //
 
 define(
-    ["atto/core"], //,"css!atto/awProgressBar.css"],
+    ["atto/core","require"],
     function(atto) {
+        // make sure the appopriate CSS has been loaded for this widget
+        var cssTitle = "atto-progressbar";
+        if (!document.querySelector("style[data-for-widget='"+cssTitle+"']")) {
+            require(["text!atto/progressBar.css"], function(rawCss) {
+                var newCss = document.createElement('style');
+                newCss.setAttribute('data-for-widget', cssTitle);
+                newCss.type = "text/css";
+                newCss.textContent = rawCss;
+
+                document.head.appendChild(newCss);
+            });
+        }
+
         function constructor(rootNode, optionArgs) {
             var _root = rootNode || document.createElement('div'),
                 _bar  = document.createElement('span'),

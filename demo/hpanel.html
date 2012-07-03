@@ -3,7 +3,6 @@
   <head>
     <title>Atto HPanel Example</title>
     <link rel="stylesheet" href="demopage.css"/>
-    <link rel="stylesheet" href="../hPanel.css"/>
     <style>
         .demoFrame {
             margin: 20px;
@@ -11,10 +10,11 @@
             width: 800px;
             border: 3px double #735;
         }
-        .aw-hPanel .left   { background-color:#345; }
-        .aw-hPanel .center { background-color:#eec; }
-        .aw-hPanel .right  { background-color:#aaa; }
+        .aw-hPanel .center { background-color:#EED; }
         .aw-hPanel h2 { text-align: center; border-bottom: 1px inset #333; }
+
+        .aw-hPanel .left, .aw-hPanel .right { background-color:#BBA; }
+
     </style>
   </head>
   <body>
@@ -82,7 +82,7 @@
       </div>
     </div>
 
-    <script src="/js/require.js"></script>
+    <script src="../../require.js"></script>
     <script>
         require.config({
             baseUrl: '../..'
