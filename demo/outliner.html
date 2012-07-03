@@ -3,11 +3,28 @@
   <head>
     <title>Atto Outliner Example</title>
     <link rel="stylesheet" href="demopage.css"/>
+    <style type="text/css">
+        pre {
+            font: monospace;
+            border: 2px inset #444;
+        }
+    </style>
   </head>
   <body>
     <h1>Atto Outliner Example</h1>
 
-    <h2>List 1 (ordered):</h2>
+    <p>Outliner is a bit different from most of the other Atto components. It's not a widget; rather, it's a
+        convenience function that can take raw text containing outline lists (using any arbitrary bullet characters
+        and indentation you want), and convert it into the equivalent HTML list markup.</p>
+    <p>Both ordered (<code>ol</code>) and unordered (<code>ul</code>) lists are supported; by default,
+        Outliner produces unordered lists, but if the container DOM node you provide includes a CSS class of
+        "<code>ordered</code>", the output will follow suit.</p>
+    <p>For best results, the DOM node containing your raw text needs to preserve arbitrary whitespace; to
+        satisfy cross-browser quirks, that essentially means using either <code>pre</code> or <code>textarea</code>.
+
+    <hr width="50%"/>
+
+    <h2>List 1 (<code>pre</code> input, ordered):</h2>
     <pre class="easy-list ordered">
     - Some task
     - Another task
@@ -21,16 +38,15 @@
     - Top-level task III (no subtasks)
     </pre>
 
-    <h2>List 2 (unordered):</h2>
-    <pre class="easy-list">
+    <h2>List 2 (<code>textarea</code> input, unordered):</h2>
+    <textarea class="easy-list">
     * bullet 1
     * bullet 2
       * bullet 2.1
-    </pre>
+    </textarea>
 
     <section class="controls">
-      <button id="btnConvert">Convert all .easy-list nodes</button>
-      <p id="status" class="hidden"></p>
+      <button id="btnConvert">Listify!</button>
     </section>
 
     <script src="../../require.js"></script>
@@ -46,14 +62,6 @@
                   var lists = document.querySelectorAll(".easy-list");
                   for (var i=0,listCount=lists.length; i<listCount; i++) {
                       listify(lists[i]);
-                  }
-                  var msg = "Converted " + listCount + " easy-list node" + (listCount>1 ? 's.' : '.');
-                  var p = atto.byId('status');
-                  if (p) {
-                      p.innerHTML = msg;
-                      p.classList.toggle('hidden');
-                  } else {
-                      console.log(msg);
                   }
                   this.classList.add('hidden');
                }

@@ -37,7 +37,7 @@
           -->
           <li><a href="demo/dataview.html">DataView</a></li>
           <li><a href="demo/prog.html">ProgressBar</a>
-          <li>(More to come!)</li>
+          <!--li><a href="demo/nav.html">NavContainer</a></li-->
           <!--
           <li><a href="demo/list.html">ListBox</a>
           <li><a href="demo/tree.html">Tree</a>
@@ -45,6 +45,7 @@
 
           <li><a href="demo/outliner.html">Outliner</a></li>
           <li><a href="demo/templated.html">Templatizr</a></li>
+          <li>(More to come!)</li>
       </ul>
 
       <section class='intro'>
@@ -98,8 +99,6 @@
             baseUrl: '..'
         });
         require(["atto/core"], function(atto) {
-            console.log('ready');
-            window.atto = atto;
             atto.addLoadEvent(function() {
                 // show the header (which is hidden until the custom font-face can get hoisted)
                 window.setTimeout(function() {
