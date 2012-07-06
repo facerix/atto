@@ -2,7 +2,6 @@
 // Atto TabContainer : convert a raw list of DOM nodes into a simple, self-contained tab widget
 //
 // author: Ryan Corradini
-// version: 2.1
 // date: 3 July 2012
 // license: MIT
 //

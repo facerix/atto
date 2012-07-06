@@ -2,7 +2,6 @@
 // Atto HPanel : simple horizontal-layout widget
 //
 // author: Ryan Corradini
-// version: 2.1
 // date: 3 July 2012
 // license: MIT
 //

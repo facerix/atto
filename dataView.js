@@ -2,7 +2,6 @@
 // Atto DataView (renders a formatted version of data fetched from an AJAX call)
 //
 // author: Ryan Corradini
-// version: 2.0 (AMD)
 // date: 13 Jun 2012
 // license: MIT
 //
