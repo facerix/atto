@@ -14,6 +14,7 @@ if(typeof document!=="undefined"&&!("classList" in document.createElement("a")))
 
 define(
     function() {
+        var _head = document.getElementsByTagName('head')[0] || {};
 
         function _xhr(args) {
             var opts = _args_mixin({
@@ -187,12 +188,18 @@ define(
         }
 
         function _addWidgetCss(rawCss, forWidget) {
-            var newCss = document.createElement('style');
-            newCss.setAttribute('data-for-widget', forWidget);
-            newCss.type = "text/css";
-            newCss.textContent = rawCss;
+            var ss = document.createElement('style');
+            ss.setAttribute('data-for-widget', forWidget);
+            ss.setAttribute('type', 'text/css');
+            _head.appendChild(ss);
 
-            document.head.appendChild(newCss);
+            if (ss.styleSheet) {
+                // stupid versions of IE
+                ss.styleSheet.cssText = rawCss;
+            } else {
+                // everyone else
+                ss.appendChild(document.createTextNode(rawCss));
+            }
         }
 
         return {
@@ -203,7 +210,8 @@ define(
             stopEventCascade : _stopEventCascade,
             xhrRequest       : _xhr,
             mixinArgs        : _args_mixin,
-            supplant         : _supplant
+            supplant         : _supplant,
+            head             : _head
         }
     }
 );
