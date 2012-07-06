@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Atto ListBox Example</title>
+    <link rel="stylesheet" href="demopage.css"/>
+  </head>
+  <body>
+    <h1>Atto ListBox Example</h1>
+
+    <h3>From HTML list (ul/li)</h3>
+    <ul id="list1">
+        <li id='item1'>Some item</li>
+        <li id='item2'>Another item</li>
+        <li id='item3'>and another</li>
+        <li id='item4'>last item</li>
+    </ul>
+    <p>Selected item ID: <span id='list1_sel'></span></p>
+
+    <h3>From HTML list (select/option)</h3>
+    <select id="list2" multiple>
+        <option id='opt1'>Some option</option>
+        <option id='opt2'>Another option</option>
+        <option id='opt3'>Option 3</option>
+        <option id='opt4'>Final option</option>
+    </select>
+    <p>Selected item ID: <span id='list2_sel'></span></p>
+
+    <script src="../../require.js"></script>
+    <script>
+        require.config({
+            baseUrl: '../..'
+        });
+        require(["atto/core","atto/listBox"], function(atto, ListBox) {
+            window.l1 = new ListBox(atto.byId('list1'), {});
+            window.l2 = new ListBox(atto.byId('list2'), {});
+
+            l1.events.itemSelected.watch(function(context) {
+                reportSelection('list1_sel', context.item);
+            });
+
+            l2.events.itemSelected.watch(function(context) {
+                reportSelection('list2_sel', context.item);
+            });
+
+            function reportSelection(lblId, selId) {
+                var lbl = atto.byId(lblId);
+                if (lbl) lbl.innerHTML = selId;
+            }
+            reportSelection('list1_sel', l1.currentItem().id);
+            reportSelection('list2_sel', l2.currentItem().id);
+
+
+        });
+    </script>
+  </body>
+</html>
