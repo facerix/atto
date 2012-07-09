@@ -25,14 +25,24 @@
     </select>
     <p>Selected item ID: <span id='list2_sel'></span></p>
 
+    <h3>From HTML text tags (div/p)</h3>
+    <div id="list3">
+        <p id='p1'>Some option</p>
+        <p id='p2'>Another option</p>
+        <p id='p3'>Option 3</p>
+        <p id='p4'>Final option</p>
+    </div>
+    <p>Selected item ID: <span id='list3_sel'></span></p>
+
     <script src="../../require.js"></script>
     <script>
         require.config({
             baseUrl: '../..'
         });
         require(["atto/core","atto/listBox"], function(atto, ListBox) {
-            window.l1 = new ListBox(atto.byId('list1'), {});
-            window.l2 = new ListBox(atto.byId('list2'), {});
+            var l1 = new ListBox(atto.byId('list1'), {}),
+                l2 = new ListBox(atto.byId('list2'), {}),
+                l3 = new ListBox(atto.byId('list3'), {});
 
             l1.events.itemSelected.watch(function(context) {
                 reportSelection('list1_sel', context.item);
@@ -42,12 +52,17 @@
                 reportSelection('list2_sel', context.item);
             });
 
+            l3.events.itemSelected.watch(function(context) {
+                reportSelection('list3_sel', context.item);
+            });
+
             function reportSelection(lblId, selId) {
                 var lbl = atto.byId(lblId);
                 if (lbl) lbl.innerHTML = selId;
             }
             reportSelection('list1_sel', l1.currentItem().id);
             reportSelection('list2_sel', l2.currentItem().id);
+            reportSelection('list3_sel', l3.currentItem().id);
 
 
         });
