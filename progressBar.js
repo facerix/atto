@@ -43,11 +43,31 @@ define(
                 _bar.style.width = percent + "%";
             }
 
+            function _setMin(newMin) {
+                if (newMin < _max) {
+                    _min = newMin;
+                } else {
+                    _min = newMin;
+                    _max = newMin;
+                }
+            }
+
+            function _setMax(newMax) {
+                if (newMax >= _min) {
+                    _max = newMax;
+                } else {
+                    _min = newMax;
+                    _max = newMax;
+                }
+            }
+
             return {
                 root     : _root,
                 getMin   : function() { return _min; },
                 getMax   : function() { return _max; },
                 getValue : function() { return _val; },
+                setMin   : _setMin,
+                setMax   : _setMax,
                 setValue : _setVal
             } // end of public interface
         } // end of constructor
