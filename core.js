@@ -202,6 +202,17 @@ define(
             }
         }
 
+        function _getKeys(obj) {
+            var k, keylist = [];
+            for (k in obj) {
+                if (obj.hasOwnProperty(k)) {
+                    keylist.push(k);
+                }
+            }
+            return keylist;
+        }
+
+
         return {
             addLoadEvent     : _addLoadEvent,
             addEvent         : _addEvent,
@@ -211,7 +222,8 @@ define(
             xhrRequest       : _xhr,
             mixinArgs        : _args_mixin,
             supplant         : _supplant,
-            head             : _head
+            head             : _head,
+            getKeys          : _getKeys
         }
     }
 );
