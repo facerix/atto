@@ -82,6 +82,16 @@ define(
             expect( 1 ).toEqual( 2 );
           }
         );
+
+        // test getKeys
+        it(
+          "should let you get all keys from an object literal",
+          function() {
+            var o = {'a': 1, 'b': 2, 'c': 3},
+                l = ['a', 'b', 'c'];
+            expect( atto.getKeys(o) ).toEqual( l );
+          }
+        );
       }
     );
   }
