@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Atto Dialog Example</title>
+    <link rel="stylesheet" href="demopage.css"/>
+    <style>
+      #dlgBase {
+        background-color: #eee;
+        width: 320px;
+        height: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Atto Dialog Example</h1>
+
+    <div id="dlgBase" data-atto-title="Example Dialog">
+        <h3>Something something, Larry Larry!</h3>
+        <select id="list2" multiple>
+            <option id='opt1'>Some option</option>
+            <option id='opt2'>Another option</option>
+            <option id='opt3'>Option 3</option>
+            <option id='opt4'>Final option</option>
+        </select>
+        <p onclick="alert()">Competition...?</p>
+    </div>
+
+    <button id="btnShow">Show Dialog</button>
+    <p>Status:</p>
+    <div id="status"></div>
+
+    <script src="../../require.js"></script>
+    <script>
+      require.config({
+        baseUrl: '../..'
+      });
+        require(["atto/core","atto/dialog"], function(atto, Dialog) {
+            var dlg = new Dialog(atto.byId('dlgBase'), {}),
+                status = atto.byId('status'),
+                btn = atto.byId('btnShow');
+
+            atto.addEvent(btn, 'click', function() {
+                dlg.show();
+                btn.disabled = 'disabled';
+            }, false);
+
+            function _log(msg) {
+                if (msg) {
+                    status.appendChild(document.createTextNode(msg));
+                    status.appendChild(document.createElement('br'));
+                }
+            }
+
+            dlg.events.onCancel.watch(function(context) {
+                _log('User cancelled.');
+                btn.disabled = '';
+            });
+            dlg.events.onSubmit.watch(function(context) {
+                _log('User clicked OK.');
+                btn.disabled = '';
+            });
+        });
+    </script>
+  </body>
+</html>

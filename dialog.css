@@ -1,0 +1,54 @@
+.aw-dialog {
+  position: absolute;
+  display: none;
+
+  border: 1px solid #CCC;
+
+  border-radius: 8px;
+
+  box-shadow: 0px 3px 5px rgba(24, 24, 28, 0.75);
+}
+
+.aw-dialog.shown { display: block; }
+
+.aw-dialog > .title,
+.aw-dialog > .body,
+.aw-dialog > .footer {
+  position: absolute;
+  left: 0; right: 0;
+  overflow: auto;
+  padding: 0 8px;
+}
+
+.aw-dialog > .title {
+  top: 0; height: 32px;
+  cursor: move;
+
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 32px;
+
+  background-color: silver;
+  color: black;
+  border-width: 0 0 1px 0;
+  border-style: groove;
+  border-radius: 8px 8px 0 0;
+
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
+.aw-dialog > .body { top: 32px; bottom: 32px; }
+.aw-dialog > .footer { bottom: 0; height: 32px; border-top: 2px inset #ccc; text-align: right; }
+
+.aw-dialog .aw-close-button {
+  color: #999;
+  position: absolute;
+  top: 2px; right: 4px;
+}
+
+.aw-dialog .aw-close-button:hover {
+  color: inherit;
+}
+
