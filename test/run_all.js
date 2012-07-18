@@ -3,7 +3,8 @@ require.config({
 });
 require(
   [
-    "atto/test/core-spec"
+    "atto/test/core-spec",
+    "atto/test/event-spec"
   ],
   function(attoSpec) {
       var jasmineEnv = jasmine.getEnv();
