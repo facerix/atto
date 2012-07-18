@@ -17,6 +17,7 @@ define(
 
         function constructor(rootNode, optArgs) {
             var _root     = rootNode,
+                _underlay = document.createElement('div'),
                 _dragging = false;
                 opts      = atto.mixinArgs({
                     okButton: '',
@@ -48,17 +49,20 @@ define(
 
             // behavior functions
             function _show() {
-              _root.classList.add('shown');
+                _underlay.classList.add('shown');
+                _root.classList.add('shown');
             }
 
             function _cancel() {
-              _root.classList.remove('shown');
-              _events.onCancel.dispatch({});
+                _root.classList.remove('shown');
+                _underlay.classList.remove('shown');
+                _events.onCancel.dispatch({});
             }
 
             function _submit() {
-              _root.classList.remove('shown');
-              _events.onSubmit.dispatch({});
+                _root.classList.remove('shown');
+                _underlay.classList.remove('shown');
+                _events.onSubmit.dispatch({});
             }
 
             function _startDrag() {
@@ -139,7 +143,8 @@ define(
             _root.style.height = (__origHeight + 64) + 'px';
             _root.style.width = (__origWidth + 16) + 'px';
             _root.appendChild(__frag);
-
+            _underlay.className = 'aw-underlay';
+            document.body.appendChild(_underlay);
 
             return {
                 root        : _root,
