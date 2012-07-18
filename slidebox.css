@@ -1,4 +1,4 @@
-/* awSlideBox.css -- stylesheet for Slideshow attowidget */
+/* slideBox.css -- stylesheet for Atto Slideshow microwidget */
 
 /* apply a natural box layout model to all child elements */
 .aw-slidebox * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
