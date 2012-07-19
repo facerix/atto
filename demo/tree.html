@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Atto Tree Example</title>
+    <link rel="stylesheet" href="demopage.css"/>
+  </head>
+  <body>
+    <h1>Atto Tree Example</h1>
+
+    <ul id="myTree" style="width:320px;">
+        <li>
+            Branch 1
+            <ul>
+                <li>Leaf 1.1</li>
+                <li>Leaf 1.2</li>
+                <li>Leaf 1.3</li>
+            </ul>
+        </li>
+        <li>Branch 2</li>
+        <li>Branch 3</li>
+    </ul>
+
+    <script src="../../require.js"></script>
+    <script>
+        require.config({
+            baseUrl: '../..'
+        });
+        require(["atto/core","atto/tree"], function(atto, Tree) {
+            var tree = new Tree(atto.byId("myTree"), {});
+        });
+    </script>
+  </body>
+</html>
