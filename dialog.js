@@ -8,7 +8,7 @@
 
 define(
     ["atto/core","atto/event","require"],
-    function(atto, CustomEvent) {
+    function(atto, AttoEvent) {
         // make sure the appopriate CSS has been loaded for this widget
         var forWidget = "atto-dialog";
         if (!document.querySelector("style[data-for-widget='"+forWidget+"']")) {
@@ -24,8 +24,8 @@ define(
                     cancelButton: ''
                 }, optArgs);
                 _events   = {
-                    onCancel: new CustomEvent('atto.dialog.onCancel'),
-                    onSubmit: new CustomEvent('atto.dialog.onSubmit'),
+                    onCancel: new AttoEvent('atto.dialog.onCancel'),
+                    onSubmit: new AttoEvent('atto.dialog.onSubmit'),
                 };
 
             // temporary working vars

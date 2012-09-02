@@ -8,7 +8,7 @@
 
 define(
     ["atto/core","atto/lmnt","atto/event","require"],
-    function(atto, lmnt, CustomEvent) {
+    function(atto, lmnt, AttoEvent) {
         // make sure the appopriate CSS has been loaded for this widget
         var forWidget = "atto-listbox";
         if (!document.querySelector("style[data-for-widget='"+forWidget+"']")) {
@@ -25,7 +25,7 @@ define(
                 _registry = {},
                 options = optArgs,
                 _events = {
-                    itemSelected: new CustomEvent('atto.listBox.itemSelected')
+                    itemSelected: new AttoEvent('atto.listBox.itemSelected')
                 };
 
             // temporary working vars

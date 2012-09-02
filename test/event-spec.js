@@ -1,6 +1,6 @@
 define(
   ['atto/event'],
-  function(CustomEvent) {
+  function(AttoEvent) {
     // describe the test suite for Atto Event
     describe(
       "Atto Event",
@@ -12,7 +12,7 @@ define(
                 unwatch  : _unsub
         */
         beforeEach(function() {
-            this.event = new CustomEvent('my.event.name');
+            this.event = new AttoEvent('my.event.name');
         });
 
         describe(
