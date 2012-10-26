@@ -16,20 +16,18 @@ define(
         }
 
         function constructor(rootNode, optArgs) {
-            var _root  = rootNode,
-                _currentItem = null,
-                i      = 0,
-                nd     = null,
-                nCount = _root.childElementCount || lmnt.childElementCount(_root),
-                lastId = 0,
+            var _root  = rootNode || document.createElement('div'),
+                _currItem = null,
+                i         = 0,
+                nd        = null,
+                nCount    = _root.childElementCount || lmnt.childElementCount(_root),
+                lastId    = 0,
                 _registry = {},
-                options = optArgs,
-                _events = {
+                options   = optArgs || {},
+                _events   = {
                     itemSelected: new AttoEvent('atto.listBox.itemSelected')
-                };
-
-            // temporary working vars
-            var __frag    = document.createDocumentFragment(),
+                },
+                __frag    = document.createDocumentFragment(),
                 itemCount = 0;
 
             function _getUniqueId() {
@@ -52,9 +50,9 @@ define(
                 ndItem.innerHTML = label;
                 ndItem.onclick = function() {
                     return function() {
-                        if (_currentItem != this) {
-                            _currentItem.classList.remove('selected');
-                            _currentItem = this;
+                        if (_currItem != this) {
+                            _currItem.classList.remove('selected');
+                            _currItem = this;
                             this.classList.add('selected');
                             _events.itemSelected.dispatch({
                                 item: this.id
@@ -65,7 +63,7 @@ define(
 
                 appendTo.appendChild(ndItem);
                 if (itemCount==1) {
-                    _currentItem = ndItem;
+                    _currItem = ndItem;
                     ndItem.classList.add('selected');
                 }
             }
@@ -97,7 +95,7 @@ define(
                 root        : _root,
                 addItem     : _addItem,
                 events      : _events,
-                currentItem : function() { return _currentItem; }
+                currentItem : function() { return _currItem; }
             } // end of public interface
         } // end of constructor
 
