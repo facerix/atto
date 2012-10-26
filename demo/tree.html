@@ -3,21 +3,93 @@
   <head>
     <title>Atto Tree Example</title>
     <link rel="stylesheet" href="demopage.css"/>
+
+    <style>
+        li.node {
+            cursor: pointer;
+            list-style-type: none;
+        }
+
+        li.node:before{
+            /*content: "\2295";
+            position: relative;
+            left: -20px;*/
+            content: "\25BC";
+            float: left;
+            margin-right: 5px;
+        }
+
+        li.node.closed:before{
+            content: "\25BA";
+            float: left;
+            margin-right: 5px;
+        }
+
+        li.node > .label:hover {
+            background-color: blue;
+            color: white;
+        }
+
+        li ul {
+            overflow: hidden;
+
+          -webkit-transition: all 0.3s ease-out;
+             -moz-transition: all 0.3s ease-out;
+              -ms-transition: all 0.3s ease-out;
+               -o-transition: all 0.3s ease-out;
+                  transition: all 0.3s ease-out;
+        }
+        li.closed ul { height: 0; }
+    </style>
   </head>
   <body>
     <h1>Atto Tree Example</h1>
 
     <ul id="myTree" style="width:320px;">
-        <li>
-            Branch 1
+        <li title="Branch 1" id="b1">
+            <span class="label">b1</span>
             <ul>
-                <li>Leaf 1.1</li>
-                <li>Leaf 1.2</li>
-                <li>Leaf 1.3</li>
+                <li title="Leaf 1.1" id="l1-1">
+                    <span class="label">l1</span>
+                    <ul>
+                        <li title="Leaf 1.1.a" id="l1-1-a">
+                            <span class="label">l1.1</span>
+                        </li>
+                        <li title="Leaf 1.1.b" id="l1-1-b">
+                            <span class="label">l1.2</span>
+                        </li>
+                        <li title="Leaf 1.1.c" id="l1-1-c">
+                            <span class="label">l1.3</span>
+                        </li>
+                        <li title="Leaf 1.1.d" id="l1-1-d">
+                            <span class="label">l1.4</span>
+                        </li>
+                    </ul>
+                </li>
+                <li title="Leaf 1.2" id="l1-2">
+                    <span class="label">l2</span>
+                </li>
+                <li title="Leaf 1.3" id="l1-3">
+                    <span class="label">l3</span>
+                </li>
             </ul>
         </li>
-        <li>Branch 2</li>
-        <li>Branch 3</li>
+        <li title="Branch 2" id="b2">
+            <span class="label">b2</span>
+            <ul>
+                <li title="Leaf 2.1" id="l2-1">
+                    <span class="label">l1</span>
+                </li>
+            </ul>
+        </li>
+        <li title="Branch 3" id="b3">
+            <span class="label">b3</span>
+            <ul>
+                <li title="Leaf 3.1" id="l3-1">
+                    <span class="label">l1</span>
+                </li>
+            </ul>
+        </li>
     </ul>
 
     <script src="../../require.js"></script>
@@ -26,7 +98,18 @@
             baseUrl: '../..'
         });
         require(["atto/core","atto/tree"], function(atto, Tree) {
-            var tree = new Tree(atto.byId("myTree"), {});
+            //var tree = new Tree(atto.byId("myTree"), {});
+
+            lis = document.querySelectorAll('#myTree li');
+            for (var i=0; i<lis.length; i++) {
+                lis[i].className = 'closed node';
+                atto.addEvent(lis[i], 'click', function(e) {
+                    if (e.target) {
+                        e.target.parentNode.classList.toggle('closed');
+                        atto.stopEventCascade(e);
+                    }
+                }, true);
+            }
         });
     </script>
   </body>
