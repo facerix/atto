@@ -5,33 +5,26 @@
     <link rel="stylesheet" href="demopage.css"/>
 
     <style>
-        li.node {
+        #myTree {
+            padding: 0;
+            width:320px;
+            border: 1px solid #333;
+            border-radius: 2px;
+        }
+
+        .aw-treeNode {
             cursor: pointer;
             list-style-type: none;
         }
 
-        li.node:before{
-            /*content: "\2295";
-            position: relative;
-            left: -20px;*/
-            content: "\25BC";
-            float: left;
-            margin-right: 5px;
-        }
-
-        li.node.closed:before{
-            content: "\25BA";
-            float: left;
-            margin-right: 5px;
-        }
-
-        li.node > .label:hover {
-            background-color: blue;
+        .aw-treeNode > .label:hover {
+            background-color: rgba(64,64,64,0.2);
             color: white;
         }
 
-        li ul {
+        .aw-treeNode ul {
             overflow: hidden;
+            height: auto;
 
           -webkit-transition: all 0.3s ease-out;
              -moz-transition: all 0.3s ease-out;
@@ -39,53 +32,84 @@
                -o-transition: all 0.3s ease-out;
                   transition: all 0.3s ease-out;
         }
-        li.closed ul { height: 0; }
+        .aw-treeNode.closed ul { height: 0; }
+
+        a.expando {
+            color: black;
+            padding: 0 6px 0 0; margin: 0;
+            display: inline-block;
+            width: 1em;
+            text-decoration : none;
+        }
+
+        .aw-treeNode .expando:before{
+            content: "\25BC";
+        }
+        .aw-treeNode.closed .expando:before{
+            content: "\25BA";
+        }
+        .aw-treeNode.empty .expando:before{
+            content: "-";
+        }
+
     </style>
   </head>
   <body>
     <h1>Atto Tree Example</h1>
 
-    <ul id="myTree" style="width:320px;">
+    <ul id="myTree">
         <li title="Branch 1" id="b1">
+            <a href="#" class="expando">&nbsp;</a>
             <span class="label">b1</span>
             <ul>
                 <li title="Leaf 1.1" id="l1-1">
+                    <a href="#" class="expando">&nbsp;</a>
                     <span class="label">l1</span>
                     <ul>
                         <li title="Leaf 1.1.a" id="l1-1-a">
+                            <a href="#" class="expando">&nbsp;</a>
                             <span class="label">l1.1</span>
                         </li>
                         <li title="Leaf 1.1.b" id="l1-1-b">
+                            <a href="#" class="expando">&nbsp;</a>
                             <span class="label">l1.2</span>
                         </li>
                         <li title="Leaf 1.1.c" id="l1-1-c">
+                            <a href="#" class="expando">&nbsp;</a>
                             <span class="label">l1.3</span>
                         </li>
                         <li title="Leaf 1.1.d" id="l1-1-d">
+                            <a href="#" class="expando">&nbsp;</a>
                             <span class="label">l1.4</span>
                         </li>
                     </ul>
                 </li>
                 <li title="Leaf 1.2" id="l1-2">
+                    <a href="#" class="expando">&nbsp;</a>
                     <span class="label">l2</span>
                 </li>
                 <li title="Leaf 1.3" id="l1-3">
+                    <a href="#" class="expando">&nbsp;</a>
                     <span class="label">l3</span>
                 </li>
             </ul>
         </li>
         <li title="Branch 2" id="b2">
+            <a href="#" class="expando">&nbsp;</a>
             <span class="label">b2</span>
             <ul>
                 <li title="Leaf 2.1" id="l2-1">
+                    <a href="#" class="expando">&nbsp;</a>
                     <span class="label">l1</span>
                 </li>
             </ul>
         </li>
         <li title="Branch 3" id="b3">
+            <a href="#" class="expando">&nbsp;</a>
             <span class="label">b3</span>
             <ul>
                 <li title="Leaf 3.1" id="l3-1">
+                    <a href="#" class="expando">&nbsp;</a>
                     <span class="label">l1</span>
                 </li>
             </ul>
@@ -97,18 +121,22 @@
         require.config({
             baseUrl: '../..'
         });
-        require(["atto/core","atto/tree"], function(atto, Tree) {
+        require(["atto/core","atto/tree","atto/lmnt"], function(atto, Tree, lmnt) {
             //var tree = new Tree(atto.byId("myTree"), {});
 
             lis = document.querySelectorAll('#myTree li');
             for (var i=0; i<lis.length; i++) {
-                lis[i].className = 'closed node';
-                atto.addEvent(lis[i], 'click', function(e) {
-                    if (e.target) {
-                        e.target.parentNode.classList.toggle('closed');
-                        atto.stopEventCascade(e);
-                    }
-                }, true);
+                lis[i].className = 'aw-treeNode';
+                if (lmnt.childElementCount(lis[i]) && lmnt.children(lis[i]).slice(-1)[0].tagName != 'UL') {
+                    lis[i].classList.add('empty');
+                } else {
+                    atto.addEvent(lis[i], 'click', function(e) {
+                        if (e.target) {
+                            e.target.parentNode.classList.toggle('closed');
+                            atto.stopEventCascade(e);
+                        }
+                    }, true);
+                }
             }
         });
     </script>
