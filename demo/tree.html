@@ -22,9 +22,9 @@
             color: white;
         }
 
-        .aw-treeNode ul {
+        .aw-treeNode > ul {
             overflow: hidden;
-            height: auto;
+            height: 0;  /* auto */
 
           -webkit-transition: all 0.3s ease-out;
              -moz-transition: all 0.3s ease-out;
@@ -32,7 +32,8 @@
                -o-transition: all 0.3s ease-out;
                   transition: all 0.3s ease-out;
         }
-        .aw-treeNode.closed ul { height: 0; }
+        /*.aw-treeNode.closed ul { height: 0; }*/
+        .aw-treeNode.open > ul { height: auto; }
 
         a.expando {
             color: black;
@@ -43,12 +44,16 @@
         }
 
         .aw-treeNode .expando:before{
-            content: "\25BC";
-        }
-        .aw-treeNode.closed .expando:before{
+            /*content: "\25BC";*/
             content: "\25BA";
         }
-        .aw-treeNode.empty .expando:before{
+        .aw-treeNode.open > .expando:before{
+            content: "\25BC";
+        }
+        .aw-treeNode.closed > .expando:before{
+            content: "\25BA";
+        }
+        .aw-treeNode.empty > .expando:before{
             content: "-";
         }
 
@@ -121,22 +126,22 @@
         require.config({
             baseUrl: '../..'
         });
-        require(["atto/core","atto/tree","atto/lmnt"], function(atto, Tree, lmnt) {
+        require(["atto/core","atto/lmnt"], function(atto, lmnt) {
             //var tree = new Tree(atto.byId("myTree"), {});
 
-            lis = document.querySelectorAll('#myTree li');
+            var lis = document.querySelectorAll('#myTree li');
             for (var i=0; i<lis.length; i++) {
                 lis[i].className = 'aw-treeNode';
                 if (lmnt.childElementCount(lis[i]) && lmnt.children(lis[i]).slice(-1)[0].tagName != 'UL') {
                     lis[i].classList.add('empty');
-                } else {
-                    atto.addEvent(lis[i], 'click', function(e) {
-                        if (e.target) {
-                            e.target.parentNode.classList.toggle('closed');
-                            atto.stopEventCascade(e);
-                        }
-                    }, true);
                 }
+                atto.addEvent(lis[i], 'click', function(e) {
+                    var clickSrc = e.target || e.srcElement;
+                    if (clickSrc) {
+                        clickSrc.parentNode.classList.toggle('open');   // closed
+                        atto.stopEventCascade(e);
+                    }
+                }, false);
             }
         });
     </script>
