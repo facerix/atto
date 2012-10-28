@@ -47,10 +47,10 @@ define(
             if ( el && el.childElementCount ) { return el.childElementCount; }
             var count = 0;
             el = el ? el.firstChild : null;
-            do {
+            while ( el ) {
                 if ( el && el.nodeType == ELEMENT_NODE ) { count++; }
                 el = el.nextSibling;
-            } while ( el );
+            };
             return count;
         }
 

@@ -1,18 +1,22 @@
-/* tree.css -- stylesheet for Atto Tree, an treeview microwidget */
+/* tree.css -- stylesheet for Atto Tree, a treeview microwidget */
 
 .aw-tree {
-    border-color: #aaa;
-    border-style: solid;
-    border-width: 1px 1px 0;
-
-  -webkit-box-shadow: 2px 2px 4px 0px #aaa; 
-     -moz-box-shadow: 2px 2px 4px 0px #aaa; 
-          box-shadow: 2px 2px 4px 0px #aaa; 
+    padding: 0;
 }
 
-.aw-tree .title,
-.aw-tree .pane {
-    border-bottom: 1px solid #555;
+.aw-treeNode {
+    cursor: pointer;
+    list-style-type: none;
+}
+
+.aw-treeNode > .label:hover {
+    background-color: rgba(64,64,64,0.2);
+    color: white;
+}
+
+.aw-treeNode > ul {
+    overflow: hidden;
+    height: 0;
 
   -webkit-transition: all 0.3s ease-out;
      -moz-transition: all 0.3s ease-out;
@@ -20,40 +24,22 @@
        -o-transition: all 0.3s ease-out;
           transition: all 0.3s ease-out;
 }
+.aw-treeNode.open > ul { height: auto; }
 
-.aw-tree .title {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 14px;
-    padding: 5px 10px 3px;
-    cursor: pointer;
+a.aw-expando {
+    color: black;
+    padding: 0 6px 0 0; margin: 0;
+    display: inline-block;
+    width: 1em;
+    text-decoration : none;
 }
 
-.aw-tree .title.active {
-    background-color: #4D5D80;
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#9FB5DF), to(#4D5D80));
-    background-image: -webkit-linear-gradient(top, #9FB5DF, #4D5D80); 
-    background-image:    -moz-linear-gradient(top, #9FB5DF, #4D5D80); 
-    background-image:     -ms-linear-gradient(top, #9FB5DF, #4D5D80); 
-    background-image:      -o-linear-gradient(top, #9FB5DF, #4D5D80); 
-    background-image:         linear-gradient(to bottom, #9FB5DF, #4D5D80);
+.aw-treeNode .aw-expando:before{
+    content: "\25BA";
 }
-
-.aw-tree .title:before {
-    content: "\25b6";
-    float: left;
-    margin-right: 5px;
+.aw-treeNode.open > .aw-expando:before{
+    content: "\25BC";
 }
-
-.aw-tree .title.active:before {
-    content: "\25bc";
-}
-
-.aw-tree .pane {
-    padding: 0 1em;
-    height: 0;
-    overflow: hidden;
-}
-.aw-tree .pane.active {
-    height: auto;
-    padding: 1em;
+.aw-treeNode.empty > .aw-expando:before{
+    content: "-";
 }
