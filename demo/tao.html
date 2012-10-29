@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Atto Tao Example</title>
+    <link rel="stylesheet" href="demopage.css"/>
+    <style type="text/css">
+        textarea {
+            background: white;
+            border: 1px inset gray;
+            width: 320px; height: 60px;
+        }
+        input[type=text] { width: 320px; }
+    </style>
+  </head>
+  <body>
+    <h1>Atto Tao Example</h1>
+
+    <p>Tao is not a widget; rather, it's a helper function, in the same vein as <a href="outliner.html">Outliner</a>.
+        It's intended to be a lightweight replacement for the standard DOM method of creating new HTML structures,
+        without the huge overhead of a full-blown templating system like Mustache or Dust or the like. Its syntax
+        (and inspiration for its name) come from the popular <a href="http://code.google.com/p/zen-coding/">Zen Coding</a>
+        abbreviation engine plugin available for many programming IDEs.</p>
+
+    <hr/>
+
+    <div class="example">&ldquo;#&rdquo; operator &ndash; specifies the ID for an element <em>(ignores multiple operands; an element can only have one ID)</em>:
+        <p>
+            <code>div#main</code>
+            <span>&rArr;</span>
+            <code>&lt;div id="main"&gt;&lt;/div&gt;</code>
+        </p>
+
+        <!--
+        <input type="text" id="src1" value="div#content>h1+p"/>
+        <button onclick="convert(1);">Parse</button><br/>
+        <textarea id="tgt1"></textarea>
+        -->
+    </div>
+
+    <hr/>
+
+    <div class="example">&ldquo;.&rdquo; operator &ndash; specifies the class for an element <em>(multiple operands allowed)</em>:
+        <p>
+            <code>blockquote.fancy.gothic</code>
+            <span>&rArr;</span>
+            <code>&lt;blockquote class="fancy gothic"&gt;&lt;/blockquote&gt;</code>
+        </p>
+    </div>
+
+    <hr/>
+
+    <div class="example">&ldquo;&gt;&rdquo; operator &ndash; makes the following element a child of the preceding one:
+        <p>
+            <code>ul>li</code>
+            <span>&rArr;</span>
+            <code>&lt;ul&gt;<br/>
+                &nbsp;&nbsp;&lt;li&gt;&lt;/li&gt;<br/>
+                &lt;/ul&gt;</code>
+        </p>
+    </div>
+
+    <hr/>
+
+    <div class="example">&ldquo;+&rdquo; operator &ndash; makes the following element a sibling of the preceding one:
+        <p>
+            <code>div&gt;p#intro+p#main</code>
+            <span>&rArr;</span>
+            <code>&lt;div&gt;<br/>
+                &nbsp;&nbsp;&lt;p id="intro"&gt;&lt;/p&gt;<br/>
+                &nbsp;&nbsp;&lt;p id="main"&gt;&lt;/p&gt;<br/>
+                &lt;/div&gt;</code></p>
+    </div>
+
+    <hr/>
+
+    <div class="example">&ldquo;&lt;&rdquo; operator &ndash; makes the following element a sibling of the preceding one's parent (i.e goes up one level in the tree):
+        <p>
+            <code>header&gt;h1&lt;section.main</code>
+            <span>&rArr;</span>
+            <code>&lt;header&gt;<br/>
+                &nbsp;&nbsp;&lt;h1&gt;&lt;/h1&gt;<br/>
+                &lt;/header&gt;<br/>
+                &lt;section class="main"&gt;&lt;/section&gt;</code>
+        </p>
+    </div>
+
+    <hr/>
+
+    <div class="example">Two output options:
+        <ol>
+            <li>DOM Fragment (default)</li>
+            <li>Serialized/string (specify <code>TRUE</code> for the optional second argument to atto.Tao())</li>
+        </ol>
+    </div>
+
+    <p>So far, this is more or less a subset of Zen Coding's power &mdash; I haven't yet added support for
+       abbreviation groups (<code>body>(header>h1)+(div#main)+(footer>span)</code>),
+       element multiplication (<code>li*5>a</code>), item numbering (<code>li#item$*3</code>),
+       or text (<code>p>{Like }+em{this}</code>). I expect if this project proves useful, I'll probably add those features,
+       as well as simple Supplant-style templating.</p>
+
+    <h2>Try your own:</h2>
+    <input type="text" id="src2" value="div#page>div.logo+ul#navigation>li>a"/>
+    <button onclick="convert(2);">Parse</button><br/>
+    <textarea id="tgt2"></textarea>
+
+    <!--
+    <h2>Example 3 (element multiplication / item numbering):</h2>
+    <input type="text" id="src3" value="ul>li#item-$*5>a"/>
+    <button onclick="convert(3);">Parse</button><br/>
+    <textarea id="tgt3"></textarea>
+
+    <h2>Example 4 (abbreviation groups):</h2>
+    <input type="text" id="src4" value="div#page>(div#header>ul#nav>li*4>a)+(div#page>(h1>span)+p*2)+div#footer"/>
+    <button onclick="convert(4);">Parse</button><br/>
+    <textarea id="tgt4"></textarea>
+
+    <h2>Example 5 (text):</h2>
+    <input type="text" id="src5" value="p>{Click }+a{here}+{ to continue}"/>
+    <button onclick="convert(5);">Parse</button><br/>
+    <textarea id="tgt5"></textarea>
+    -->
+
+    <script src="../../require.js"></script>
+    <script>
+        require.config({
+            baseUrl: '../..'
+        });
+        require(["atto/tao"], function(Tao) {
+            window.Tao = Tao;
+            window.convert = function(idx) {
+                var src = document.getElementById('src'+idx),
+                    tgt = document.getElementById('tgt'+idx);
+                if (src && tgt) {
+                    tgt.textContent = Tao(src.value, true); //.outerHTML;
+                }
+            }
+        });
+    </script>
+  </body>
+</html>
