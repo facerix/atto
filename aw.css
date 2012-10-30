@@ -103,22 +103,23 @@ abbr {
 }
 #gallery a[disabled] { background-color: rgba(64,64,64,0.5); }
 
-#gallery a[href*='hpanel'] { background-image: url(demo/images/icon_hpanel.png); }
-#gallery a[href*='vpanel'] { background-image: url(demo/images/icon_vpanel.png); }
-#gallery a[href*='panels'] { background-image: url(demo/images/icon_panels.png); }
+#gallery a[href*='accor']    { background-image: url(demo/images/icon_accordion.png); }
+#gallery a[href*='button']   { background-image: url(demo/images/icon_button.png); }
+#gallery a[href*='combo']    { background-image: url(demo/images/icon_combo.png); }
 #gallery a[href*='dataview'] { background-image: url(demo/images/icon_dataview.png); }
-
-#gallery a[href*='button'] { background-image: url(demo/images/icon_button.png); }
-#gallery a[href*='text']   { background-image: url(demo/images/icon_textbox.png); }
-#gallery a[href*='combo']  { background-image: url(demo/images/icon_combo.png); }
-#gallery a[href*='accor']  { background-image: url(demo/images/icon_accordion.png); }
-#gallery a[href*='list']   { background-image: url(demo/images/icon_list.png); }
-#gallery a[href*='prog']   { background-image: url(demo/images/icon_prog.png); }
-#gallery a[href*='slide']  { background-image: url(demo/images/icon_slides.png); }
-#gallery a[href*='tab']    { background-image: url(demo/images/icon_tabs.png); }
-#gallery a[href*='tree']   { background-image: url(demo/images/icon_tree.png); }
+#gallery a[href*='dialog']   { background-image: url(demo/images/icon_dialog.png); }
+#gallery a[href*='hpanel']   { background-image: url(demo/images/icon_hpanel.png); }
+#gallery a[href*='list']     { background-image: url(demo/images/icon_list.png); }
 #gallery a[href*='outline']  { background-image: url(demo/images/icon_outline.png); }
+#gallery a[href*='panels']   { background-image: url(demo/images/icon_panels.png); }
+#gallery a[href*='prog']     { background-image: url(demo/images/icon_prog.png); }
+#gallery a[href*='slide']    { background-image: url(demo/images/icon_slides.png); }
+#gallery a[href*='tab']      { background-image: url(demo/images/icon_tabs.png); }
+#gallery a[href*='tao']      { background-image: url(demo/images/icon_tao.png); }
 #gallery a[href*='template'] { background-image: url(demo/images/icon_tmpl.png); }
+#gallery a[href*='text']     { background-image: url(demo/images/icon_textbox.png); }
+#gallery a[href*='tree']     { background-image: url(demo/images/icon_tree.png); }
+#gallery a[href*='vpanel']   { background-image: url(demo/images/icon_vpanel.png); }
 
 .caps { font-variant: small-caps; }
 
