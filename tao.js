@@ -32,10 +32,11 @@ define(
     function() {
         "use strict";
 
-        var _tagRex   = /[a-z]+[1-6]?/i,
+        var _tagRex   = /^[a-z]+[1-6]?/i,
             _posRex   = /[>|<|\+]+/g,
             _idRex    = /#[a-z]+/i,
             _classRex = /\.[a-z]+/i,
+            _textRex  = /{[^}]+}/,
             _countRex = /\*[0-9]+/;
 
         function _buildElement(spec) {
@@ -53,9 +54,19 @@ define(
                         el.classList.add(matches[i].slice(1));
                     }
                 }
+                if (_textRex.test(spec)) {
+                    matches = _textRex.exec(spec);
+                    el.appendChild(document.createTextNode( matches[0].slice(1, -1) ));
+                }
 
                 if (_countRex.test(spec)) {
                     // TODO: return a list instead of a single node
+                }
+            } else {
+                // no tag; maybe it's a bare text node?
+                if (_textRex.test(spec)) {
+                    matches = _textRex.exec(spec);
+                    el = document.createTextNode( matches[0].slice(1, -1) );
                 }
             }
             return el;

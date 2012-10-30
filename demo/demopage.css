@@ -88,3 +88,17 @@ hr { width: 90%; margin: 20px auto; }
     color: #eee;
     padding: 20px;
 }
+
+footer {
+    font: small-caps 1.25em 'GoodDogRegular', cursive;
+    font-size-adjust: 0.43;
+    text-align: right;
+    color: #600;
+    font-weight: bold;
+    padding: 0 10px 5px;
+    margin: 0;
+
+    left: 0; right: 0; bottom: 0;
+    height: 48px;
+}
+.lt-ie9 footer { font-family: 'Comic Sans MS', 'Comic Sans', cursive; font-size: 12px; }

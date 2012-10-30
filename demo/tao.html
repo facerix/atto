@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Atto Tao Example</title>
+    <meta http-equiv='Content-Type' content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="demopage.css"/>
     <style type="text/css">
         textarea {
@@ -86,6 +87,20 @@
 
     <hr/>
 
+    <div class="example">&ldquo;{ }&rdquo; operators &ndash; specifies the contents of a text node:
+        <p>
+            <code>p>{A }+em{simple}+{ example}</code>
+            <span>&rArr;</span>
+            <code>&lt;p&gt;<br/>
+                &nbsp;&nbsp;"A "<br/>
+                &nbsp;&nbsp;&lt;em&gt;simple&lt;/em&gt;<br/>
+                &nbsp;&nbsp;" example"<br/>
+                &lt;/p&gt;</code>
+        </p>
+    </div>
+
+    <hr/>
+
     <div class="example">Two output options:
         <ol>
             <li>DOM Fragment (default)</li>
@@ -95,8 +110,8 @@
 
     <p>So far, this is more or less a subset of Zen Coding's power &mdash; I haven't yet added support for
        abbreviation groups (<code>body>(header>h1)+(div#main)+(footer>span)</code>),
-       element multiplication (<code>li*5>a</code>), item numbering (<code>li#item$*3</code>),
-       or text (<code>p>{Like }+em{this}</code>). I expect if this project proves useful, I'll probably add those features,
+       element multiplication (<code>li*5>a</code>), or item numbering (<code>li#item$*3</code>).
+       I expect if this project proves useful, I'll probably add those features,
        as well as simple Supplant-style templating.</p>
 
     <h2>Try your own:</h2>
@@ -120,6 +135,12 @@
     <button onclick="convert(5);">Parse</button><br/>
     <textarea id="tgt5"></textarea>
     -->
+
+    <hr/>
+
+    <footer><span class="caps">Atto</span> is released under the <a href="http://www.opensource.org/licenses/MIT">MIT license</a>.<br/>
+      If you use these widgets in something interesting, <a href="https://twitter.com/intent/tweet/?text=Hey%20@buyog..." title="Tweet at me, bro!">I'd love to hear about it</a>.
+    </footer>
 
     <script src="../../require.js"></script>
     <script>
