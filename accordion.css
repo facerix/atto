@@ -17,11 +17,11 @@
 .aw-acc-title, .aw-acc-pane {
     border-bottom: 1px solid #AAA;
 
-  -webkit-transition: all 0.3s ease-out;
-     -moz-transition: all 0.3s ease-out;
-      -ms-transition: all 0.3s ease-out;
-       -o-transition: all 0.3s ease-out;
-          transition: all 0.3s ease-out;
+  -webkit-transition: all 0.1s ease-out;
+     -moz-transition: all 0.1s ease-out;
+      -ms-transition: all 0.1s ease-out;
+       -o-transition: all 0.1s ease-out;
+          transition: all 0.1s ease-out;
 }
 
 .aw-acc-title {
@@ -59,11 +59,11 @@
 .aw-acc-pane {
     background-color: #FFF;
     padding: 0 1em;
-    height: 0;
+    max-height: 0;
     overflow: hidden;
 }
 .aw-acc-pane.active {
-    height: auto;
+    max-height: 999px;
     padding: 1em;
 }
 
