@@ -11,7 +11,7 @@
 /*
 Example, from the Zen Coding homepage:
 
-var dom_fragment = tao.zen("div#page>div.logo+ul#navigation>li*5>a");
+var dom_fragment = tao.expand("div#page>div.logo+ul#navigation>li*5>a");
 
 dom_fragment.toString():
 
@@ -118,7 +118,7 @@ define(
 
         // return available generator functions
         return {
-            zen    : _parseTree,
+            expand : _parseTree,
             create : _createElement
         };
     }
