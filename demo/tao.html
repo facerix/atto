@@ -115,7 +115,7 @@
        as well as simple Supplant-style templating.</p>
 
     <h2>Try your own:</h2>
-    <input type="text" id="src2" value="div#page>div.logo+ul#navigation>li>a"/>
+    <input type="text" id="src2" value="div#page>div.logo+ul#navigation>li>a" />
     <button onclick="convert(2);">Parse</button><br/>
     <textarea id="tgt2"></textarea>
 
@@ -147,13 +147,13 @@
         require.config({
             baseUrl: '../..'
         });
-        require(["atto/tao"], function(Tao) {
-            window.Tao = Tao;
+        require(["atto/tao"], function(tao) {
+            window.tao = tao;
             window.convert = function(idx) {
                 var src = document.getElementById('src'+idx),
                     tgt = document.getElementById('tgt'+idx);
                 if (src && tgt) {
-                    tgt.textContent = Tao(src.value, true); //.outerHTML;
+                    tgt.textContent = tao.zen(src.value, true);
                 }
             }
         });
