@@ -14,7 +14,7 @@
     color: white;
 }
 
-.aw-treeNode > ul {
+.aw-treeNode > .aw-treeNodeList {
     overflow: hidden;
     height: 0;
 
@@ -24,7 +24,7 @@
        -o-transition: all 0.3s ease-out;
           transition: all 0.3s ease-out;
 }
-.aw-treeNode.open > ul { height: auto; }
+.aw-treeNode.open > .aw-treeNodeList { height: auto; }
 
 a.aw-expando {
     color: black;

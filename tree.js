@@ -7,8 +7,8 @@
 //
 
 define(
-    ["atto/core","atto/lmnt","atto/event","require"],
-    function(atto, lmnt, AttoEvent) {
+    ["atto/core","atto/lmnt","atto/tao","require"],
+    function(atto, lmnt, tao) {
         // make sure the appopriate CSS has been loaded for this widget
         var forWidget = "atto-tree";
         if (!document.querySelector("style[data-for-widget='"+forWidget+"']")) {
@@ -16,7 +16,7 @@ define(
         }
 
         function constructor(rootNode, optArgs) {
-            var _root  = rootNode || document.createElement('div'),
+            var _root  = rootNode || document.createElement('ul'),
                 _currNode = null,
                 i         = 0,
                 nd        = null,
@@ -24,9 +24,6 @@ define(
                 lastId    = 0,
                 _registry = {},
                 options   = optArgs || {},
-                _events   = {
-                    itemSelected: new AttoEvent('atto.listBox.itemSelected')
-                },
                 __frag    = document.createDocumentFragment(),
                 nodeCount = 0;
 
@@ -75,33 +72,26 @@ define(
                 }
             }
 
-            function _addNode(srcNode) {
-                var newNode, expando, label;
+            function _convertExistingNode(srcNode) {
+                var newNode, expando, label,
+                    i, grandchildren, lastChild, clickSrc;
 
-                //newNode = document.createElement('li');
                 srcNode.className = 'aw-treeNode';
 
-                // insert the expando & label elements for each list item
-                expando = document.createElement('a');
+                // create the expando & label elements
+                label = tao.create("span.label{" + (srcNode.title || "Unnamed Node") + "}");
+                expando = tao.create("a.aw-expando{ }");
                 expando.href = "#";
-                expando.className = "aw-expando";
-                expando.appendChild(document.createTextNode(" "));
 
-                label = document.createElement('span');
-                label.className = 'label';
-                label.appendChild(document.createTextNode(srcNode.title || "Unnamed Node"));
-
-                // handle differently if this is a leaf node (i.e no child elements)
+                // handle differently if this is a leaf node (i.e. no child elements)
                 if (lmnt.childElementCount(srcNode)) {
                     // has children
 
                     srcNode.insertBefore(label, lmnt.firstElementChild(srcNode));
                     srcNode.insertBefore(expando, label);
 
-
                     // is the last child an UL? If not, assume we're childless
-
-                    var grandchildren, lastChild = lmnt.lastElementChild(srcNode)
+                    lastChild = lmnt.lastElementChild(srcNode)
                     if (lastChild.tagName != 'UL') {
                         // last element child isn't an UL; assume that means there isn't one, and we're empty
                         srcNode.classList.add('empty');
@@ -110,10 +100,12 @@ define(
                         srcNode.appendChild(label);
 
                     } else {
+                        lastChild.classList.add('aw-treeNodeList');
+
                         // last element child IS an UL; recurse its children
                         grandchildren = lmnt.children(lastChild);
-                        for (var i in grandchildren) {
-                            _addNode(grandchildren[i]);
+                        for (i in grandchildren) {
+                            _convertExistingNode(grandchildren[i]);
                         }
                     }
 
@@ -127,50 +119,35 @@ define(
                 }
 
                 atto.addEvent(srcNode, 'click', function(e) {
-                    var clickSrc = e.target || e.srcElement;
+                    clickSrc = e.target || e.srcElement;
                     if (clickSrc) {
                         clickSrc.parentNode.classList.toggle('open');
                         atto.stopEventCascade(e);
                     }
                 }, false);
-
-                //__frag.appendChild(newNode);
-
             }
 
-            // grab any child elements (not raw text nodes) to form my initial nodes
+            if (_root.tagName == 'UL') {
+                // try and convert any existing structure into a Tree if at all possible
 
-            // prototype //
-            /*
-            var lis = document.querySelectorAll('#myTree li');
-            for (var i=0; i<lis.length; i++) {
-                lis[i].className = 'aw-treeNode';
-                if (lmnt.childElementCount(lis[i]) && lmnt.children(lis[i]).slice(-1)[0].tagName != 'UL') {
-                    lis[i].classList.add('empty');
+                // grab any child elements (not raw text nodes) to form my initial nodes
+                var elems = lmnt.children(_root);
+                for (i=0; i < elems.length; i++) {
+                    _convertExistingNode(elems[i]);
                 }
-                atto.addEvent(lis[i], 'click', function(e) {
-                    var clickSrc = e.target || e.srcElement;
-                    if (clickSrc) {
-                        clickSrc.parentNode.classList.toggle('open');   // closed
-                        atto.stopEventCascade(e);
-                    }
-                }, false);
-            }
-            */
-            // end of prototype //
 
-            var elems = lmnt.children(_root);
-            for (i=0; i < elems.length; i++) {
-                _addNode(elems[i]);
+            } else {
+                // replace the existing DOM node with a proper UL and go from there
+                _root.appendChild(tao.zen("div#aw-treeNode>a.aw-expando{ }+span.label{Branch 1}+div.aw-treeNodeList>div.aw-treeNode+div.aw-treeNode"));
 
-                //_addNode(nd.title ? nd.title : "Node " + (nodeCount+1), nd.innerHTML, __frag);
             }
-            //_root.innerHTML = '';
+
             _root.classList.add('aw-tree');
             _root.appendChild(__frag);
 
             return {
-                root    : _root
+                root    : _root,
+                addNode : function() {}
             } // end of public interface
         } // end of constructor
 

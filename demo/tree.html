@@ -6,7 +6,7 @@
     <meta http-equiv='Content-Type' content="text/html; charset=UTF-8" />
 
     <style>
-        #myTree, #testTree {
+        #myTree, #testTree, #manualTree {
             width:320px;
             border: 1px solid #333;
             border-radius: 2px;
@@ -21,11 +21,11 @@
         <li title="Branch 1" id="b1">
             <a href="#" class="aw-expando">&nbsp;</a>
             <span class="label">Branch 1</span>
-            <ul>
+            <ul class="aw-treeNodeList">
                 <li title="Leaf 1.1" id="l1-1">
                     <a href="#" class="aw-expando">&nbsp;</a>
                     <span class="label">Leaf 1.1</span>
-                    <ul>
+                    <ul class="aw-treeNodeList">
                         <li title="Leaf 1.1.a" id="l1-1-a">
                             <a href="#" class="aw-expando">&nbsp;</a>
                             <span class="label">Leaf 1.1.a</span>
@@ -57,7 +57,7 @@
         <li title="Branch 2" id="b2">
             <a href="#" class="aw-expando">&nbsp;</a>
             <span class="label">Branch 2</span>
-            <ul>
+            <ul class="aw-treeNodeList">
                 <li title="Leaf 2.1" id="l2-1">
                     <a href="#" class="aw-expando">&nbsp;</a>
                     <span class="label">Leaf 2.1</span>
@@ -67,7 +67,7 @@
         <li title="Branch 3" id="b3">
             <a href="#" class="aw-expando">&nbsp;</a>
             <span class="label">Branch 3</span>
-            <ul>
+            <ul class="aw-treeNodeList">
                 <li title="Leaf 3.1" id="l3-1">
                     <a href="#" class="aw-expando">&nbsp;</a>
                     <span class="label">Leaf 3.1</span>
@@ -84,30 +84,33 @@
     <ul id="myTree">
         <li title="Branch 1">
             <ul>
-                <li title="Leaf 1.1" id="l1-1">
+                <li title="Leaf 1.1">
                     <ul>
-                        <li title="Leaf 1.1.a" id="l1-1-a"></li>
-                        <li title="Leaf 1.1.b" id="l1-1-b"></li>
-                        <li title="Leaf 1.1.c" id="l1-1-c"></li>
-                        <li title="Leaf 1.1.d" id="l1-1-d"></li>
+                        <li title="Leaf 1.1.a"></li>
+                        <li title="Leaf 1.1.b"></li>
+                        <li title="Leaf 1.1.c"></li>
+                        <li title="Leaf 1.1.d"></li>
                     </ul>
                 </li>
-                <li title="Leaf 1.2" id="l1-2"></li>
-                <li title="Leaf 1.3" id="l1-3"></li>
+                <li title="Leaf 1.2"></li>
+                <li title="Leaf 1.3"></li>
             </ul>
         </li>
-        <li title="Branch 2" id="b2">
+        <li title="Branch 2">
             <ul>
-                <li title="Leaf 2.1" id="l2-1"></li>
+                <li title="Leaf 2.1"></li>
             </ul>
         </li>
-        <li title="Branch 3" id="b3">
+        <li title="Branch 3">
             <ul>
-                <li title="Leaf 3.1" id="l3-1"></li>
+                <li title="Leaf 3.1"></li>
             </ul>
         </li>
-        <li title="Branch 4" id="b4"></li>
+        <li title="Branch 4"></li>
     </ul>
+
+    <h2>Bare Atto Tree, populated by addNode():</h2>
+    <div id="manualTree"></div>
 
     <script src="../../require.js"></script>
     <script>
@@ -115,7 +118,9 @@
             baseUrl: '../..'
         });
         require(["atto/core", "atto/tree", "atto/lmnt"], function(atto, Tree, lmnt) {
-            var tree = new Tree(atto.byId("myTree"), {});
+            var tree1 = new Tree(atto.byId("myTree"), {}),
+                tree2 = new Tree(atto.byId("manualTree"), {});
+            var branch1 = tree2.addNode({id:'man1',label:'Branch 1'});
 
             // prototype //
             var lis = document.querySelectorAll('#testTree li');
