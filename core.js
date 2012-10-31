@@ -21,12 +21,13 @@ define(
                 postData: '',
                 success: null,
                 failure: null,
-                accept: null
+                accept: null,
+                form: null
             }, args);
 
             var req = _createXMLHTTPObject();
             if (!req) return;
-            if (opts.postData) {
+            if (opts.postData || opts.form) {
                 req.open('POST', opts.url, true);
                 req.setRequestHeader('Content-type','application/x-www-form-urlencoded');
             } else {
@@ -62,6 +63,10 @@ define(
                 }
             }
             if (req.readyState == 4) return;
+            if (opts.form) {
+                if (typeof opts.form == 'string') opts.form = document.getElementById(opts.form);
+                opts.postData = _serializeForm(opts.form);
+            }
             req.send(opts.postData);
         }
 
@@ -84,6 +89,18 @@ define(
                 break;
             }
             return xmlhttp;
+        }
+
+        function _serializeForm(theForm) {
+            var i, args = [], formElements = theForm.childNodes;
+
+            for (i=0; i<formElements.length; i++) {
+                if (formElements[i].name) {
+                    args.push( formElements[i].name + "=" + encodeURIComponent(formElements[i].value) );
+                }
+            }
+
+            return args.join('&');
         }
 
         function _isArray(it) {
