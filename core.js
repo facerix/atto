@@ -2,8 +2,7 @@
 // Atto Core : helper functions and such (AMD)
 //
 // author: Ryan Corradini
-// version: 2.0
-// date: 12 June 2012
+// date: 31 Oct 2012
 // license: MIT
 //
 
@@ -21,7 +20,8 @@ define(
                 url: '',
                 postData: '',
                 success: null,
-                failure: null
+                failure: null,
+                accept: null
             }, args);
 
             var req = _createXMLHTTPObject();
@@ -31,6 +31,20 @@ define(
                 req.setRequestHeader('Content-type','application/x-www-form-urlencoded');
             } else {
                 req.open('GET', opts.url, true);
+            }
+            if (opts.accept) {
+                var acceptMIMEType = null;
+                switch (opts.accept) {
+                    case 'html':
+                        acceptMIMEType = 'text/html';
+                        break;
+                    case 'json':
+                        acceptMIMEType = 'application/json';
+                        break;
+                    default:
+                        break;
+                }
+                if (acceptMIMEType) req.setRequestHeader('Accept', acceptMIMEType);
             }
             req.onreadystatechange = function () {
                 if (req.readyState != 4) return;
