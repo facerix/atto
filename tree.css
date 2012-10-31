@@ -10,13 +10,14 @@
 }
 
 .aw-treeNode > .label:hover {
-    background-color: rgba(64,64,64,0.2);
+    background-color: #404040;
+    background-color: rgba(64,64,64,0.5);
     color: white;
 }
 
-.aw-treeNode > .aw-treeNodeList {
+.aw-treeNodeList {
     overflow: hidden;
-    height: 0;
+    max-height: 0;
 
   -webkit-transition: all 0.3s ease-out;
      -moz-transition: all 0.3s ease-out;
@@ -24,7 +25,7 @@
        -o-transition: all 0.3s ease-out;
           transition: all 0.3s ease-out;
 }
-.aw-treeNode.open > .aw-treeNodeList { height: auto; }
+.aw-treeNode.open > .aw-treeNodeList { max-height: 999px; }
 
 a.aw-expando {
     color: black;
