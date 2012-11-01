@@ -29,8 +29,10 @@ dom_fragment.toString():
 */
 
 define(
-    function() {
+    ["atto/classList"],
+    function(ClassList) {
         "use strict";
+        window.cl = ClassList;
 
         var _tagRex   = /^[a-z]+[1-6]?/i,
             _posRex   = /[>|<|\+]+/g,
@@ -42,7 +44,8 @@ define(
         function _buildElement(spec) {
             var tag = _tagRex.exec(spec),
                 i, matches = null,
-                el = tag ? document.createElement(tag[0]) : null;
+                el = tag ? document.createElement(tag[0]) : null,
+                myClassList = ClassList(el);
             if (el) {
                 if (_idRex.test(spec)) {
                     matches = _idRex.exec(spec);
@@ -51,7 +54,7 @@ define(
                 matches = _classRex.exec(spec);
                 while (matches && matches.length) {
                     for (i=0; i< matches.length; i++) {
-                        el.classList.add(matches[i].slice(1));
+                        myClassList.add(matches[i].slice(1));
                     }
                     matches = _classRex.exec(spec);
                 }

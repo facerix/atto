@@ -153,7 +153,7 @@
                 var src = document.getElementById('src'+idx),
                     tgt = document.getElementById('tgt'+idx);
                 if (src && tgt) {
-                    tgt.textContent = tao.expand(src.value, true);
+                    tgt.textContent = tgt.value = tao.expand(src.value, true);
                 }
             }
         });
