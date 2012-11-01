@@ -120,7 +120,9 @@
         require(["atto/core", "atto/tree", "atto/lmnt"], function(atto, Tree, lmnt) {
             var tree1 = new Tree(atto.byId("myTree"), {}),
                 tree2 = new Tree(atto.byId("manualTree"), {});
+
             var branch1 = tree2.addNode({id:'man1',label:'Branch 1'});
+            tree2.addNode({id:'man1-1',label:'Leaf 1.1'}, branch1);
 
             // prototype //
             var lis = document.querySelectorAll('#testTree li');
