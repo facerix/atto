@@ -35,7 +35,7 @@ define(
         var _tagRex   = /^[a-z]+[1-6]?/i,
             _posRex   = /[>|<|\+]+/g,
             _idRex    = /#[_a-z]+[_a-z0-9-]*/i,
-            _classRex = /\.-?[_a-z]+[_a-z0-9-]*/i,                ///\.[a-z]+/i,
+            _classRex = /\.-?[_a-z]+[_a-z0-9-]*/gi,
             _textRex  = /{[^}]+}/,
             _countRex = /\*[0-9]+/;
 
@@ -48,11 +48,12 @@ define(
                     matches = _idRex.exec(spec);
                     el.id = matches[0].slice(1);
                 }
-                if (_classRex.test(spec)) {
-                    matches = _classRex.exec(spec);
+                matches = _classRex.exec(spec);
+                while (matches && matches.length) {
                     for (i=0; i< matches.length; i++) {
                         el.classList.add(matches[i].slice(1));
                     }
+                    matches = _classRex.exec(spec);
                 }
                 if (_textRex.test(spec)) {
                     matches = _textRex.exec(spec);
