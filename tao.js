@@ -39,18 +39,38 @@ define(
             _idRex    = /#[_a-z]+[_a-z0-9-]*/i,
             _classRex = /\.-?[_a-z]+[_a-z0-9-]*/gi,
             _textRex  = /{[^}]+}/,
-            _countRex = /\*[0-9]+/;
+            _countRex = /\*[0-9]+/,
+            _attrsRex = /\[[^\]]*\]/;
 
         function _buildElement(spec) {
             var tag = _tagRex.exec(spec),
-                i, matches = null,
+                i, matches, val,
                 el = tag ? document.createElement(tag[0]) : null,
-                myClassList = ClassList(el);
+                myClassList = el ? ClassList(el) : null;
             if (el) {
+                // add element attributes
+                if (_attrsRex.test(spec)) {
+                    // only one; if there are multiples, they're ignored
+                    matches = _attrsRex.exec(spec);
+
+                    // strip out the attrs clause from the spec so its contents don't get mistaken for a class or id
+                    spec = spec.slice(0,matches.index) + spec.slice(matches.index+matches[0].length);
+                    matches = matches[0].slice(1, -1).split(',');
+                    for (i=0; i<matches.length; i++) {
+                        val = matches[i].split('=');
+                        if (val.length == 2) {
+                            el.setAttribute(val[0], val[1]);
+                        }
+                    }
+                }
+
+                // add element id
                 if (_idRex.test(spec)) {
                     matches = _idRex.exec(spec);
                     el.id = matches[0].slice(1);
                 }
+
+                // add element class(es)
                 matches = _classRex.exec(spec);
                 while (matches && matches.length) {
                     for (i=0; i< matches.length; i++) {
@@ -58,6 +78,8 @@ define(
                     }
                     matches = _classRex.exec(spec);
                 }
+
+                // add element text node(s)
                 if (_textRex.test(spec)) {
                     matches = _textRex.exec(spec);
                     el.appendChild(document.createTextNode( matches[0].slice(1, -1) ));

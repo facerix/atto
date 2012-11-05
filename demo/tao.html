@@ -101,6 +101,22 @@
 
     <hr/>
 
+    <div class="example">&ldquo;[ ]&rdquo; operators &ndash; specifies attributes other than class and id (comma-separated if more than one):
+        <p>
+            <code>a#myId.myClass[href=http://foo.com,data-type=permalink]</code>
+            <span>&rArr;</span>
+            <code>&lt;a <br/>
+                &nbsp;&nbsp;href="foo.com"<br/>
+                &nbsp;&nbsp;data-type="permalink"<br/>
+                &nbsp;&nbsp;id="myId"<br/>
+                &nbsp;&nbsp;class="myClass"<br/>
+                /&gt;</code>
+        </p>
+    </div>
+
+    <hr/>
+
+
     <div class="example">Two output options:
         <ol>
             <li>DOM Fragment (default)</li>
@@ -113,6 +129,23 @@
        element multiplication (<code>li*5>a</code>), or item numbering (<code>li#item$*3</code>).
        I expect if this project proves useful, I'll probably add those features,
        as well as simple Supplant-style templating.</p>
+
+    <!--
+    <p>Thoughts on advanced features:</p>
+    <ul>
+        <li>Simple index insertion on loops with $ (as in Zen Coding):<br/>
+            <code>ul&gt;li#item$*3</code></li>
+        <li>Element multiplication doesn't have to be in a paren group; it will affect anything downline:<br/>
+            <code>li*3&gt;a &rArr; li&gt;a&lt;li&gt;a&lt;li&gt;a</code></li>
+        <li>Complex template logic with element multipliers:<br/>
+            <code>(li#item\item.id/>a[href=\item.href/):for item in items;</code></li>
+
+        <li>:<br/>
+            <code></code></li>
+        <li>:<br/>
+            <code></code></li>
+    </ul>
+    -->
 
     <h2>Try your own:</h2>
     <input type="text" id="src2" value="div#page>div.logo+ul#navigation>li>a" />
