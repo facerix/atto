@@ -110,7 +110,7 @@
     </ul>
 
     <h2>Bare Atto Tree, populated by addNode():</h2>
-    <div id="manualTree"></div>
+    <ul id="manualTree"></ul>
 
     <script src="../../require.js"></script>
     <script>
@@ -121,8 +121,23 @@
             var tree1 = new Tree(atto.byId("myTree"), {}),
                 tree2 = new Tree(atto.byId("manualTree"), {});
 
-            var branch1 = tree2.addNode({id:'man1',label:'Branch 1'});
-            tree2.addNode({id:'man1-1',label:'Leaf 1.1'}, branch1);
+            var branch1 = tree2.addNode({id:'man1',label:'Branch 1'}),
+                branch1_1 = tree2.addNode({id:'man1-1',label:'Leaf 1.1'}, branch1);
+            tree2.addNode({id:'man1-1a',label:'Leaf 1.1a'}, branch1_1);
+            tree2.addNode({id:'man1-1b',label:'Leaf 1.1b'}, branch1_1);
+            tree2.addNode({id:'man1-1c',label:'Leaf 1.1c'}, branch1_1);
+            tree2.addNode({id:'man1-1d',label:'Leaf 1.1d'}, branch1_1);
+
+            tree2.addNode({id:'man1-2',label:'Leaf 1.2'}, branch1);
+            tree2.addNode({id:'man1-3',label:'Leaf 1.3'}, branch1);
+
+            var branch2 = tree2.addNode({id:'man2',label:'Branch 2'});
+            tree2.addNode({id:'man2-1',label:'Leaf 2.1'}, branch2);
+
+            var branch3 = tree2.addNode({id:'man3',label:'Branch 3'});
+            tree2.addNode({id:'man3-1',label:'Leaf 3.1'}, branch3);
+
+            tree2.addNode({id:'man4',label:'Branch 4'});
 
             // prototype //
             var lis = document.querySelectorAll('#testTree li');

@@ -30,7 +30,7 @@ define(
 
             function _addNode(details, parentNode) {
                 var sID = details.id || _getUniqueId(),
-                    newNode = tao.create("li.aw-treeNode#" + sID),
+                    newNode = tao.create("li.aw-treeNode.empty#" + sID),
                     nodeTitle = details.label || 'Node ' + _lastId,
                     appendTo, contentFrag;
 
@@ -45,6 +45,7 @@ define(
                     } else {
                         // try to find the nearest valid container inside the specified parent node
                         appendTo = parentNode.querySelector('.aw-treeNodeList');
+                        if (parentNode.classList.contains('empty')) parentNode.classList.remove('empty');
                     }
                 }
                 if (appendTo) {
@@ -65,8 +66,7 @@ define(
 
                 // create the expando & label elements
                 label = tao.create("span.label{" + (srcNode.title || "Unnamed Node") + "}");
-                expando = tao.create("a.aw-expando{ }");
-                expando.href = "#";
+                expando = tao.create("a.aw-expando{ }[href=#]");
 
                 // handle differently if this is a leaf node (i.e. no child elements)
                 if (lmnt.childElementCount(srcNode)) {
