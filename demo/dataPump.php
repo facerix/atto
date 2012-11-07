@@ -54,9 +54,9 @@ function getPerson() {
     $rnd = mt_rand(0,30000);
     $birthDay = strtotime("- $rnd days");
     return array(
-        'first_name'=>$givenNames[$rnd%20],
-        'surname'=>$surnames[$rnd%20],
-        'gender'=>$gender[$rnd%2],
+        'first_name'=>$givenNames[$rnd % 20],
+        'surname'=>$surnames[mt_rand(0,12000) % 20],
+        'gender'=>$gender[mt_rand(0,1)],
         'randomString'=>genRandomString(5,15),
         'link'=>$urls[mt_rand(0,5)],
         'birthDate'=>date("Y/m/d", $birthDay)
