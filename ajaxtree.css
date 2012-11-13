@@ -1,0 +1,47 @@
+/* ajaxtree.css -- stylesheet for Atto AjaxTree, a pseudo-subclass of Atto Tree with AJAX-driven nodes */
+
+@include 'tree.css';
+
+.aw-ajaxtree {
+    overflow: hidden;
+    max-height: 999px;
+    height: auto;
+
+  -webkit-transition: 1s;
+     -moz-transition: 1s;
+      -ms-transition: 1s;
+       -o-transition: 1s;
+          transition: 1s;
+}
+
+.aw-ajaxtree.empty {
+    background-color: #777;
+    color: white;
+    height: 1.2em;
+}
+
+.aw-ajaxtree.empty:before {
+    content: "(No child nodes)";
+    color: white;
+    text-shadow: 1px 1px 3px #000;
+    font-variant: small-caps;
+    font-weight: bold;
+    position: relative; 
+    top: 0; left: 10px;
+}
+
+.aw-ajaxtree.pending {
+    background-color: #777;
+    color: white;
+    max-height: 100px !important;
+}
+
+.aw-ajaxtree.pending:before {
+    content: attr(data-fetch-message);
+    color: white;
+    text-shadow: 1px 1px 3px #000;
+    font-variant: small-caps;
+    font-weight: bold;
+    position: relative; 
+    top: 10px; left: 10px;
+}
