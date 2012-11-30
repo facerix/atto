@@ -249,6 +249,7 @@ define(
             addEvent         : _addEvent,
             addWidgetCss     : _addWidgetCss,
             byId             : _byId,
+            isArray          : _isArray,
             stopEventCascade : _stopEventCascade,
             xhrRequest       : _xhr,
             mixinArgs        : _args_mixin,
