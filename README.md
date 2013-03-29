@@ -12,7 +12,7 @@ More information can be found on Atto's official home [here](http://www.buyog.co
 
 ## Running the demos locally
 
-* Download the atto source code. Place it somewhere like C:\code\js\atto
-* Download require.js, *and* its text.js plugin (required to load CSS). Place it in the directory above atto, e.g. C:\code\js
-* OPTIONAL: Download the Good Dog font and CSS file [from here](http://www.buyog.com/fonts/gooddog/). Place it in C:\fonts\gooddog. Or, edit the location pointed to from the import statement in demopage.css.
+* Download the atto source code. Place it somewhere like C:\\code\\js\\atto
+* Download require.js, *and* its text.js plugin (required to load CSS). Place it in the directory above atto, e.g. C:\\code\\js
+* OPTIONAL: Download the Good Dog font and CSS file [from here](http://www.buyog.com/fonts/gooddog/). Place it in C:\\fonts\\gooddog. Or, edit the location pointed to from the import statement in demopage.css.
 * Use Google Chrome to open the demo HTML file. Start Chrome with the argument "--disable-web-security", so that the XHR requests to load CSS files will work.
