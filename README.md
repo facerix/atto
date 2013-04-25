@@ -12,7 +12,7 @@ More information can be found on Atto's official home [here](http://www.buyog.co
 
 ## Running the demos locally
 
-(_Note:_ It's probably still better to just set up a web server on your machine, as the demos weren't really meant to be run locally. But, if that's not an option, this solution should get you the majority of the core functionality.)
+*Note:* It's probably still better to just set up a web server on your machine, as the demos weren't really meant to be run locally. But, if that's not an option, this solution should get you the majority of the core functionality.
 
 * Download the atto source code. Place it somewhere like C:\\code\\js\\atto
 * Download require.js, *and* its text.js plugin (required to load CSS). Place it in the directory above atto, e.g. C:\\code\\js
