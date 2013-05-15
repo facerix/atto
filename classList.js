@@ -9,6 +9,38 @@
 define(
     function() {
         "use strict";
+
+        function _inArray(the_array, searchElement) {
+            if (the_array == null) {
+              throw new TypeError();         
+            }
+            var t = Object(the_array);
+            var len = t.length >>> 0;
+            if (len === 0) {
+              return -1;
+            }         
+            var n = 0;
+            if (arguments.length > 2) {
+              n = Number(arguments[2]);
+              if (n != n) { // shortcut for verifying if it's NaN                 
+                n = 0;
+              } else if (n != 0 && n != Infinity && n != -Infinity) {
+                n = (n > 0 || -1) * Math.floor(Math.abs(n)); 
+              }         
+            }
+            if (n >= len) {
+              return -1;
+            }         
+            var k = n >= 0 ? n : Math.max(len - Math.abs(n), 0);
+            for (; k < len; k++) { 
+              if (k in t && t[k] === searchElement) {
+                return k;
+              }         
+            }
+          return -1;     
+        }
+
+      
         return function(el) {
             var _err = function(o,p) { this.name=o; this.code=DOMException[o]; this.message=p; this.toString=function(){return o + ": " + p} }
             if (!el) { throw new _err("NULL_ERR","A null element was specified"); }
@@ -27,7 +59,7 @@ define(
             }
 
             function _contains(cls) {
-                return (_arr.indexOf(cls) !== -1);
+                return (_inArray(_arr, cls) !== -1);
             }
 
             function _item(idx) {
@@ -40,7 +72,7 @@ define(
 
             function _remove(val) {
                 var cls = val+"",
-                    pos = _arr.indexOf(val);
+                    pos = _inArray(_arr, val);
                 if (pos !== -1) {
                     _arr.splice(pos, 1);
                     _update();
@@ -48,7 +80,7 @@ define(
             }
 
             function _toggle(cls) {
-                if (_arr.indexOf(cls)===-1) {
+                if (_inArray(_arr, cls) === -1) {
                     _add(cls);
                 } else {
                     _remove(cls);
