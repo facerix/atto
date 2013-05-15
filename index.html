@@ -8,10 +8,15 @@
 
 <!--[if lt IE 9]> <script src="../js/html5shiv.js"></script> <![endif]-->
 
-    <link rel="stylesheet" href="/fonts/gooddog/stylesheet.css" type="text/css" charset="utf-8">
-    <link rel="stylesheet" href="aw.css" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="/fonts/gooddog/stylesheet.css" type="text/css" charset="utf-8" />
+    <link rel="stylesheet" href="aw.css" type="text/css" charset="utf-8" />
+    <link rel="stylesheet" href="/css/gh-banner.css" />
     <style>
       /* overrides until I can refresh the CloudFlare cache */
+      .gh-banner a {
+        background-color: rgb(13, 196, 242);
+        background-image: none;
+      }
     </style>
   </head>
   <body>
@@ -19,6 +24,7 @@
       <h1 id="bubble1" class="speech-bubble primary invisible"><span>Aw Yeah Atto!</span></h1>
       <h2 id="bubble2" class="speech-bubble secondary invisible"><span>Ultralight, Pure-JavaScript Widgets</span></h2>
     </header>
+    <div class="gh-banner"><a href="https://github.com/buyog/atto">Fork me on GitHub</a></div> <!-- adapted from https://gist.github.com/1679040 -->
 
     <article class="main">
       <ul id="gallery" class="group">
