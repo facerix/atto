@@ -138,6 +138,26 @@ define(
             return old_args;
         }  // --> this is the one that gets exposed
 
+
+        function _deepExtend(destination, source) {
+            for (var property in source) {
+                if (source[property] && source[property].constructor &&
+                 source[property].constructor === Object) {
+                    console.log('recursing ', property);
+                    destination[property] = destination[property] || {};
+                    arguments.callee(destination[property], source[property]);
+                } else {
+                    console.log('copying ', property);
+                    destination[property] = source[property];
+                }
+            }
+            return destination;
+        };
+
+        function _isObjectLiteral(o) {
+            return o && o.constructor && o.constructor.name === 'Object';
+        }
+
         function _stopEventCascade(e) {
             if (!e) var e = window.event || {};
             if (e.preventDefault) {
@@ -253,6 +273,8 @@ define(
             stopEventCascade : _stopEventCascade,
             xhrRequest       : _xhr,
             mixinArgs        : _args_mixin,
+            extend           : _args_mixin,
+            deepExtend       : _deepExtend,
             supplant         : _supplant,
             head             : _head,
             getKeys          : _getKeys
